@@ -1,74 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Colors — [Product name] Design System</title>
-<link rel="icon" href="../assets/logos/aak-favicon.ico" sizes="any">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../tokens.css">
-<style>
-  body { padding: 48px; background: var(--itkaarhus-white); }
-  .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
-  h1 { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 660px; margin: 0 0 8px; line-height: 1.55; }
-  h2 { font-size: 22px; margin: 56px 0 6px; font-weight: 600; letter-spacing: -0.01em; }
-  h2 + .sub { font-size: 14px; color: var(--itkaarhus-gray-500); margin: 0 0 20px; max-width: 660px; line-height: 1.55; }
-  code { font-family: var(--itkaarhus-font-mono); font-size: 0.9em; background: var(--itkaarhus-gray-100); padding: 1px 5px; border-radius: 4px; }
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
 
-  /* Primary brand pair — two large cards */
-  .brand-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .brand-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
-  .brand-card .chip { background: var(--c); height: 140px; display: flex; align-items: flex-end; padding: 18px; }
-  .brand-card .chip .role { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: #fff; opacity: 0.9; }
-  .brand-card .meta { padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .brand-card .nm { font-size: 18px; font-weight: 600; }
-  .brand-card .codes { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); text-align: right; }
-
-  /* Scale row: 10 steps */
-  .scale { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
-  .scale .step { aspect-ratio: 1/1.5; background: var(--c); display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding: 8px 6px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: #fff; }
-  .scale .step.dk { color: var(--itkaarhus-gray-900); }
-  .scale .step .s { font-weight: 500; opacity: 0.95; }
-  .scale .step .h { opacity: 0.7; font-size: 9px; }
-  .scale-label { display: flex; align-items: baseline; gap: 10px; margin: 20px 0 6px; }
-  .scale-label .t { font-size: 14px; font-weight: 600; color: var(--itkaarhus-gray-900); }
-  .scale-label .tok { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
-
-  /* Usage */
-  .usage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-  .ucard { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 22px; }
-  .ucard.do { border-left: 3px solid var(--itkaarhus-success-500); }
-  .ucard.dont { border-left: 3px solid var(--itkaarhus-danger-500); }
-  .ucard .hd { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
-  .ucard.do .hd { color: var(--itkaarhus-success-700); }
-  .ucard.dont .hd { color: var(--itkaarhus-danger-700); }
-  .ucard ul { margin: 0; padding: 0; list-style: none; }
-  .ucard li { padding: 10px 0; border-top: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); line-height: 1.5; }
-  .ucard li:first-child { border-top: 0; padding-top: 0; }
-  .ucard li b { color: var(--itkaarhus-gray-900); font-weight: 600; }
-
-  /* Recipe table — token → role */
-  .recipe { width: 100%; border-collapse: collapse; margin-top: 8px; }
-  .recipe th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; padding: 0 0 10px; border-bottom: 1px solid var(--itkaarhus-gray-200); }
-  .recipe td { padding: 12px 0; border-bottom: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); vertical-align: top; }
-  .recipe td.sw { width: 32px; }
-  .recipe td.sw span { display: inline-block; width: 20px; height: 20px; border-radius: 5px; border: 1px solid rgba(17,19,24,0.08); vertical-align: middle; }
-  .recipe td.tk { width: 230px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-900); }
-
-  /* State demo alerts */
-  .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
-  .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 14px; line-height: 1.5; border: 1px solid transparent; }
-  .alert .ic { flex: none; width: 18px; height: 18px; }
-  .alert.info    { background: var(--itkaarhus-info-50);    border-color: var(--itkaarhus-info-200);    color: var(--itkaarhus-info-900); }
-  .alert.success { background: var(--itkaarhus-success-50); border-color: var(--itkaarhus-success-200); color: var(--itkaarhus-success-900); }
-  .alert.warning { background: var(--itkaarhus-warning-50); border-color: var(--itkaarhus-warning-200); color: var(--itkaarhus-warning-900); }
-  .alert.danger  { background: var(--itkaarhus-danger-50);  border-color: var(--itkaarhus-danger-200);  color: var(--itkaarhus-danger-900); }
-  .alert svg { stroke-width: 2; fill: none; stroke: currentColor; }
-  .alert b { display: block; }
-</style>
-</head>
-<body>
+<Layout title="Colors">
 <div class="page">
   <div class="eyebrow">Design tokens · Colors</div>
   <h1>Two brand colors, four states, one gray scale.</h1>
@@ -79,11 +14,11 @@
   <div class="brand-pair">
     <div class="brand-card">
       <div class="chip" style="--c: var(--itkaarhus-blue-500)"><span class="role">Primary</span></div>
-      <div class="meta"><span class="nm">Blue</span><span class="codes">--itkaarhus-blue-500<br>#007BA6</span></div>
+      <div class="meta"><span class="nm">Blue</span><span class="codes">--itkaarhus-blue-500<br />#007BA6</span></div>
     </div>
     <div class="brand-card">
       <div class="chip" style="--c: var(--itkaarhus-coral-500)"><span class="role">Secondary</span></div>
-      <div class="meta"><span class="nm">Coral</span><span class="codes">--itkaarhus-coral-500<br>#FF5F31</span></div>
+      <div class="meta"><span class="nm">Coral</span><span class="codes">--itkaarhus-coral-500<br />#FF5F31</span></div>
     </div>
   </div>
 
@@ -230,9 +165,70 @@
       <tr><td class="sw"><span style="background:var(--itkaarhus-success)"></span></td><td class="tk">--itkaarhus-success</td><td>success-500</td><td>Success / active status</td></tr>
       <tr><td class="sw"><span style="background:var(--itkaarhus-warning)"></span></td><td class="tk">--itkaarhus-warning</td><td>warning-500</td><td>Warnings, caution</td></tr>
       <tr><td class="sw"><span style="background:var(--itkaarhus-danger)"></span></td><td class="tk">--itkaarhus-danger</td><td>danger-500</td><td>Errors, destructive actions</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-info-soft)"></span></td><td class="tk">--itkaarhus-{state}-soft</td><td>{state}-100</td><td>Soft surface tint for badges / alerts</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-info-soft)"></span></td><td class="tk">--itkaarhus-{'{state}'}-soft</td><td>{'{state}'}-100</td><td>Soft surface tint for badges / alerts</td></tr>
     </tbody>
   </table>
 </div>
-</body>
-</html>
+</Layout>
+
+<style>
+  body { padding: 48px; background: var(--itkaarhus-white); }
+  .page { max-width: 1040px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
+  h1 { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 660px; margin: 0 0 8px; line-height: 1.55; }
+  h2 { font-size: 22px; margin: 56px 0 6px; font-weight: 600; letter-spacing: -0.01em; }
+  h2 + .sub { font-size: 14px; color: var(--itkaarhus-gray-500); margin: 0 0 20px; max-width: 660px; line-height: 1.55; }
+  code { font-family: var(--itkaarhus-font-mono); font-size: 0.9em; background: var(--itkaarhus-gray-100); padding: 1px 5px; border-radius: 4px; }
+
+  /* Primary brand pair — two large cards */
+  .brand-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .brand-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+  .brand-card .chip { background: var(--c); height: 140px; display: flex; align-items: flex-end; padding: 18px; }
+  .brand-card .chip .role { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: #fff; opacity: 0.9; }
+  .brand-card .meta { padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .brand-card .nm { font-size: 18px; font-weight: 600; }
+  .brand-card .codes { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); text-align: right; }
+
+  /* Scale row: 10 steps */
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+  .scale .step { aspect-ratio: 1/1.5; background: var(--c); display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding: 8px 6px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: #fff; }
+  .scale .step.dk { color: var(--itkaarhus-gray-900); }
+  .scale .step .s { font-weight: 500; opacity: 0.95; }
+  .scale .step .h { opacity: 0.7; font-size: 9px; }
+  .scale-label { display: flex; align-items: baseline; gap: 10px; margin: 20px 0 6px; }
+  .scale-label .t { font-size: 14px; font-weight: 600; color: var(--itkaarhus-gray-900); }
+  .scale-label .tok { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
+
+  /* Usage */
+  .usage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .ucard { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 22px; }
+  .ucard.do { border-left: 3px solid var(--itkaarhus-success-500); }
+  .ucard.dont { border-left: 3px solid var(--itkaarhus-danger-500); }
+  .ucard .hd { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+  .ucard.do .hd { color: var(--itkaarhus-success-700); }
+  .ucard.dont .hd { color: var(--itkaarhus-danger-700); }
+  .ucard ul { margin: 0; padding: 0; list-style: none; }
+  .ucard li { padding: 10px 0; border-top: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); line-height: 1.5; }
+  .ucard li:first-child { border-top: 0; padding-top: 0; }
+  .ucard li b { color: var(--itkaarhus-gray-900); font-weight: 600; }
+
+  /* Recipe table — token → role */
+  .recipe { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .recipe th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; padding: 0 0 10px; border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .recipe td { padding: 12px 0; border-bottom: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); vertical-align: top; }
+  .recipe td.sw { width: 32px; }
+  .recipe td.sw span { display: inline-block; width: 20px; height: 20px; border-radius: 5px; border: 1px solid rgba(17,19,24,0.08); vertical-align: middle; }
+  .recipe td.tk { width: 230px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-900); }
+
+  /* State demo alerts */
+  .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
+  .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 14px; line-height: 1.5; border: 1px solid transparent; }
+  .alert .ic { flex: none; width: 18px; height: 18px; }
+  .alert.info    { background: var(--itkaarhus-info-50);    border-color: var(--itkaarhus-info-200);    color: var(--itkaarhus-info-900); }
+  .alert.success { background: var(--itkaarhus-success-50); border-color: var(--itkaarhus-success-200); color: var(--itkaarhus-success-900); }
+  .alert.warning { background: var(--itkaarhus-warning-50); border-color: var(--itkaarhus-warning-200); color: var(--itkaarhus-warning-900); }
+  .alert.danger  { background: var(--itkaarhus-danger-50);  border-color: var(--itkaarhus-danger-200);  color: var(--itkaarhus-danger-900); }
+  .alert svg { stroke-width: 2; fill: none; stroke: currentColor; }
+  .alert b { display: block; }
+</style>

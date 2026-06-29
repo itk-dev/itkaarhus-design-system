@@ -7,21 +7,25 @@ footer endorsement; each product carries its own name in the header.
 
 > **Live preview:** <https://itk-dev.github.io/itkaarhus-design-system/>
 
-No build step. No JavaScript framework. Just static HTML + one CSS file you can
-drop into any project.
+The reference site is built with [Astro](https://astro.build) so it can be served
+locally with a single command. The tokens themselves are still plain CSS — one
+file you can drop into any project, no framework required.
 
 ## Files
 
-- `tokens.css` — the single source of truth: CSS custom properties (colors, type scale, spacing, radii, shadows, focus). Consuming apps mirror these tokens into their own runtime CSS — keep them in sync when tokens change.
-- `index.html` — overview page with previews of every section.
-- `tokens/colors.html` — palette, shade ramps, and usage rules.
-- `tokens/typography.html` — Inter Tight + Source Serif 4 + JetBrains Mono.
-- `tokens/spacing.html` — 4px-base spacing, radii, elevation.
-- `tokens/logo.html` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
-- `tokens/components.html` — buttons, tags, inputs, cards, callouts, stats, editorial type, KPI cards, semantic badges, expandable table, timeline, nav, breadcrumb.
-- `examples/website.html` — full reference layout (a public site rebuilt with the system).
-- `assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
-- `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
+- `public/tokens.css` — the single source of truth: CSS custom properties (colors, type scale, spacing, radii, shadows, focus). Consuming apps mirror these tokens into their own runtime CSS — keep them in sync when tokens change.
+- `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon, `tokens.css`).
+- `src/styles/sidebar.css` — sidebar styling (replaces the old top-bar `ds-nav.css`).
+- `src/pages/index.astro` — overview page with previews of every section.
+- `src/pages/colors.astro` — palette, shade ramps, and usage rules.
+- `src/pages/typography.astro` — Inter + Newsreader (system monospace).
+- `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
+- `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
+- `src/pages/components.astro` — buttons, tags, inputs, cards, callouts, stats, editorial type, KPI cards, semantic badges, expandable table, timeline, nav, breadcrumb.
+- `src/pages/applied.astro` — wraps the full reference site in an iframe, keeping the sidebar in place.
+- `public/website.html` — full reference layout (a public site rebuilt with the system), served as a standalone document and shown via the Applied page's iframe.
+- `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
+- `public/assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
 ## Color palette
 
@@ -45,11 +49,14 @@ tint for badges/alerts.
 
 ## Type
 
-- **Display & UI:** `Inter Tight` 400/500/600/700 — app chrome, dense surfaces.
-- **Serif (editorial):** `Source Serif 4` — opt-in for website-style surfaces
+- **Display, UI & body:** `Inter` 400/500/600/700 — app chrome, dense dashboards,
+  long-form prose, and small text.
+- **Serif (editorial):** `Newsreader` — opt-in for website-style surfaces
   (heroes, overviews, KPI numbers) via `--itkaarhus-font-serif`. Not for app chrome.
-- **Mono:** `JetBrains Mono` 400/500
+- **Mono:** system default (`ui-monospace, …`) — the DS ships no web monospace font.
 - Scale (px): 12, 14, 16, 18, 22, 28, 36, 48, 64, 88
+- **Eyebrows:** plain uppercase labels in app chrome; the leading rule ("the dash")
+  is reserved for the editorial / serif voice.
 - Tone: Danish-first, calm, gov-grade. Negative letter-spacing on display sizes.
 
 ## Icons
@@ -71,20 +78,25 @@ tint for badges/alerts.
 
 ## Viewing locally
 
-The HTML reference pages are static. Open them directly in a browser:
+Install dependencies once, then start the dev server:
 
 ```sh
-open index.html
+npm install
+npm run dev
+# then visit the printed URL (http://localhost:4321/itkaarhus-design-system/)
 ```
 
-Or serve the repo root if you prefer real URLs:
+To build the static site and preview the production output:
 
 ```sh
-python3 -m http.server 8001
-# then visit http://localhost:8001/
+npm run build    # outputs to dist/
+npm run preview
 ```
+
+The site is served under the `/itkaarhus-design-system/` base path (matching
+GitHub Pages), configured in `astro.config.mjs`.
 
 ## Publishing
 
-Pushing to `main` deploys the repo root to GitHub Pages via
+Pushing to `main` builds the Astro site and deploys `dist/` to GitHub Pages via
 `.github/workflows/pages.yml` → <https://itk-dev.github.io/itkaarhus-design-system/>.

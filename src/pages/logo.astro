@@ -1,14 +1,73 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Logo &amp; brand — [Product name] Design System</title>
-<link rel="icon" href="../assets/logos/aak-favicon.ico" sizes="any">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../tokens.css">
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Logo & brand">
+  <div class="page">
+    <div class="eyebrow">Brand · Logo &amp; endorsement</div>
+    <h1 class="title">Aarhus Kommune leads, the product names itself.</h1>
+    <p class="lede">Aarhus Kommune is the institutional brand — present, but quiet. It signs each product as a footer endorsement rather than a banner. In the header, a small emblem pairs with the product's own name.</p>
+
+    <h2 class="sh">Endorsement mark — Aarhus Kommune</h2>
+    <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">The official Aarhus Kommune mark. Use it small and low — a footer endorsement that says who stands behind the product. Don't recreate it; always use the supplied SVGs.</p>
+    <div class="variants">
+      <div class="var color">
+        <div class="box"><img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="Aarhus Kommune, mørk" /></div>
+        <div class="cap">Mørk · on light <span>AAK_02_venstrejusteret_sh.svg</span></div>
+      </div>
+      <div class="var white">
+        <div class="box"><img src={`${base}assets/logos/AAK_02_venstrejusteret_hvid.svg`} alt="Aarhus Kommune, hvid" /></div>
+        <div class="cap" style="background:var(--itkaarhus-gray-900); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">AAK_02_venstrejusteret_hvid.svg</span></div>
+      </div>
+      <div class="var color">
+        <div class="box"><img src={`${base}assets/logos/AAK_02_hoejrejusteret_dark.svg`} alt="Aarhus Kommune, højrejusteret" /></div>
+        <div class="cap">Højrejusteret <span>AAK_02_hoejrejusteret_dark.svg</span></div>
+      </div>
+    </div>
+
+    <h2 class="sh">Product header lockup</h2>
+    <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">Each product signs its chrome with a small emblem plus its own name — not the Aarhus Kommune logo, not a legacy wordmark. The emblem here is the Aarhus Kommune crest; <code>[Product name]</code> is a placeholder you swap per product.</p>
+    <div class="lockup">
+      <img src={`${base}assets/logos/aak-favicon.ico`} alt="Emblem" />
+      <span class="product">[Product name]</span>
+    </div>
+
+    <h2 class="sh">Clear space &amp; minimum size</h2>
+    <div class="clearspace">
+      <div class="rel">
+        <img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="Aarhus Kommune mark med frizone" />
+      </div>
+    </div>
+    <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: 12px 0 0">Minimum clear space equals 25 % of the mark's height on every side. Keep the endorsement small and unobtrusive — it confirms ownership, it doesn't headline.</p>
+
+    <h2 class="sh">Do not</h2>
+    <div class="misuse">
+      <div class="m"><div class="mbox stretch"><img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="" /></div><div class="cap">Don't stretch</div></div>
+      <div class="m tint"><div class="mbox"><img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="" /></div><div class="cap">Don't recolour</div></div>
+      <div class="m bg"><div class="mbox"><img src={`${base}assets/logos/AAK_02_venstrejusteret_hvid.svg`} alt="" /></div><div class="cap">Don't place on busy backgrounds</div></div>
+      <div class="m shadow"><div class="mbox"><img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="" /></div><div class="cap">Don't add effects</div></div>
+    </div>
+
+    <h2 class="sh">Footer endorsement in context</h2>
+    <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">How the Aarhus Kommune mark sits in a product footer: small, low, quiet — confirming ownership without competing with the product name.</p>
+    <div class="cobrand">
+      <div class="cobox">
+        <div style="font-size:13px; line-height:1.4; opacity:.7">[Product name]<br /><span style="opacity:.7">En del af</span></div>
+        <div class="div"></div>
+        <img src={`${base}assets/logos/AAK_02_venstrejusteret_hvid.svg`} alt="Aarhus Kommune" />
+      </div>
+      <div class="cobox inv">
+        <div style="font-size:13px; line-height:1.4; color:var(--itkaarhus-gray-500)">[Product name]<br /><span>En del af</span></div>
+        <div class="div"></div>
+        <img src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="Aarhus Kommune" />
+      </div>
+    </div>
+  </div>
+</Layout>
+
 <style>
-  body { padding: 48px; }
-  .page { max-width: 1040px; margin: 0 auto; }
+  .page { max-width: 1040px; margin: 0 auto; padding: 48px; }
   .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
   h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
   p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 640px; margin: 0 0 40px; }
@@ -63,68 +122,9 @@
   .cobox.inv { background: #fff; color: var(--itkaarhus-gray-900); border: 1px solid var(--itkaarhus-gray-200); }
   .cobox .div { width: 1px; height: 60%; background: currentColor; opacity: 0.3; }
   .cobox img { height: 48px; object-fit: contain; }
+
+  @media (max-width: 860px) {
+    .page { padding: 40px 20px; }
+    .variants, .misuse, .cobrand, .anat { grid-template-columns: 1fr; }
+  }
 </style>
-</head>
-<body>
-<div class="page">
-  <div class="eyebrow">Brand · Logo &amp; endorsement</div>
-  <h1 class="title">Aarhus Kommune leads, the product names itself.</h1>
-  <p class="lede">Aarhus Kommune is the institutional brand — present, but quiet. It signs each product as a footer endorsement rather than a banner. In the header, a small emblem pairs with the product's own name.</p>
-
-  <h2 class="sh">Endorsement mark — Aarhus Kommune</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">The official Aarhus Kommune mark. Use it small and low — a footer endorsement that says who stands behind the product. Don't recreate it; always use the supplied SVGs.</p>
-  <div class="variants">
-    <div class="var color">
-      <div class="box"><img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune, mørk"></div>
-      <div class="cap">Mørk · on light <span>AAK_02_venstrejusteret_sh.svg</span></div>
-    </div>
-    <div class="var white">
-      <div class="box"><img src="../assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune, hvid"></div>
-      <div class="cap" style="background:var(--itkaarhus-gray-900); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">AAK_02_venstrejusteret_hvid.svg</span></div>
-    </div>
-    <div class="var color">
-      <div class="box"><img src="../assets/logos/AAK_02_hoejrejusteret_dark.svg" alt="Aarhus Kommune, højrejusteret"></div>
-      <div class="cap">Højrejusteret <span>AAK_02_hoejrejusteret_dark.svg</span></div>
-    </div>
-  </div>
-
-  <h2 class="sh">Product header lockup</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">Each product signs its chrome with a small emblem plus its own name — not the Aarhus Kommune logo, not a legacy wordmark. The emblem here is the Aarhus Kommune crest; <code>[Product name]</code> is a placeholder you swap per product.</p>
-  <div class="lockup">
-    <img src="../assets/logos/aak-favicon.ico" alt="Emblem">
-    <span class="product">[Product name]</span>
-  </div>
-
-  <h2 class="sh">Clear space &amp; minimum size</h2>
-  <div class="clearspace">
-    <div class="rel">
-      <img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune mark med frizone">
-    </div>
-  </div>
-  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: 12px 0 0">Minimum clear space equals 25 % of the mark's height on every side. Keep the endorsement small and unobtrusive — it confirms ownership, it doesn't headline.</p>
-
-  <h2 class="sh">Do not</h2>
-  <div class="misuse">
-    <div class="m"><div class="mbox stretch"><img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt=""></div><div class="cap">Don't stretch</div></div>
-    <div class="m tint"><div class="mbox"><img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt=""></div><div class="cap">Don't recolour</div></div>
-    <div class="m bg"><div class="mbox"><img src="../assets/logos/AAK_02_venstrejusteret_hvid.svg" alt=""></div><div class="cap">Don't place on busy backgrounds</div></div>
-    <div class="m shadow"><div class="mbox"><img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt=""></div><div class="cap">Don't add effects</div></div>
-  </div>
-
-  <h2 class="sh">Footer endorsement in context</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">How the Aarhus Kommune mark sits in a product footer: small, low, quiet — confirming ownership without competing with the product name.</p>
-  <div class="cobrand">
-    <div class="cobox">
-      <div style="font-size:13px; line-height:1.4; opacity:.7">[Product name]<br><span style="opacity:.7">En del af</span></div>
-      <div class="div"></div>
-      <img src="../assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune">
-    </div>
-    <div class="cobox inv">
-      <div style="font-size:13px; line-height:1.4; color:var(--itkaarhus-gray-500)">[Product name]<br><span>En del af</span></div>
-      <div class="div"></div>
-      <img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune">
-    </div>
-  </div>
-</div>
-</body>
-</html>

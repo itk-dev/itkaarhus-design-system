@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Applied example" bleed={true}>
+  <header class="applied-bar">
+    <div>
+      <p class="applied-bar__eyebrow">04 · Applied</p>
+      <h1 class="applied-bar__title">Applied example</h1>
+    </div>
+    <a class="applied-bar__open" href={`${base}website.html`} target="_blank" rel="noopener">
+      Open in new tab ↗
+    </a>
+  </header>
+  <iframe
+    class="applied-frame"
+    src={`${base}website.html`}
+    title="[Product name] — applied example site"
+    loading="lazy"
+  ></iframe>
+</Layout>
+
+<style>
+  .applied-bar {
+    flex: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--itkaarhus-gray-200);
+    background: var(--itkaarhus-white);
+  }
+  .applied-bar__eyebrow {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--itkaarhus-blue-500);
+    font-weight: 600;
+  }
+  .applied-bar__title {
+    margin: 4px 0 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .applied-bar__open {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--itkaarhus-blue-500);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .applied-bar__open:hover { text-decoration: underline; }
+  .applied-bar__open:focus-visible {
+    outline: none;
+    box-shadow: var(--itkaarhus-focus);
+    border-radius: var(--itkaarhus-radius-1);
+  }
+
+  .applied-frame {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: var(--itkaarhus-gray-50);
+  }
+
+  @media (max-width: 860px) {
+    .applied-bar { padding: 16px 20px; }
+    .applied-frame { min-height: 70vh; }
+  }
+</style>

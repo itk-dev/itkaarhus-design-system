@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Typography">
+  <div class="page">
+    <div class="eyebrow">Design tokens · Typography</div>
+    <h1 class="title">One workhorse sans, one editorial serif.</h1>
+    <p class="lede">Inter does the work — dashboards, long-form prose, and small UI text all stay readable in the same family. Newsreader is an opt-in editorial serif for website surfaces like heroes and overviews. For monospace we defer to the system default; the design system doesn't ship one. Copy stays Danish-first.</p>
+
+    <h2 class="sh">Families</h2>
+
+    <div class="family-row">
+      <div class="meta">
+        <div class="fname">Inter</div>
+        <div>Display, UI &amp; body · 400 / 500 / 600 / 700</div>
+        <div style="margin-top:8px"><code>--itkaarhus-font-sans</code> · <code>--itkaarhus-font-display</code></div>
+      </div>
+      <div>
+        <div class="specimen-giant">Aa 123</div>
+        <div class="specimen-alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz &middot; æøå &middot; 0123456789 !?&amp;—</div>
+      </div>
+    </div>
+
+    <div class="family-row">
+      <div class="meta">
+        <div class="fname">Newsreader</div>
+        <div>Editorial display · 400 / 500 / 600 + italic</div>
+        <div style="margin-top:8px">Opt-in: <code>--itkaarhus-font-serif</code>. Heroes, headings, KPI numbers — website surfaces, not app chrome.</div>
+      </div>
+      <div>
+        <div class="specimen-serif">Aa 123</div>
+        <div class="specimen-serif-alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz &middot; æøå &middot; 0123456789 !?&amp;—</div>
+      </div>
+    </div>
+
+    <div class="family-row">
+      <div class="meta">
+        <div class="fname">System monospace</div>
+        <div>Code &amp; technical · system default</div>
+        <div style="margin-top:8px"><code>--itkaarhus-font-mono</code> resolves to the OS monospace — no web font is loaded.</div>
+      </div>
+      <div>
+        <div class="specimen-mono">#007BA6 → rgb(0, 123, 166)</div>
+        <div class="specimen-mono-alpha">0 1 2 3 4 5 6 7 8 9 &middot; {'{'} {'}'} [ ] ( ) &middot; org/&lt;repo&gt; &middot; POST /api/v2</div>
+      </div>
+    </div>
+
+    <h2 class="sh">Scale</h2>
+    <table class="scale">
+      <tr><td class="tok">text-5xl</td><td class="px">88 / 0.98</td><td class="demo" style="font-size:88px;line-height:.98;letter-spacing:-.035em;font-weight:700">Overblik</td><td class="note">Hero only</td></tr>
+      <tr><td class="tok">text-4xl</td><td class="px">64 / 1.02</td><td class="demo" style="font-size:64px;line-height:1.02;letter-spacing:-.03em;font-weight:700">Innovation</td><td class="note">Page title</td></tr>
+      <tr><td class="tok">text-3xl</td><td class="px">48 / 1.05</td><td class="demo" style="font-size:48px;line-height:1.05;letter-spacing:-.02em;font-weight:700">Afdelinger</td><td class="note">Section headline</td></tr>
+      <tr><td class="tok">text-2xl</td><td class="px">36 / 1.12</td><td class="demo" style="font-size:36px;line-height:1.12;letter-spacing:-.015em;font-weight:600">Aktive projekter</td><td class="note">Subsection</td></tr>
+      <tr><td class="tok">text-xl</td><td class="px">28 / 1.2</td><td class="demo" style="font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:600">Card title</td><td class="note">Card / dialog</td></tr>
+      <tr><td class="tok">text-lg</td><td class="px">22 / 1.35</td><td class="demo" style="font-size:22px;font-weight:500">Lede paragraph</td><td class="note">Intro copy</td></tr>
+      <tr><td class="tok">text-md</td><td class="px">18 / 1.55</td><td class="demo" style="font-size:18px">Editorial body</td><td class="note">Long-form</td></tr>
+      <tr><td class="tok">text-base</td><td class="px">16 / 1.55</td><td class="demo" style="font-size:16px">Default body text</td><td class="note">UI default</td></tr>
+      <tr><td class="tok">text-sm</td><td class="px">14 / 1.5</td><td class="demo" style="font-size:14px">Metadata &amp; captions</td><td class="note">Form help, table</td></tr>
+      <tr><td class="tok">text-xs</td><td class="px">12 / 1.4</td><td class="demo" style="font-size:12px;letter-spacing:.04em">Eyebrow / micro</td><td class="note">Tags, stamps</td></tr>
+    </table>
+
+    <h2 class="sh">Eyebrows</h2>
+    <p class="ex-note">A small uppercase label above a heading. The leading rule (the dash) is a deliberate signal — it marks the <strong>editorial / serif voice</strong> only. App-chrome eyebrows — page headers, cards, dashboards — stay plain.</p>
+    <div class="eyebrow-rules">
+      <div class="er">
+        <div class="er-demo"><span class="eyebrow">Design tokens · Typography</span></div>
+        <div class="er-meta">
+          <div class="er-name">Plain — app chrome</div>
+          <p>Page headers, card kickers, table sections, dashboards. No leading rule.</p>
+        </div>
+      </div>
+      <div class="er">
+        <div class="er-demo"><span class="s-eyebrow">Indsigt · Arbejdsmiljø</span></div>
+        <div class="er-meta">
+          <div class="er-name">Ruled — editorial voice</div>
+          <p>Only on serif / website surfaces (heroes, overviews). The 24&thinsp;px rule pairs with a Newsreader heading.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sh">Examples</h2>
+
+    <p class="ex-note">Inter carries the application UI — dense, legible, hierarchy from weight and size rather than colour. Newsreader stays opt-in for editorial surfaces.</p>
+
+    <!-- App / dashboard surface — the everyday case (Inter) -->
+    <div class="app-example">
+      <div class="app-head">
+        <div>
+          <div class="kicker">Sagsbehandling · Oversigt</div>
+          <h3 class="app-h">Åbne sager</h3>
+        </div>
+        <span class="app-badge">3 kræver handling</span>
+      </div>
+      <table class="app-table">
+        <thead>
+          <tr><th>Sag</th><th>Ansvarlig</th><th>Frist</th><th class="num">Dage</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tilbygning, Dokk1</td><td>Mette Sørensen</td><td>14. apr 2026</td><td class="num">2</td></tr>
+          <tr><td>Aktindsigt — miljø</td><td>Jonas Bach</td><td>18. apr 2026</td><td class="num">6</td></tr>
+          <tr><td>Byggetilladelse §42</td><td>Aisha Khan</td><td>30. apr 2026</td><td class="num">18</td></tr>
+        </tbody>
+      </table>
+      <p class="app-foot">Standard body text at 14&ndash;16&thinsp;px stays comfortable across long lists and small labels alike.</p>
+    </div>
+
+    <!-- Editorial serif surface — opt-in website voice (Newsreader) -->
+    <div class="serif-example">
+      <span class="s-eyebrow">Indsigt · Arbejdsmiljø</span>
+      <h3 class="s-h">En <em>tryg</em> arbejdsplads starter med overblik.</h3>
+      <p class="s-p">Newsreader giver de redaktionelle flader ro og tyngde, med skarpe kanter helt op i displaystørrelser. Den blå farve fører an; korallen accentuerer. Brug serif til website-agtige sider — ikke til tætte applikationsflader.</p>
+    </div>
+
+    <div class="pair-grid" style="margin-top:24px">
+      <div class="pair">
+        <div class="kicker">Vejledning · Kom godt i gang</div>
+        <h4 class="headline">Ét designsystem på tværs af produkter.</h4>
+        <p class="body">Inter bærer brødtekst og UI; vægt og størrelse skaber hierarki. Hold dig til de navngivne trin i skalaen, så flader føles ens på tværs af teams.</p>
+      </div>
+      <div class="pair">
+        <div class="kicker">Mønstre · Tabeller</div>
+        <h4 class="headline">Læsbar i tætte dataflader.</h4>
+        <p class="body">Høj x-højde og åbne bogstavformer gør Inter rolig i lange lister og små labels — fra dashboards til formularhjælpetekst.</p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  body { padding: 48px; }
+  .page { max-width: 1040px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
+  h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 640px; margin: 0 0 40px; }
+  h2.sh { font-size: 22px; margin: 56px 0 20px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .family-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 24px 0; border-top: 1px solid var(--itkaarhus-gray-200); }
+  .family-row .meta { font-size: 13px; color: var(--itkaarhus-gray-500); }
+  .family-row .meta .fname { color: var(--itkaarhus-gray-900); font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .specimen-giant { font-family: var(--itkaarhus-font-display); font-weight: 700; font-size: 120px; line-height: 1; letter-spacing: -0.04em; color: var(--itkaarhus-gray-900); }
+  .specimen-alpha { font-family: var(--itkaarhus-font-display); font-weight: 500; font-size: 28px; line-height: 1.25; letter-spacing: -0.01em; color: var(--itkaarhus-gray-700); margin-top: 8px; }
+  .specimen-mono { font-family: var(--itkaarhus-font-mono); font-size: 22px; color: var(--itkaarhus-gray-900); line-height: 1.3; }
+  .specimen-mono-alpha { font-family: var(--itkaarhus-font-mono); font-size: 13px; color: var(--itkaarhus-gray-700); margin-top: 8px; }
+  .specimen-serif { font-family: var(--itkaarhus-font-serif); font-weight: 400; font-size: 120px; line-height: 1; letter-spacing: -0.03em; color: var(--itkaarhus-gray-900); }
+  .specimen-serif-alpha { font-family: var(--itkaarhus-font-serif); font-weight: 400; font-size: 28px; line-height: 1.3; color: var(--itkaarhus-gray-700); margin-top: 8px; }
+
+  table.scale { width: 100%; border-collapse: collapse; }
+  table.scale td { padding: 18px 16px; border-top: 1px solid var(--itkaarhus-gray-200); vertical-align: baseline; }
+  table.scale tr:first-child td { border-top: 0; }
+  td.tok { width: 140px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
+  td.px  { width: 80px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
+  td.note{ width: 200px; font-size: 13px; color: var(--itkaarhus-gray-500); }
+  td.demo { font-family: var(--itkaarhus-font-display); color: var(--itkaarhus-gray-900); }
+
+  .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pair { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 28px; }
+  .pair .kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; margin-bottom: 12px; }
+  .pair .headline { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 12px; }
+  .pair .body { font-size: 15px; color: var(--itkaarhus-gray-700); line-height: 1.6; margin: 0; }
+
+  .ex-note { font-size: 14px; color: var(--itkaarhus-gray-500); max-width: 640px; margin: -8px 0 24px; line-height: 1.55; }
+  .ex-note strong { color: var(--itkaarhus-gray-900); font-weight: 600; }
+
+  /* Eyebrow convention — plain vs. ruled (editorial) */
+  .eyebrow-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .er { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; overflow: hidden; }
+  .er-demo { padding: 32px 28px; background: var(--itkaarhus-gray-50); border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .er-meta { padding: 18px 28px 22px; }
+  .er-meta .er-name { font-size: 14px; font-weight: 600; color: var(--itkaarhus-gray-900); margin-bottom: 4px; }
+  .er-meta p { font-size: 13px; color: var(--itkaarhus-gray-500); margin: 0; line-height: 1.55; }
+  /* Standalone editorial eyebrow (mirrors .serif-example .s-eyebrow) for the demo */
+  .er-demo .s-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
+  .er-demo .s-eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+
+  /* App / dashboard example — the everyday Inter surface. */
+  .app-example { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 28px 28px 24px; margin-top: 16px; }
+  .app-example .app-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+  .app-example .kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
+  .app-example .app-h { font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; margin: 6px 0 0; }
+  .app-example .app-badge { flex: none; font-size: 12px; font-weight: 600; color: var(--itkaarhus-warning-500); background: var(--itkaarhus-warning-soft, rgba(245,184,0,0.16)); padding: 5px 10px; border-radius: var(--itkaarhus-radius-pill); }
+  .app-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .app-table th { text-align: left; font-weight: 600; color: var(--itkaarhus-gray-500); font-size: 12px; letter-spacing: 0.02em; padding: 0 12px 10px; border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .app-table td { padding: 12px; border-bottom: 1px solid var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-900); }
+  .app-table tr:last-child td { border-bottom: 0; }
+  .app-table .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--itkaarhus-gray-700); }
+  .app-foot { font-size: 13px; color: var(--itkaarhus-gray-500); margin: 16px 0 0; line-height: 1.5; }
+
+  /* Serif editorial example — the "website" voice. */
+  .serif-example { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 56px 48px; margin-top: 24px; }
+  .serif-example .s-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
+  .serif-example .s-eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+  .serif-example .s-h { font-family: var(--itkaarhus-font-serif); font-weight: 400; font-size: 56px; line-height: 1.04; letter-spacing: -0.02em; color: var(--itkaarhus-gray-900); margin: 16px 0 20px; max-width: 18ch; }
+  .serif-example .s-h em { font-style: italic; color: var(--itkaarhus-coral-500); }
+  .serif-example .s-p { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 560px; margin: 0; line-height: 1.6; }
+</style>
