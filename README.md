@@ -1,8 +1,9 @@
-# ITK Aarhus Design System
+# Aarhus Kommune Design System
 
-The shared visual design system for **ITK** in Aarhus Kommune — one palette, one
-type stack, one set of primitives, used from public sites down to internal tools.
-Sourced from the official ITK Farvekoder palette and the `itk.aarhus.dk` brand context.
+The shared visual design system for digital products in **Aarhus Kommune** — one
+palette, one type stack, one set of primitives, used from public sites down to
+internal tools. Aarhus Kommune is the institutional brand, expressed quietly as a
+footer endorsement; each product carries its own name in the header.
 
 > **Live preview:** <https://itk-dev.github.io/itkaarhus-design-system/>
 
@@ -16,36 +17,36 @@ drop into any project.
 - `tokens/colors.html` — palette, shade ramps, and usage rules.
 - `tokens/typography.html` — Inter Tight + Source Serif 4 + JetBrains Mono.
 - `tokens/spacing.html` — 4px-base spacing, radii, elevation.
-- `tokens/logo.html` — logo variants, clear space, misuse.
+- `tokens/logo.html` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
 - `tokens/components.html` — buttons, tags, inputs, cards, callouts, stats, editorial type, KPI cards, semantic badges, expandable table, timeline, nav, breadcrumb.
 - `examples/website.html` — full reference layout (a public site rebuilt with the system).
-- `assets/logos/` — official logo PNGs (4F = full colour, sort = black, hvid = white).
+- `assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
 - `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
 ## Brand palette
 
 One primary, one complementary secondary, plus state colours. Each role colour
-ships a **50→900 shade ramp** (`--itk-{blue,coral,green,amber,red,cyan}-*`);
+ships a **50→900 shade ramp** (`--itkaarhus-{blue,coral,green,amber,red,cyan}-*`);
 `500` is the base hue.
 
 | Token | Hex | Role |
 |---|---|---|
-| `--itk-blue` | `#007BA6` | **Primary** — links, primary buttons, active state |
-| `--itk-coral` | `#FF5F31` | **Secondary** — warm complement; highlights, editorial accents |
-| `--itk-green` | `#008D3D` | Success, "active" status |
-| `--itk-amber` | `#F5B800` | Warning |
-| `--itk-red` | `#E44930` | Danger, errors — sharp and rare |
-| `--itk-cyan` | `#00A5CD` | Info |
-| `--itk-aqua` / `--itk-mint` / `--itk-lime` | `#00B5C9` / `#73BC99` / `#89BD23` | Supporting hues — stats, soft positive, pilot/draft |
+| `--itkaarhus-blue` | `#007BA6` | **Primary** — links, primary buttons, active state |
+| `--itkaarhus-coral` | `#FF5F31` | **Secondary** — warm complement; highlights, editorial accents |
+| `--itkaarhus-green` | `#008D3D` | Success, "active" status |
+| `--itkaarhus-amber` | `#F5B800` | Warning |
+| `--itkaarhus-red` | `#E44930` | Danger, errors — sharp and rare |
+| `--itkaarhus-cyan` | `#00A5CD` | Info |
+| `--itkaarhus-aqua` / `--itkaarhus-mint` / `--itkaarhus-lime` | `#00B5C9` / `#73BC99` / `#89BD23` | Supporting hues — stats, soft positive, pilot/draft |
 
-Role aliases: `--itk-primary`, `--itk-secondary`, `--itk-success`, `--itk-warning`,
-`--itk-danger`, `--itk-info`, each with a `*-soft` surface tint for badges/alerts.
+Role aliases: `--itkaarhus-primary`, `--itkaarhus-secondary`, `--itkaarhus-success`, `--itkaarhus-warning`,
+`--itkaarhus-danger`, `--itkaarhus-info`, each with a `*-soft` surface tint for badges/alerts.
 
 ## Type
 
 - **Display & UI:** `Inter Tight` 400/500/600/700 — app chrome, dense surfaces.
 - **Serif (editorial):** `Source Serif 4` — opt-in for website-style surfaces
-  (heroes, overviews, KPI numbers) via `--itk-font-serif`. Not for app chrome.
+  (heroes, overviews, KPI numbers) via `--itkaarhus-font-serif`. Not for app chrome.
 - **Mono:** `JetBrains Mono` 400/500
 - Scale (px): 12, 14, 16, 18, 22, 28, 36, 48, 64, 88
 - Tone: Danish-first, calm, gov-grade. Negative letter-spacing on display sizes.
@@ -65,7 +66,7 @@ Role aliases: `--itk-primary`, `--itk-secondary`, `--itk-success`, `--itk-warnin
 - No emoji, no illustrative SVG. **Gradients are reserved for data-viz**
   (e.g. the map heatmap) and the faceted palette swatch — decorative gradients
   are out; use flat brand fills or a single very-subtle wash.
-- The faceted triangle palette **is** the expression.
+- The palette **is** the expression — let the colours do the lifting.
 
 ## Viewing locally
 

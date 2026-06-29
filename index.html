@@ -2,53 +2,58 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>ITK Development — Design System</title>
+<title>[Product name] — Design System</title>
+<link rel="icon" href="assets/logos/aak-favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <style>
-  body { background: var(--itk-paper); }
+  body { background: var(--itkaarhus-paper); }
   .shell { max-width: 1200px; margin: 0 auto; padding: 56px 32px 96px; }
 
+  /* Brand lockup — small emblem + product name */
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--itkaarhus-ink); }
+  .brand .emblem { width: 28px; height: 28px; border-radius: var(--itkaarhus-radius-1); object-fit: contain; }
+  .brand .product { font-family: var(--itkaarhus-font-display); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+
   /* Masthead */
-  .mast { display: grid; grid-template-columns: 1fr 380px; gap: 40px; margin-bottom: 72px; align-items: end; }
-  .mast .eye { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-blue); font-weight: 600; }
+  .mast { margin-bottom: 72px; }
+  .mast .brand { margin-bottom: 40px; }
+  .mast .eye { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-blue); font-weight: 600; }
   .mast h1 { font-size: 88px; line-height: 0.95; letter-spacing: -0.035em; font-weight: 700; margin: 16px 0 20px; max-width: 820px; }
-  .mast h1 em { font-style: normal; color: var(--itk-red); }
-  .mast p { font-size: 18px; color: var(--itk-slate-700); max-width: 620px; line-height: 1.55; margin: 0; }
-  .mast .logomark { display: flex; align-items: center; justify-content: flex-end; }
-  .mast .logomark img { max-width: 100%; }
+  .mast h1 em { font-style: normal; color: var(--itkaarhus-blue); }
+  .mast p { font-size: 18px; color: var(--itkaarhus-slate-700); max-width: 620px; line-height: 1.55; margin: 0; }
 
   /* Rainbow divider */
   .rainbow { height: 8px; border-radius: 999px; margin: 0 0 72px;
     background: linear-gradient(to right,
-      var(--itk-red) 0 14%,
-      var(--itk-lime) 14% 28%,
-      var(--itk-green) 28% 42%,
-      var(--itk-mint) 42% 56%,
-      var(--itk-aqua) 56% 70%,
-      var(--itk-cyan) 70% 85%,
-      var(--itk-blue) 85% 100%);
+      var(--itkaarhus-red) 0 14%,
+      var(--itkaarhus-lime) 14% 28%,
+      var(--itkaarhus-green) 28% 42%,
+      var(--itkaarhus-mint) 42% 56%,
+      var(--itkaarhus-aqua) 56% 70%,
+      var(--itkaarhus-cyan) 70% 85%,
+      var(--itkaarhus-blue) 85% 100%);
   }
 
   /* Index grid */
-  h2.sec { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; margin: 56px 0 24px; }
+  h2.sec { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; margin: 56px 0 24px; }
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .dcard { border: 1px solid var(--itk-slate-200); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; background: #fff; transition: transform .18s, box-shadow .18s, border-color .18s; }
-  .dcard:hover { transform: translateY(-2px); box-shadow: var(--itk-shadow-2); border-color: var(--itk-slate-300); }
-  .dcard .preview { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--itk-slate-50); display: flex; align-items: center; justify-content: center; padding: 28px; }
+  .dcard { border: 1px solid var(--itkaarhus-slate-200); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; background: #fff; transition: transform .18s, box-shadow .18s, border-color .18s; }
+  .dcard:hover { transform: translateY(-2px); box-shadow: var(--itkaarhus-shadow-2); border-color: var(--itkaarhus-slate-300); }
+  .dcard .preview { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--itkaarhus-slate-50); display: flex; align-items: center; justify-content: center; padding: 28px; }
   .dcard .meta { padding: 20px 22px 22px; }
-  .dcard .idx { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itk-blue); font-weight: 600; }
+  .dcard .idx { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue); font-weight: 600; }
   .dcard h3 { font-size: 20px; margin: 6px 0 6px; letter-spacing: -0.01em; font-weight: 600; }
-  .dcard p { font-size: 13px; color: var(--itk-slate-500); margin: 0; line-height: 1.5; }
+  .dcard p { font-size: 13px; color: var(--itkaarhus-slate-500); margin: 0; line-height: 1.5; }
 
   /* Preview miniatures */
   .mini-palette { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 4px; width: 100%; height: 100%; }
   .mini-palette div { border-radius: 3px; }
-  .mini-type { text-align: center; font-family: var(--itk-font-display); }
-  .mini-type .big { font-size: 82px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--itk-ink); }
-  .mini-type .alpha { font-size: 12px; color: var(--itk-slate-500); margin-top: 4px; }
+  .mini-type { text-align: center; font-family: var(--itkaarhus-font-display); }
+  .mini-type .big { font-size: 82px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--itkaarhus-ink); }
+  .mini-type .alpha { font-size: 12px; color: var(--itkaarhus-slate-500); margin-top: 4px; }
   .mini-space { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .mini-space .r { height: 10px; background: var(--itk-blue); border-radius: 2px; }
+  .mini-space .r { height: 10px; background: var(--itkaarhus-blue); border-radius: 2px; }
   .mini-space .r:nth-child(1) { width: 8%; }
   .mini-space .r:nth-child(2) { width: 16%; }
   .mini-space .r:nth-child(3) { width: 28%; }
@@ -57,33 +62,37 @@
   .mini-space .r:nth-child(6) { width: 100%; }
   .mini-logo { max-width: 80%; max-height: 80%; }
   .mini-comp { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; width: 100%; }
-  .mini-comp .btn { background: var(--itk-blue); color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 12px; font-weight: 600; }
+  .mini-comp .btn { background: var(--itkaarhus-blue); color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 12px; font-weight: 600; }
   .mini-comp .chips { display: flex; gap: 6px; }
   .mini-comp .chip { padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 500; }
-  .mini-comp .chip.g { background: rgba(0,141,61,0.15); color: var(--itk-green); }
-  .mini-comp .chip.b { background: rgba(0,123,166,0.15); color: var(--itk-blue); }
-  .mini-comp .chip.r { background: rgba(228,73,48,0.15); color: var(--itk-red); }
-  .mini-comp .card { width: 100%; padding: 10px 12px; border: 1px solid var(--itk-slate-200); border-radius: 6px; background: #fff; }
+  .mini-comp .chip.g { background: rgba(0,141,61,0.15); color: var(--itkaarhus-green); }
+  .mini-comp .chip.b { background: rgba(0,123,166,0.15); color: var(--itkaarhus-blue); }
+  .mini-comp .chip.r { background: rgba(228,73,48,0.15); color: var(--itkaarhus-red); }
+  .mini-comp .card { width: 100%; padding: 10px 12px; border: 1px solid var(--itkaarhus-slate-200); border-radius: 6px; background: #fff; }
   .mini-comp .card .t { font-size: 11px; font-weight: 600; }
-  .mini-comp .card .s { font-size: 9px; color: var(--itk-slate-500); margin-top: 2px; }
-  .mini-site { background: #fff; border: 1px solid var(--itk-slate-200); border-radius: 6px; width: 100%; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
-  .mini-site .bar { height: 14px; background: var(--itk-slate-100); border-bottom: 1px solid var(--itk-slate-200); display: flex; align-items: center; padding: 0 6px; gap: 3px; }
-  .mini-site .bar span { width: 5px; height: 5px; border-radius: 50%; background: var(--itk-slate-300); }
-  .mini-site .inner { flex: 1; padding: 10px; background: var(--itk-ink); color: #fff; position: relative; overflow: hidden; }
+  .mini-comp .card .s { font-size: 9px; color: var(--itkaarhus-slate-500); margin-top: 2px; }
+  .mini-site { background: #fff; border: 1px solid var(--itkaarhus-slate-200); border-radius: 6px; width: 100%; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
+  .mini-site .bar { height: 14px; background: var(--itkaarhus-slate-100); border-bottom: 1px solid var(--itkaarhus-slate-200); display: flex; align-items: center; padding: 0 6px; gap: 3px; }
+  .mini-site .bar span { width: 5px; height: 5px; border-radius: 50%; background: var(--itkaarhus-slate-300); }
+  .mini-site .inner { flex: 1; padding: 10px; background: var(--itkaarhus-ink); color: #fff; position: relative; overflow: hidden; }
   .mini-site .inner h { display: block; font-size: 11px; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
-  .mini-site .inner h em { font-style: normal; color: var(--itk-lime); }
+  .mini-site .inner h em { font-style: normal; color: var(--itkaarhus-lime); }
   .mini-site .tri { position: absolute; bottom: -10px; right: -10px; width: 70px; height: 70px; opacity: 0.85; }
 
   /* Principles */
   .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .prin { padding: 28px 28px 24px; border: 1px solid var(--itk-slate-200); border-radius: 12px; }
-  .prin .n { font-family: var(--itk-font-mono); font-size: 12px; color: var(--itk-blue); }
+  .prin { padding: 28px 28px 24px; border: 1px solid var(--itkaarhus-slate-200); border-radius: 12px; }
+  .prin .n { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-blue); }
   .prin h4 { font-size: 20px; margin: 10px 0 8px; letter-spacing: -0.01em; font-weight: 600; }
-  .prin p { font-size: 14px; color: var(--itk-slate-700); line-height: 1.6; margin: 0; }
+  .prin p { font-size: 14px; color: var(--itkaarhus-slate-700); line-height: 1.6; margin: 0; }
 
   /* Meta footer */
-  .meta-foot { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--itk-slate-200); display: flex; justify-content: space-between; font-size: 13px; color: var(--itk-slate-500); }
-  .meta-foot a { color: var(--itk-blue); text-decoration: none; font-weight: 500; }
+  .meta-foot { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--itkaarhus-slate-200); display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; font-size: 13px; color: var(--itkaarhus-slate-500); }
+  .meta-foot a { color: var(--itkaarhus-blue); text-decoration: none; font-weight: 500; }
+  /* Quiet Aarhus Kommune endorsement */
+  .endorse { display: flex; flex-direction: column; gap: 8px; }
+  .endorse-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--itkaarhus-slate-500); }
+  .endorse img { height: 40px; width: auto; }
 </style>
 </head>
 <body>
@@ -91,14 +100,13 @@
 <div class="shell">
 
   <div class="mast">
-    <div>
-      <div class="eye">ITK Development · Design System v1.0</div>
-      <h1>A toolkit for <em>the smarter city</em>.</h1>
-      <p>ITK Development designs, builds and maintains digital services for every magistrate in Aarhus Kommune. This system keeps that work consistent — one palette, one type stack, one set of primitives, from itk.aarhus.dk to internal admin tools.</p>
-    </div>
-    <div class="logomark">
-      <img src="assets/logos/itk-4f-1.png" alt="ITK primary logo" style="max-width: 340px;">
-    </div>
+    <a class="brand" href="index.html">
+      <img class="emblem" src="assets/logos/aak-favicon.ico" alt="" width="28" height="28">
+      <span class="product">[Product name]</span>
+    </a>
+    <div class="eye">Design System · v1.0</div>
+    <h1>One system for <em>digital Aarhus</em>.</h1>
+    <p>A shared design system for digital products in Aarhus Kommune — one palette, one type stack, one set of primitives, from public sites to internal admin tools. Consistent, accessible, Danish-first.</p>
   </div>
 
   <div class="rainbow"></div>
@@ -108,20 +116,20 @@
     <a class="dcard" href="tokens/colors.html">
       <div class="preview">
         <div class="mini-palette">
-          <div style="background: var(--itk-blue)"></div>
-          <div style="background: var(--itk-cyan)"></div>
-          <div style="background: var(--itk-aqua)"></div>
-          <div style="background: var(--itk-mint)"></div>
-          <div style="background: var(--itk-green)"></div>
-          <div style="background: var(--itk-lime)"></div>
-          <div style="background: var(--itk-red)"></div>
-          <div style="background: var(--itk-ink)"></div>
+          <div style="background: var(--itkaarhus-blue)"></div>
+          <div style="background: var(--itkaarhus-cyan)"></div>
+          <div style="background: var(--itkaarhus-aqua)"></div>
+          <div style="background: var(--itkaarhus-mint)"></div>
+          <div style="background: var(--itkaarhus-green)"></div>
+          <div style="background: var(--itkaarhus-lime)"></div>
+          <div style="background: var(--itkaarhus-red)"></div>
+          <div style="background: var(--itkaarhus-ink)"></div>
         </div>
       </div>
       <div class="meta">
         <div class="idx">01 · Foundations</div>
         <h3>Colors</h3>
-        <p>Seven brand hues from the logo plus a full neutral scale. Blue leads, greens expand, red stays sharp.</p>
+        <p>Seven faceted brand hues plus a full neutral scale. Blue leads, greens expand, red stays sharp.</p>
       </div>
     </a>
 
@@ -158,12 +166,12 @@
   <div class="cards">
     <a class="dcard" href="tokens/logo.html">
       <div class="preview" style="padding: 32px;">
-        <img class="mini-logo" src="assets/logos/itk-4f-1.png" alt="">
+        <img class="mini-logo" src="assets/logos/AAK_02_venstrejusteret_sh.svg" alt="">
       </div>
       <div class="meta">
         <div class="idx">02 · Brand</div>
-        <h3>Logo</h3>
-        <p>Primary four-colour mark, black, white, alternates. Clear space, misuse and co-branding with Aarhus Kommune.</p>
+        <h3>Logo &amp; endorsement</h3>
+        <p>The Aarhus Kommune endorsement mark, the product emblem, clear space and usage rules.</p>
       </div>
     </a>
 
@@ -172,7 +180,7 @@
         <div class="mini-comp">
           <div class="btn">Primary action</div>
           <div class="chips">
-            <div class="chip b">• Development</div>
+            <div class="chip b">• Projekt</div>
             <div class="chip g">• Aktiv</div>
             <div class="chip r">• Afsluttet</div>
           </div>
@@ -206,8 +214,8 @@
       </div>
       <div class="meta">
         <div class="idx">04 · Applied</div>
-        <h3>itk.aarhus.dk — applied</h3>
-        <p>The system on the public website: hero, news, departments, stats, footer.</p>
+        <h3>Applied example</h3>
+        <p>The system on a full public site: hero, news, departments, stats, footer.</p>
       </div>
     </a>
   </div>
@@ -217,12 +225,12 @@
     <div class="prin">
       <div class="n">001</div>
       <h4>Clarity over cleverness.</h4>
-      <p>We build services used by 360 000 citizens — long-form Danish copy wins over decorative flourishes. Every component earns its place.</p>
+      <p>We build services for citizens — long-form Danish copy wins over decorative flourishes. Every component earns its place.</p>
     </div>
     <div class="prin">
       <div class="n">002</div>
       <h4>Open by default.</h4>
-      <p>Like the code, the design system is shared across OS2, GovTech Midtjylland and partner kommuner. Decisions are documented, tokens are tokens.</p>
+      <p>The design system is shared and reusable across products and partner kommuner. Decisions are documented, tokens are tokens.</p>
     </div>
     <div class="prin">
       <div class="n">003</div>
@@ -232,8 +240,11 @@
   </div>
 
   <div class="meta-foot">
-    <div>ITK Development · Aarhus Kommune · Kultur og Borgerservice</div>
-    <div><a href="mailto:itk@mkb.aarhus.dk">itk@mkb.aarhus.dk</a> · <a href="https://itk.aarhus.dk">itk.aarhus.dk</a></div>
+    <div class="endorse">
+      <span class="endorse-label">En del af</span>
+      <img src="assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune">
+    </div>
+    <div>Design System · <a href="https://github.com/itk-dev/itkaarhus-design-system">github.com/itk-dev/itkaarhus-design-system</a></div>
   </div>
 </div>
 

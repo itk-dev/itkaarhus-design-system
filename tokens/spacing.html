@@ -2,76 +2,77 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Spacing &amp; Elevation — ITK Design System</title>
+<title>Spacing &amp; Elevation — [Product name] Design System</title>
+<link rel="icon" href="../assets/logos/aak-favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../tokens.css">
 <style>
   body { padding: 48px; }
   .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; }
   h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itk-slate-700); max-width: 640px; margin: 0 0 40px; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-slate-700); max-width: 640px; margin: 0 0 40px; }
   h2.sh { font-size: 22px; margin: 48px 0 20px; font-weight: 600; letter-spacing: -0.01em; }
 
   .space-table { display: grid; grid-template-columns: 120px 80px 1fr 200px; gap: 16px; align-items: center; }
-  .space-table > div { padding: 12px 0; border-top: 1px solid var(--itk-slate-200); }
+  .space-table > div { padding: 12px 0; border-top: 1px solid var(--itkaarhus-slate-200); }
   .space-table > div:nth-child(-n+4) { border-top: 0; padding-top: 0; }
-  .tok { font-family: var(--itk-font-mono); font-size: 13px; color: var(--itk-slate-700); }
-  .px  { font-family: var(--itk-font-mono); font-size: 13px; color: var(--itk-slate-500); }
-  .bar { height: 20px; background: var(--itk-blue); border-radius: 3px; }
-  .use { font-size: 13px; color: var(--itk-slate-500); }
+  .tok { font-family: var(--itkaarhus-font-mono); font-size: 13px; color: var(--itkaarhus-slate-700); }
+  .px  { font-family: var(--itkaarhus-font-mono); font-size: 13px; color: var(--itkaarhus-slate-500); }
+  .bar { height: 20px; background: var(--itkaarhus-blue); border-radius: 3px; }
+  .use { font-size: 13px; color: var(--itkaarhus-slate-500); }
 
   .radius-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 16px; }
-  .rbox { aspect-ratio: 1/1; background: var(--itk-slate-100); border: 1px solid var(--itk-slate-200); display: flex; align-items: flex-end; justify-content: space-between; padding: 12px; }
-  .rbox .rl { font-family: var(--itk-font-mono); font-size: 11px; color: var(--itk-slate-700); }
-  .rbox .rv { font-family: var(--itk-font-mono); font-size: 11px; color: var(--itk-slate-500); }
+  .rbox { aspect-ratio: 1/1; background: var(--itkaarhus-slate-100); border: 1px solid var(--itkaarhus-slate-200); display: flex; align-items: flex-end; justify-content: space-between; padding: 12px; }
+  .rbox .rl { font-family: var(--itkaarhus-font-mono); font-size: 11px; color: var(--itkaarhus-slate-700); }
+  .rbox .rv { font-family: var(--itkaarhus-font-mono); font-size: 11px; color: var(--itkaarhus-slate-500); }
 
   .shadow-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 12px; }
   .scard { background: #fff; border-radius: 10px; padding: 28px 24px; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
   .scard h4 { margin: 0; font-size: 15px; font-weight: 600; }
-  .scard .t { font-family: var(--itk-font-mono); font-size: 11px; color: var(--itk-slate-500); }
-  .s1 { box-shadow: var(--itk-shadow-1); }
-  .s2 { box-shadow: var(--itk-shadow-2); }
-  .s3 { box-shadow: var(--itk-shadow-3); }
+  .scard .t { font-family: var(--itkaarhus-font-mono); font-size: 11px; color: var(--itkaarhus-slate-500); }
+  .s1 { box-shadow: var(--itkaarhus-shadow-1); }
+  .s2 { box-shadow: var(--itkaarhus-shadow-2); }
+  .s3 { box-shadow: var(--itkaarhus-shadow-3); }
 
-  .grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; background: var(--itk-slate-50); padding: 16px; border-radius: 10px; border: 1px solid var(--itk-slate-200); }
-  .grid-demo > div { background: rgba(0,123,166,0.12); height: 80px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--itk-font-mono); font-size: 11px; color: var(--itk-blue); }
+  .grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; background: var(--itkaarhus-slate-50); padding: 16px; border-radius: 10px; border: 1px solid var(--itkaarhus-slate-200); }
+  .grid-demo > div { background: rgba(0,123,166,0.12); height: 80px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--itkaarhus-font-mono); font-size: 11px; color: var(--itkaarhus-blue); }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="eyebrow">Design tokens · Spacing &amp; elevation</div>
   <h1 class="title">Rhythm on a 4&thinsp;px grid.</h1>
-  <p class="lede">Nine-step spacing scale, five-step radius scale, three-step elevation. Generous breathing room over density — ITK surfaces lots of imagery and long-form Danish copy.</p>
+  <p class="lede">Nine-step spacing scale, five-step radius scale, three-step elevation. Generous breathing room over density — these surfaces carry lots of imagery and long-form Danish copy.</p>
 
   <h2 class="sh">Spacing scale</h2>
   <div class="space-table">
-    <div class="tok">--itk-space-1</div><div class="px">4 px</div><div><div class="bar" style="width:4px"></div></div><div class="use">Icon gap, tight stack</div>
-    <div class="tok">--itk-space-2</div><div class="px">8 px</div><div><div class="bar" style="width:8px"></div></div><div class="use">Inline chip padding</div>
-    <div class="tok">--itk-space-3</div><div class="px">12 px</div><div><div class="bar" style="width:12px"></div></div><div class="use">Form row gap</div>
-    <div class="tok">--itk-space-4</div><div class="px">16 px</div><div><div class="bar" style="width:16px"></div></div><div class="use">Default card padding</div>
-    <div class="tok">--itk-space-5</div><div class="px">24 px</div><div><div class="bar" style="width:24px"></div></div><div class="use">Content block gap</div>
-    <div class="tok">--itk-space-6</div><div class="px">32 px</div><div><div class="bar" style="width:32px"></div></div><div class="use">Card interior, nav height</div>
-    <div class="tok">--itk-space-7</div><div class="px">48 px</div><div><div class="bar" style="width:48px"></div></div><div class="use">Section gutter (mobile)</div>
-    <div class="tok">--itk-space-8</div><div class="px">64 px</div><div><div class="bar" style="width:64px"></div></div><div class="use">Section gutter (desktop)</div>
-    <div class="tok">--itk-space-9</div><div class="px">96 px</div><div><div class="bar" style="width:96px"></div></div><div class="use">Hero / page margins</div>
+    <div class="tok">--itkaarhus-space-1</div><div class="px">4 px</div><div><div class="bar" style="width:4px"></div></div><div class="use">Icon gap, tight stack</div>
+    <div class="tok">--itkaarhus-space-2</div><div class="px">8 px</div><div><div class="bar" style="width:8px"></div></div><div class="use">Inline chip padding</div>
+    <div class="tok">--itkaarhus-space-3</div><div class="px">12 px</div><div><div class="bar" style="width:12px"></div></div><div class="use">Form row gap</div>
+    <div class="tok">--itkaarhus-space-4</div><div class="px">16 px</div><div><div class="bar" style="width:16px"></div></div><div class="use">Default card padding</div>
+    <div class="tok">--itkaarhus-space-5</div><div class="px">24 px</div><div><div class="bar" style="width:24px"></div></div><div class="use">Content block gap</div>
+    <div class="tok">--itkaarhus-space-6</div><div class="px">32 px</div><div><div class="bar" style="width:32px"></div></div><div class="use">Card interior, nav height</div>
+    <div class="tok">--itkaarhus-space-7</div><div class="px">48 px</div><div><div class="bar" style="width:48px"></div></div><div class="use">Section gutter (mobile)</div>
+    <div class="tok">--itkaarhus-space-8</div><div class="px">64 px</div><div><div class="bar" style="width:64px"></div></div><div class="use">Section gutter (desktop)</div>
+    <div class="tok">--itkaarhus-space-9</div><div class="px">96 px</div><div><div class="bar" style="width:96px"></div></div><div class="use">Hero / page margins</div>
   </div>
 
   <h2 class="sh">Radii</h2>
   <div class="radius-grid">
-    <div class="rbox" style="border-radius: var(--itk-radius-0)"><div class="rl">radius-0</div><div class="rv">0</div></div>
-    <div class="rbox" style="border-radius: var(--itk-radius-1)"><div class="rl">radius-1</div><div class="rv">2</div></div>
-    <div class="rbox" style="border-radius: var(--itk-radius-2)"><div class="rl">radius-2</div><div class="rv">6</div></div>
-    <div class="rbox" style="border-radius: var(--itk-radius-3)"><div class="rl">radius-3</div><div class="rv">10</div></div>
-    <div class="rbox" style="border-radius: var(--itk-radius-4)"><div class="rl">radius-4</div><div class="rv">16</div></div>
-    <div class="rbox" style="border-radius: var(--itk-radius-pill)"><div class="rl">pill</div><div class="rv">999</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-0)"><div class="rl">radius-0</div><div class="rv">0</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-1)"><div class="rl">radius-1</div><div class="rv">2</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-2)"><div class="rl">radius-2</div><div class="rv">6</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-3)"><div class="rl">radius-3</div><div class="rv">10</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-4)"><div class="rl">radius-4</div><div class="rv">16</div></div>
+    <div class="rbox" style="border-radius: var(--itkaarhus-radius-pill)"><div class="rl">pill</div><div class="rv">999</div></div>
   </div>
 
   <h2 class="sh">Elevation</h2>
   <div class="shadow-row">
-    <div class="scard s1"><h4>Shadow 1</h4><div class="t">--itk-shadow-1 · inline cards, inputs</div></div>
-    <div class="scard s2"><h4>Shadow 2</h4><div class="t">--itk-shadow-2 · hovered cards, menus</div></div>
-    <div class="scard s3"><h4>Shadow 3</h4><div class="t">--itk-shadow-3 · modals, focused overlays</div></div>
+    <div class="scard s1"><h4>Shadow 1</h4><div class="t">--itkaarhus-shadow-1 · inline cards, inputs</div></div>
+    <div class="scard s2"><h4>Shadow 2</h4><div class="t">--itkaarhus-shadow-2 · hovered cards, menus</div></div>
+    <div class="scard s3"><h4>Shadow 3</h4><div class="t">--itkaarhus-shadow-3 · modals, focused overlays</div></div>
   </div>
 
   <h2 class="sh">12-column grid</h2>
