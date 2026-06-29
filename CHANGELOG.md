@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   placeholder.
 - **Removed** all ITK logo assets (`itk-*.png`, `alt/`) and references — the ITK
   marks are no longer part of the design system.
+- Bumped GitHub Pages workflow actions off the deprecated Node 20 runtime
+  (`checkout@v5`, `upload-pages-artifact@v4`).
 
 ### Added
 
