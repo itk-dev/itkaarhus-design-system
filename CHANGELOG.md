@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Breaking:** renamed CSS tokens from `--itk-*` to `--itkaarhus-*` and component
   classes from `.itk-*` to `.itkaarhus-*`. Consuming apps that mirror these must re-sync.
+- **Breaking:** consolidated the colour palette. Removed the supporting hues
+  (`aqua`, `mint`, `lime`) and the standalone `green`; renamed neutrals
+  `ink`/`paper`/`slate-*` → `gray-{50..900}` + `white`, and the state colours
+  `cyan`/`green`/`amber`/`red` → `info`/`success`/`warning`/`danger`. The palette is
+  now blue + coral (brand), four state colours, and one gray scale — each a full
+  50→900 scale. Rebuilt the Colors reference page with elaborated usage guidance.
 - Rebranded away from ITK: Aarhus Kommune now appears only as a quiet footer
   endorsement, and the header uses a small product emblem + a `[Product name]`
   placeholder.

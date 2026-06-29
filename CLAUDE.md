@@ -29,8 +29,8 @@ When asked to "use this design system", "apply the styling", or similar:
 
 | Don't | Do |
 | --- | --- |
-| `color: #007BA6;` | `color: var(--itkaarhus-blue);` or `var(--itkaarhus-primary);` |
-| `color: #FF5F31;` | `color: var(--itkaarhus-secondary);` or `var(--itkaarhus-coral);` |
+| `color: #007BA6;` | `color: var(--itkaarhus-blue-500);` or `var(--itkaarhus-primary);` |
+| `color: #FF5F31;` | `color: var(--itkaarhus-secondary);` or `var(--itkaarhus-coral-500);` |
 | `padding: 16px;` | `padding: var(--itkaarhus-space-4);` |
 | `border-radius: 6px;` | `border-radius: var(--itkaarhus-radius-2);` |
 | `font-family: "Source Serif 4", serif;` | `font-family: var(--itkaarhus-font-serif);` |
@@ -40,15 +40,14 @@ If a missing token is genuinely needed, add it to `tokens.css` rather than inlin
 
 ## Color roles
 
-One primary, one complementary secondary, plus state colours. Role colours ship a **50→900 shade ramp** (`--itkaarhus-{blue,coral,green,amber,red,cyan}-{50..900}`); `500` is the base hue.
+Two brand colours, four state colours, one neutral scale. Every colour ships a **50→900 scale** (e.g. `--itkaarhus-blue-{50..900}`); `500` is the base hue, lighter steps for surfaces/soft fills, darker steps for text/borders/hover.
 
-- **`--itkaarhus-blue` (primary)** — primary actions, links, focus ring, default brand surface. Most UI chrome is blue.
-- **`--itkaarhus-coral` (secondary)** — warm complement to the blue. Highlights, editorial accents, secondary emphasis. **Not** an error colour.
-- **`--itkaarhus-green` (success)**, **`--itkaarhus-amber` (warning)**, **`--itkaarhus-red` (danger)**, **`--itkaarhus-cyan` (info)** — semantic state colours. Red stays sharp and rare; never the primary brand colour in a layout.
-- **`--itkaarhus-aqua`, `--itkaarhus-mint`, `--itkaarhus-lime`** — supporting hues for charts, stats, soft positive, pilot/draft tags.
-- **Neutrals** (`--itkaarhus-ink`, `--itkaarhus-slate-700`…`--itkaarhus-slate-50`, `--itkaarhus-paper`) — body copy, surfaces, borders, muted text.
+- **`--itkaarhus-blue-*` (primary)** — primary actions, links, focus ring, default brand surface. Most UI chrome is blue. Use `-200` for accents on dark backgrounds.
+- **`--itkaarhus-coral-*` (secondary)** — warm complement to the blue. Highlights, editorial accents, secondary emphasis, used sparingly. **Not** an error colour.
+- **State:** **`--itkaarhus-info-*`** (cyan), **`--itkaarhus-success-*`** (green), **`--itkaarhus-warning-*`** (amber), **`--itkaarhus-danger-*`** (red). Reserve for meaning, never decoration. Danger stays sharp and rare; never a large fill.
+- **`--itkaarhus-gray-*`** (`50`→`900`, numbered only) — body copy, surfaces, borders, muted text. `--itkaarhus-white` is true white for page backgrounds.
 
-Role aliases: `--itkaarhus-primary`, `--itkaarhus-secondary`, `--itkaarhus-success`, `--itkaarhus-warning`, `--itkaarhus-danger`, `--itkaarhus-info`, each with a `*-soft` surface tint for badges/alerts.
+There are no decorative/supporting hues — the palette is deliberately just these. Role aliases: `--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, and `--itkaarhus-{info,success,warning,danger}`, each state with a `*-soft` surface tint for badges/alerts.
 
 ## Typography
 
@@ -87,8 +86,8 @@ Role aliases: `--itkaarhus-primary`, `--itkaarhus-secondary`, `--itkaarhus-succe
 ## Principles to defer to
 
 1. **Clarity over cleverness.** Plain Danish copy and obvious affordances beat decorative flourishes.
-2. **Blue leads, coral accents, greens expand, red stays sharp and rare.**
-3. **No emoji, no illustrative SVG.** Gradients are reserved for data-viz and the faceted palette swatch — decorative gradients are out; use flat brand fills or a single very-subtle wash.
+2. **Blue leads, coral accents sparingly, state colours carry meaning, red stays sharp and rare.**
+3. **No emoji, no illustrative SVG.** Gradients are reserved for data-viz — decorative gradients are out; use flat brand fills or a single very-subtle wash.
 
 ## Reference
 
