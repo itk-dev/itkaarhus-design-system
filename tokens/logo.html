@@ -9,58 +9,58 @@
 <style>
   body { padding: 48px; }
   .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
   h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itkaarhus-slate-700); max-width: 640px; margin: 0 0 40px; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 640px; margin: 0 0 40px; }
   h2.sh { font-size: 22px; margin: 48px 0 20px; font-weight: 600; letter-spacing: -0.01em; }
 
-  .primary-wrap { border: 1px solid var(--itkaarhus-slate-200); border-radius: 12px; padding: 56px 40px; display: flex; align-items: center; justify-content: center; background: var(--itkaarhus-slate-50); }
+  .primary-wrap { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 56px 40px; display: flex; align-items: center; justify-content: center; background: var(--itkaarhus-gray-50); }
   .primary-wrap img { max-width: 360px; width: 100%; }
 
   /* Product header lockup — emblem + product name */
-  .lockup { border: 1px solid var(--itkaarhus-slate-200); border-radius: 12px; padding: 40px; display: flex; align-items: center; gap: 14px; background: #fff; }
+  .lockup { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 40px; display: flex; align-items: center; gap: 14px; background: #fff; }
   .lockup img { width: 40px; height: 40px; border-radius: var(--itkaarhus-radius-2); object-fit: contain; }
-  .lockup .product { font-family: var(--itkaarhus-font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.015em; color: var(--itkaarhus-ink); }
+  .lockup .product { font-family: var(--itkaarhus-font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.015em; color: var(--itkaarhus-gray-900); }
 
 
   .anat { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .anat-card { border: 1px solid var(--itkaarhus-slate-200); border-radius: 12px; padding: 24px; }
-  .anat-card .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; }
+  .anat-card { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 24px; }
+  .anat-card .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
   .anat-card .h { font-size: 16px; font-weight: 600; margin: 6px 0 4px; }
-  .anat-card p { font-size: 14px; color: var(--itkaarhus-slate-700); margin: 0 0 16px; }
+  .anat-card p { font-size: 14px; color: var(--itkaarhus-gray-700); margin: 0 0 16px; }
 
   .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .var { border: 1px solid var(--itkaarhus-slate-200); border-radius: 10px; overflow: hidden; background: #fff; }
+  .var { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; overflow: hidden; background: #fff; }
   .var .box { aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; padding: 24px; }
-  .var.black .box { background: var(--itkaarhus-slate-50); }
-  .var.white .box { background: var(--itkaarhus-ink); }
+  .var.black .box { background: var(--itkaarhus-gray-50); }
+  .var.white .box { background: var(--itkaarhus-gray-900); }
   .var.color .box { background: #fff; }
   .var img { max-width: 65%; max-height: 80%; object-fit: contain; }
-  .var .cap { padding: 12px 16px; border-top: 1px solid var(--itkaarhus-slate-200); font-size: 12px; color: var(--itkaarhus-slate-700); display: flex; justify-content: space-between; }
-  .var .cap span { font-family: var(--itkaarhus-font-mono); color: var(--itkaarhus-slate-500); font-size: 11px; }
+  .var .cap { padding: 12px 16px; border-top: 1px solid var(--itkaarhus-gray-200); font-size: 12px; color: var(--itkaarhus-gray-700); display: flex; justify-content: space-between; }
+  .var .cap span { font-family: var(--itkaarhus-font-mono); color: var(--itkaarhus-gray-500); font-size: 11px; }
 
   .misuse { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .m { border: 1px solid var(--itkaarhus-slate-200); border-radius: 10px; overflow: hidden; }
+  .m { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; overflow: hidden; }
   .m .mbox { aspect-ratio: 1/0.7; display: flex; align-items: center; justify-content: center; position: relative; }
-  .m .mbox::after { content: "✕"; position: absolute; top: 8px; right: 10px; color: var(--itkaarhus-red); font-weight: 700; font-size: 18px; }
-  .m.do .mbox::after { content: "✓"; color: var(--itkaarhus-green); }
+  .m .mbox::after { content: "✕"; position: absolute; top: 8px; right: 10px; color: var(--itkaarhus-danger-500); font-weight: 700; font-size: 18px; }
+  .m.do .mbox::after { content: "✓"; color: var(--itkaarhus-success-500); }
   .m img { max-width: 60%; max-height: 70%; object-fit: contain; }
   .m.stretch img { transform: scaleX(1.6); }
   .m.tint { filter: hue-rotate(220deg) saturate(2); }
   .m.shadow img { filter: drop-shadow(4px 4px 0 rgba(0,0,0,.4)); }
   .m.bg .mbox { background: linear-gradient(45deg, #ff0080, #ffa200); }
-  .m .cap { padding: 10px 14px; font-size: 12px; color: var(--itkaarhus-slate-700); border-top: 1px solid var(--itkaarhus-slate-200); }
+  .m .cap { padding: 10px 14px; font-size: 12px; color: var(--itkaarhus-gray-700); border-top: 1px solid var(--itkaarhus-gray-200); }
 
-  .clearspace { background: var(--itkaarhus-slate-50); border: 1px solid var(--itkaarhus-slate-200); border-radius: 12px; padding: 48px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .clearspace { background: var(--itkaarhus-gray-50); border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 48px; display: flex; align-items: center; justify-content: center; position: relative; }
   .clearspace .rel { position: relative; display: inline-block; }
   .clearspace .rel img { display: block; width: 360px; }
-  .clearspace .rel::before { content: ""; position: absolute; inset: -25% ; border: 1px dashed var(--itkaarhus-cyan); border-radius: 4px; pointer-events: none; }
-  .clearspace .rel::after { content: "X"; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--itkaarhus-slate-50); padding: 0 6px; font-size: 11px; font-family: var(--itkaarhus-font-mono); color: var(--itkaarhus-cyan); }
-  .clearspace .label { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--itkaarhus-slate-500); font-family: var(--itkaarhus-font-mono); }
+  .clearspace .rel::before { content: ""; position: absolute; inset: -25% ; border: 1px dashed var(--itkaarhus-info-500); border-radius: 4px; pointer-events: none; }
+  .clearspace .rel::after { content: "X"; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--itkaarhus-gray-50); padding: 0 6px; font-size: 11px; font-family: var(--itkaarhus-font-mono); color: var(--itkaarhus-info-500); }
+  .clearspace .label { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--itkaarhus-gray-500); font-family: var(--itkaarhus-font-mono); }
 
   .cobrand { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
-  .cobox { background: var(--itkaarhus-ink); color: #fff; padding: 32px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 32px; min-height: 120px; }
-  .cobox.inv { background: #fff; color: var(--itkaarhus-ink); border: 1px solid var(--itkaarhus-slate-200); }
+  .cobox { background: var(--itkaarhus-gray-900); color: #fff; padding: 32px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 32px; min-height: 120px; }
+  .cobox.inv { background: #fff; color: var(--itkaarhus-gray-900); border: 1px solid var(--itkaarhus-gray-200); }
   .cobox .div { width: 1px; height: 60%; background: currentColor; opacity: 0.3; }
   .cobox img { height: 48px; object-fit: contain; }
 </style>
@@ -72,7 +72,7 @@
   <p class="lede">Aarhus Kommune is the institutional brand — present, but quiet. It signs each product as a footer endorsement rather than a banner. In the header, a small emblem pairs with the product's own name.</p>
 
   <h2 class="sh">Endorsement mark — Aarhus Kommune</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-slate-500); margin: -8px 0 16px; max-width:640px">The official Aarhus Kommune mark. Use it small and low — a footer endorsement that says who stands behind the product. Don't recreate it; always use the supplied SVGs.</p>
+  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">The official Aarhus Kommune mark. Use it small and low — a footer endorsement that says who stands behind the product. Don't recreate it; always use the supplied SVGs.</p>
   <div class="variants">
     <div class="var color">
       <div class="box"><img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune, mørk"></div>
@@ -80,7 +80,7 @@
     </div>
     <div class="var white">
       <div class="box"><img src="../assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune, hvid"></div>
-      <div class="cap" style="background:var(--itkaarhus-ink); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">AAK_02_venstrejusteret_hvid.svg</span></div>
+      <div class="cap" style="background:var(--itkaarhus-gray-900); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">AAK_02_venstrejusteret_hvid.svg</span></div>
     </div>
     <div class="var color">
       <div class="box"><img src="../assets/logos/AAK_02_hoejrejusteret_dark.svg" alt="Aarhus Kommune, højrejusteret"></div>
@@ -89,7 +89,7 @@
   </div>
 
   <h2 class="sh">Product header lockup</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-slate-500); margin: -8px 0 16px; max-width:640px">Each product signs its chrome with a small emblem plus its own name — not the Aarhus Kommune logo, not a legacy wordmark. The emblem here is the Aarhus Kommune crest; <code>[Product name]</code> is a placeholder you swap per product.</p>
+  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">Each product signs its chrome with a small emblem plus its own name — not the Aarhus Kommune logo, not a legacy wordmark. The emblem here is the Aarhus Kommune crest; <code>[Product name]</code> is a placeholder you swap per product.</p>
   <div class="lockup">
     <img src="../assets/logos/aak-favicon.ico" alt="Emblem">
     <span class="product">[Product name]</span>
@@ -101,7 +101,7 @@
       <img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune mark med frizone">
     </div>
   </div>
-  <p style="font-size:14px; color:var(--itkaarhus-slate-500); margin: 12px 0 0">Minimum clear space equals 25 % of the mark's height on every side. Keep the endorsement small and unobtrusive — it confirms ownership, it doesn't headline.</p>
+  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: 12px 0 0">Minimum clear space equals 25 % of the mark's height on every side. Keep the endorsement small and unobtrusive — it confirms ownership, it doesn't headline.</p>
 
   <h2 class="sh">Do not</h2>
   <div class="misuse">
@@ -112,7 +112,7 @@
   </div>
 
   <h2 class="sh">Footer endorsement in context</h2>
-  <p style="font-size:14px; color:var(--itkaarhus-slate-500); margin: -8px 0 16px; max-width:640px">How the Aarhus Kommune mark sits in a product footer: small, low, quiet — confirming ownership without competing with the product name.</p>
+  <p style="font-size:14px; color:var(--itkaarhus-gray-500); margin: -8px 0 16px; max-width:640px">How the Aarhus Kommune mark sits in a product footer: small, low, quiet — confirming ownership without competing with the product name.</p>
   <div class="cobrand">
     <div class="cobox">
       <div style="font-size:13px; line-height:1.4; opacity:.7">[Product name]<br><span style="opacity:.7">En del af</span></div>
@@ -120,7 +120,7 @@
       <img src="../assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune">
     </div>
     <div class="cobox inv">
-      <div style="font-size:13px; line-height:1.4; color:var(--itkaarhus-slate-500)">[Product name]<br><span>En del af</span></div>
+      <div style="font-size:13px; line-height:1.4; color:var(--itkaarhus-gray-500)">[Product name]<br><span>En del af</span></div>
       <div class="div"></div>
       <img src="../assets/logos/AAK_02_venstrejusteret_sh.svg" alt="Aarhus Kommune">
     </div>

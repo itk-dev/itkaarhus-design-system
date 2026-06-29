@@ -23,24 +23,25 @@ drop into any project.
 - `assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
 - `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
-## Brand palette
+## Color palette
 
-One primary, one complementary secondary, plus state colours. Each role colour
-ships a **50→900 shade ramp** (`--itkaarhus-{blue,coral,green,amber,red,cyan}-*`);
-`500` is the base hue.
+Two brand colours, four state colours, and a neutral gray scale. Every colour
+ships a **50→900 scale** (`-50` lightest → `-900` darkest); `500` is the base hue.
 
-| Token | Hex | Role |
+| Scale | Base hex | Role |
 |---|---|---|
-| `--itkaarhus-blue` | `#007BA6` | **Primary** — links, primary buttons, active state |
-| `--itkaarhus-coral` | `#FF5F31` | **Secondary** — warm complement; highlights, editorial accents |
-| `--itkaarhus-green` | `#008D3D` | Success, "active" status |
-| `--itkaarhus-amber` | `#F5B800` | Warning |
-| `--itkaarhus-red` | `#E44930` | Danger, errors — sharp and rare |
-| `--itkaarhus-cyan` | `#00A5CD` | Info |
-| `--itkaarhus-aqua` / `--itkaarhus-mint` / `--itkaarhus-lime` | `#00B5C9` / `#73BC99` / `#89BD23` | Supporting hues — stats, soft positive, pilot/draft |
+| `--itkaarhus-blue-*` | `#007BA6` | **Primary** — links, primary buttons, focus, active state |
+| `--itkaarhus-coral-*` | `#FF5F31` | **Secondary** — warm complement; highlights, editorial accents (not an error colour) |
+| `--itkaarhus-info-*` | `#00A5CD` | State — informational |
+| `--itkaarhus-success-*` | `#008D3D` | State — success / "active" |
+| `--itkaarhus-warning-*` | `#F5B800` | State — warning |
+| `--itkaarhus-danger-*` | `#E44930` | State — danger, errors (sharp and rare) |
+| `--itkaarhus-gray-*` | — | Neutral — text, surfaces, borders (`50`→`900`; numbered only) |
 
-Role aliases: `--itkaarhus-primary`, `--itkaarhus-secondary`, `--itkaarhus-success`, `--itkaarhus-warning`,
-`--itkaarhus-danger`, `--itkaarhus-info`, each with a `*-soft` surface tint for badges/alerts.
+`--itkaarhus-white` is true white for page backgrounds. Role aliases:
+`--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, and
+`--itkaarhus-{info,success,warning,danger}` — each state with a `*-soft` surface
+tint for badges/alerts.
 
 ## Type
 
@@ -62,10 +63,10 @@ Role aliases: `--itkaarhus-primary`, `--itkaarhus-secondary`, `--itkaarhus-succe
 ## Principles
 
 - Clarity over cleverness — calm, gov-grade, long-form Danish.
-- Blue leads, coral accents, greens expand, red stays sharp and rare.
+- Blue leads, coral accents sparingly, state colours carry meaning, red stays sharp and rare.
 - No emoji, no illustrative SVG. **Gradients are reserved for data-viz**
-  (e.g. the map heatmap) and the faceted palette swatch — decorative gradients
-  are out; use flat brand fills or a single very-subtle wash.
+  (e.g. the map heatmap) — decorative gradients are out; use flat brand fills or
+  a single very-subtle wash.
 - The palette **is** the expression — let the colours do the lifting.
 
 ## Viewing locally

@@ -4,202 +4,235 @@
 <meta charset="utf-8">
 <title>Colors — [Product name] Design System</title>
 <link rel="icon" href="../assets/logos/aak-favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../tokens.css">
 <style>
-  body { padding: 48px; background: var(--itkaarhus-paper); }
+  body { padding: 48px; background: var(--itkaarhus-white); }
   .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
   h1 { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itkaarhus-slate-700); max-width: 640px; margin: 0 0 40px; }
-  h2 { font-size: 22px; margin: 48px 0 16px; font-weight: 600; letter-spacing: -0.01em; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 660px; margin: 0 0 8px; line-height: 1.55; }
+  h2 { font-size: 22px; margin: 56px 0 6px; font-weight: 600; letter-spacing: -0.01em; }
+  h2 + .sub { font-size: 14px; color: var(--itkaarhus-gray-500); margin: 0 0 20px; max-width: 660px; line-height: 1.55; }
+  code { font-family: var(--itkaarhus-font-mono); font-size: 0.9em; background: var(--itkaarhus-gray-100); padding: 1px 5px; border-radius: 4px; }
 
-  /* Primary palette grid */
-  .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--itkaarhus-slate-200); border: 1px solid var(--itkaarhus-slate-200); }
-  .swatch { background: var(--c); aspect-ratio: 1.1/1; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; position: relative; }
-  .swatch.ink-dark { color: var(--itkaarhus-ink); }
-  .swatch .name { font-size: 16px; font-weight: 600; }
-  .swatch .tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; font-weight: 500; }
-  .swatch .codes { font-family: var(--itkaarhus-font-mono); font-size: 11px; line-height: 1.55; opacity: 0.92; }
-  .swatch .codes div { display: flex; justify-content: space-between; gap: 12px; }
-  .swatch .codes span:first-child { opacity: 0.7; }
+  /* Primary brand pair — two large cards */
+  .brand-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .brand-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+  .brand-card .chip { background: var(--c); height: 140px; display: flex; align-items: flex-end; padding: 18px; }
+  .brand-card .chip .role { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: #fff; opacity: 0.9; }
+  .brand-card .meta { padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .brand-card .nm { font-size: 18px; font-weight: 600; }
+  .brand-card .codes { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); text-align: right; }
 
-  /* Neutral row */
-  .neutrals { display: grid; grid-template-columns: repeat(8,1fr); gap: 1px; background: var(--itkaarhus-slate-200); border: 1px solid var(--itkaarhus-slate-200); }
-  .n { background: var(--c); aspect-ratio: 1/1.1; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
-  .n.ink-dark { color: var(--itkaarhus-ink); }
-  .n .nm { font-size: 12px; font-weight: 600; }
-  .n .hx { font-family: var(--itkaarhus-font-mono); font-size: 10px; opacity: 0.8; }
+  /* Scale row: 10 steps */
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+  .scale .step { aspect-ratio: 1/1.5; background: var(--c); display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding: 8px 6px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: #fff; }
+  .scale .step.dk { color: var(--itkaarhus-gray-900); }
+  .scale .step .s { font-weight: 500; opacity: 0.95; }
+  .scale .step .h { opacity: 0.7; font-size: 9px; }
+  .scale-label { display: flex; align-items: baseline; gap: 10px; margin: 20px 0 6px; }
+  .scale-label .t { font-size: 14px; font-weight: 600; color: var(--itkaarhus-gray-900); }
+  .scale-label .tok { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
 
-  /* Usage row */
-  .usage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-  .ucard { border: 1px solid var(--itkaarhus-slate-200); border-radius: 10px; padding: 20px; }
-  .ucard .hd { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--itkaarhus-slate-500); font-weight: 600; margin-bottom: 12px; }
-  .ucard ul { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--itkaarhus-slate-700); }
-  .ucard li { padding: 6px 0; border-top: 1px solid var(--itkaarhus-slate-100); display: flex; gap: 10px; align-items: center; }
-  .ucard li:first-child { border-top: 0; }
-  .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+  /* Usage */
+  .usage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .ucard { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 22px; }
+  .ucard.do { border-left: 3px solid var(--itkaarhus-success-500); }
+  .ucard.dont { border-left: 3px solid var(--itkaarhus-danger-500); }
+  .ucard .hd { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+  .ucard.do .hd { color: var(--itkaarhus-success-700); }
+  .ucard.dont .hd { color: var(--itkaarhus-danger-700); }
+  .ucard ul { margin: 0; padding: 0; list-style: none; }
+  .ucard li { padding: 10px 0; border-top: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); line-height: 1.5; }
+  .ucard li:first-child { border-top: 0; padding-top: 0; }
+  .ucard li b { color: var(--itkaarhus-gray-900); font-weight: 600; }
 
-  /* Gradient strip */
-  .rainbow { height: 16px; margin-top: 10px;
-    background: linear-gradient(to right, var(--itkaarhus-red) 0%, var(--itkaarhus-red) 14%, var(--itkaarhus-lime) 14%, var(--itkaarhus-lime) 28%, var(--itkaarhus-green) 28%, var(--itkaarhus-green) 42%, var(--itkaarhus-mint) 42%, var(--itkaarhus-mint) 56%, var(--itkaarhus-aqua) 56%, var(--itkaarhus-aqua) 70%, var(--itkaarhus-cyan) 70%, var(--itkaarhus-cyan) 85%, var(--itkaarhus-blue) 85%, var(--itkaarhus-blue) 100%);
-  }
+  /* Recipe table — token → role */
+  .recipe { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .recipe th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; padding: 0 0 10px; border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .recipe td { padding: 12px 0; border-bottom: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); vertical-align: top; }
+  .recipe td.sw { width: 32px; }
+  .recipe td.sw span { display: inline-block; width: 20px; height: 20px; border-radius: 5px; border: 1px solid rgba(17,19,24,0.08); vertical-align: middle; }
+  .recipe td.tk { width: 230px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-900); }
 
-  /* Shade ramps */
-  .ramp { display: grid; grid-template-columns: repeat(10, 1fr); gap: 1px; background: var(--itkaarhus-slate-200); border: 1px solid var(--itkaarhus-slate-200); margin-bottom: 8px; }
-  .ramp .step { aspect-ratio: 1/1.3; background: var(--c); display: flex; align-items: flex-end; padding: 8px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: #fff; }
-  .ramp .step.dk { color: var(--itkaarhus-ink); }
-  .ramp-label { font-size: 13px; font-weight: 600; color: var(--itkaarhus-slate-700); margin: 16px 0 6px; }
+  /* State demo alerts */
+  .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
+  .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 14px; line-height: 1.5; border: 1px solid transparent; }
+  .alert .ic { flex: none; width: 18px; height: 18px; }
+  .alert.info    { background: var(--itkaarhus-info-50);    border-color: var(--itkaarhus-info-200);    color: var(--itkaarhus-info-900); }
+  .alert.success { background: var(--itkaarhus-success-50); border-color: var(--itkaarhus-success-200); color: var(--itkaarhus-success-900); }
+  .alert.warning { background: var(--itkaarhus-warning-50); border-color: var(--itkaarhus-warning-200); color: var(--itkaarhus-warning-900); }
+  .alert.danger  { background: var(--itkaarhus-danger-50);  border-color: var(--itkaarhus-danger-200);  color: var(--itkaarhus-danger-900); }
+  .alert svg { stroke-width: 2; fill: none; stroke: currentColor; }
+  .alert b { display: block; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="eyebrow">Design tokens · Colors</div>
-  <h1>A faceted spectrum: blue-forward, green-rich, red-accented.</h1>
-  <p class="lede">A faceted brand spectrum. Seven brand hues plus a neutral slate scale. Deep blue leads; greens expand; red stays sharp and rare.</p>
+  <h1>Two brand colors, four states, one gray scale.</h1>
+  <p class="lede">A deliberately small palette. Blue leads and coral complements it; four state colors carry meaning; everything else is neutral gray. Each color ships a 50→900 scale — <code>500</code> is the base, lighter steps for surfaces and softer fills, darker steps for text, borders and hover.</p>
 
-  <h2>Brand palette</h2>
-  <div class="palette">
-    <div class="swatch" style="--c: var(--itkaarhus-blue);">
-      <div><div class="tag">Primary</div><div class="name">Blue</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#007BA6</span></div>
-        <div><span>RGB</span><span>0 · 123 · 166</span></div>
-      </div>
+  <h2>Primary</h2>
+  <p class="sub">Blue is the brand and the workhorse — primary actions, links, focus, active state. Coral is the warm secondary: highlights and editorial accents, used sparingly. Coral is <b>not</b> an error color.</p>
+  <div class="brand-pair">
+    <div class="brand-card">
+      <div class="chip" style="--c: var(--itkaarhus-blue-500)"><span class="role">Primary</span></div>
+      <div class="meta"><span class="nm">Blue</span><span class="codes">--itkaarhus-blue-500<br>#007BA6</span></div>
     </div>
-    <div class="swatch" style="--c: var(--itkaarhus-coral);">
-      <div><div class="tag">Secondary</div><div class="name">Coral</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#FF5F31</span></div>
-        <div><span>RGB</span><span>255 · 95 · 49</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-cyan);">
-      <div><div class="tag">Info</div><div class="name">Cyan</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#00A5CD</span></div>
-        <div><span>RGB</span><span>0 · 165 · 205</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-aqua);">
-      <div><div class="tag">Supporting</div><div class="name">Aqua</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#00B5C9</span></div>
-        <div><span>RGB</span><span>0 · 181 · 201</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-mint);">
-      <div><div class="tag">Supporting</div><div class="name">Mint</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#73BC99</span></div>
-        <div><span>RGB</span><span>115 · 188 · 153</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-green);">
-      <div><div class="tag">Success</div><div class="name">Green</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#008D3D</span></div>
-        <div><span>RGB</span><span>0 · 141 · 61</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-lime);">
-      <div><div class="tag">Pilot / draft</div><div class="name">Lime</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#89BD23</span></div>
-        <div><span>RGB</span><span>137 · 189 · 35</span></div>
-      </div>
-    </div>
-    <div class="swatch ink-dark" style="--c: var(--itkaarhus-amber);">
-      <div><div class="tag">Warning</div><div class="name">Amber</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#F5B800</span></div>
-        <div><span>RGB</span><span>245 · 184 · 0</span></div>
-      </div>
-    </div>
-    <div class="swatch" style="--c: var(--itkaarhus-red);">
-      <div><div class="tag">Danger</div><div class="name">Red</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#E44930</span></div>
-        <div><span>RGB</span><span>228 · 73 · 48</span></div>
-      </div>
-    </div>
-    <div class="swatch ink-dark" style="--c: var(--itkaarhus-paper); border: 1px solid var(--itkaarhus-slate-200);">
-      <div><div class="tag">Paper</div><div class="name">Paper</div></div>
-      <div class="codes">
-        <div><span>HEX</span><span>#FFFFFF</span></div>
-        <div><span>RGB</span><span>255 · 255 · 255</span></div>
-      </div>
+    <div class="brand-card">
+      <div class="chip" style="--c: var(--itkaarhus-coral-500)"><span class="role">Secondary</span></div>
+      <div class="meta"><span class="nm">Coral</span><span class="codes">--itkaarhus-coral-500<br>#FF5F31</span></div>
     </div>
   </div>
-  <div class="rainbow" aria-hidden="true"></div>
 
-  <h2>Shade ramps</h2>
-  <p class="lede" style="margin-bottom:16px">Each role colour ships a 50→900 ramp. <code>500</code> is the base hue; lighter tints (50–400) for soft surfaces, darker shades (600–900) for text and hover. Token names: <code>--itkaarhus-{blue,coral,green,amber,red,cyan}-{50..900}</code>.</p>
-  <div class="ramp-label">Blue — primary</div>
-  <div class="ramp" aria-hidden="true">
-    <div class="step dk" style="--c: var(--itkaarhus-blue-50)">50</div>
-    <div class="step dk" style="--c: var(--itkaarhus-blue-100)">100</div>
-    <div class="step dk" style="--c: var(--itkaarhus-blue-200)">200</div>
-    <div class="step dk" style="--c: var(--itkaarhus-blue-300)">300</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-400)">400</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-500)">500</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-600)">600</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-700)">700</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-800)">800</div>
-    <div class="step" style="--c: var(--itkaarhus-blue-900)">900</div>
-  </div>
-  <div class="ramp-label">Coral — secondary</div>
-  <div class="ramp" aria-hidden="true">
-    <div class="step dk" style="--c: var(--itkaarhus-coral-50)">50</div>
-    <div class="step dk" style="--c: var(--itkaarhus-coral-100)">100</div>
-    <div class="step dk" style="--c: var(--itkaarhus-coral-200)">200</div>
-    <div class="step dk" style="--c: var(--itkaarhus-coral-300)">300</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-400)">400</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-500)">500</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-600)">600</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-700)">700</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-800)">800</div>
-    <div class="step" style="--c: var(--itkaarhus-coral-900)">900</div>
+  <div class="scale-label"><span class="t">Blue</span><span class="tok">--itkaarhus-blue-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-blue-50)"><span class="s">50</span><span class="h">#e6f2f6</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-blue-100)"><span class="s">100</span><span class="h">#cce4ed</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-blue-200)"><span class="s">200</span><span class="h">#99c9db</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-blue-300)"><span class="s">300</span><span class="h">#66aec9</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-400)"><span class="s">400</span><span class="h">#3393b6</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-500)"><span class="s">500</span><span class="h">#007ba6</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-600)"><span class="s">600</span><span class="h">#006385</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-700)"><span class="s">700</span><span class="h">#004f6b</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-800)"><span class="s">800</span><span class="h">#003a4f</span></div>
+    <div class="step" style="--c: var(--itkaarhus-blue-900)"><span class="s">900</span><span class="h">#002835</span></div>
   </div>
 
-  <h2>Neutral scale</h2>
-  <div class="neutrals">
-    <div class="n ink-dark" style="--c: var(--itkaarhus-paper);"><div><div class="nm">Paper</div><div class="hx">#FFFFFF</div></div></div>
-    <div class="n ink-dark" style="--c: var(--itkaarhus-slate-50);"><div><div class="nm">Slate 50</div><div class="hx">#F7F8FA</div></div></div>
-    <div class="n ink-dark" style="--c: var(--itkaarhus-slate-100);"><div><div class="nm">Slate 100</div><div class="hx">#EEF1F5</div></div></div>
-    <div class="n ink-dark" style="--c: var(--itkaarhus-slate-200);"><div><div class="nm">Slate 200</div><div class="hx">#DFE3EA</div></div></div>
-    <div class="n ink-dark" style="--c: var(--itkaarhus-slate-300);"><div><div class="nm">Slate 300</div><div class="hx">#C7CCD4</div></div></div>
-    <div class="n" style="--c: var(--itkaarhus-slate-500);"><div><div class="nm">Slate 500</div><div class="hx">#6B7484</div></div></div>
-    <div class="n" style="--c: var(--itkaarhus-slate-700);"><div><div class="nm">Slate 700</div><div class="hx">#3F4654</div></div></div>
-    <div class="n" style="--c: var(--itkaarhus-ink);"><div><div class="nm">Ink</div><div class="hx">#111318</div></div></div>
+  <div class="scale-label"><span class="t">Coral</span><span class="tok">--itkaarhus-coral-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-coral-50)"><span class="s">50</span><span class="h">#fff0eb</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-coral-100)"><span class="s">100</span><span class="h">#ffe1d7</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-coral-200)"><span class="s">200</span><span class="h">#ffc4b0</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-coral-300)"><span class="s">300</span><span class="h">#ffa288</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-400)"><span class="s">400</span><span class="h">#ff8160</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-500)"><span class="s">500</span><span class="h">#ff5f31</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-600)"><span class="s">600</span><span class="h">#e54d24</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-700)"><span class="s">700</span><span class="h">#cc4820</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-800)"><span class="s">800</span><span class="h">#a33616</span></div>
+    <div class="step" style="--c: var(--itkaarhus-coral-900)"><span class="s">900</span><span class="h">#7a2810</span></div>
+  </div>
+
+  <h2>Gray</h2>
+  <p class="sub">The neutral scale carries most of the interface: text, surfaces, borders, dividers. Steps are numbered only — no names. <code>--itkaarhus-white</code> is true white for page backgrounds; <code>gray-900</code> is the darkest ink for body copy.</p>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-gray-50)"><span class="s">50</span><span class="h">#f7f8fa</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-gray-100)"><span class="s">100</span><span class="h">#eef1f5</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-gray-200)"><span class="s">200</span><span class="h">#dfe3ea</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-gray-300)"><span class="s">300</span><span class="h">#c7ccd4</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-gray-400)"><span class="s">400</span><span class="h">#9aa1ae</span></div>
+    <div class="step" style="--c: var(--itkaarhus-gray-500)"><span class="s">500</span><span class="h">#6b7484</span></div>
+    <div class="step" style="--c: var(--itkaarhus-gray-600)"><span class="s">600</span><span class="h">#515967</span></div>
+    <div class="step" style="--c: var(--itkaarhus-gray-700)"><span class="s">700</span><span class="h">#3f4654</span></div>
+    <div class="step" style="--c: var(--itkaarhus-gray-800)"><span class="s">800</span><span class="h">#2a2f38</span></div>
+    <div class="step" style="--c: var(--itkaarhus-gray-900)"><span class="s">900</span><span class="h">#111318</span></div>
+  </div>
+
+  <h2>State</h2>
+  <p class="sub">Four colors that carry meaning — never decoration. Each has a full scale: the <code>50</code>/<code>100</code> tints back soft alert surfaces, <code>500</code> is the icon/accent, <code>700</code>+ gives readable text on those tints.</p>
+  <div class="scale-label"><span class="t">Info — Cyan</span><span class="tok">--itkaarhus-info-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-info-50)"><span class="s">50</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-info-100)"><span class="s">100</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-info-200)"><span class="s">200</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-info-300)"><span class="s">300</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-400)"><span class="s">400</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-500)"><span class="s">500</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-600)"><span class="s">600</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-700)"><span class="s">700</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-800)"><span class="s">800</span></div>
+    <div class="step" style="--c: var(--itkaarhus-info-900)"><span class="s">900</span></div>
+  </div>
+  <div class="scale-label"><span class="t">Success — Green</span><span class="tok">--itkaarhus-success-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-success-50)"><span class="s">50</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-success-100)"><span class="s">100</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-success-200)"><span class="s">200</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-success-300)"><span class="s">300</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-400)"><span class="s">400</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-500)"><span class="s">500</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-600)"><span class="s">600</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-700)"><span class="s">700</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-800)"><span class="s">800</span></div>
+    <div class="step" style="--c: var(--itkaarhus-success-900)"><span class="s">900</span></div>
+  </div>
+  <div class="scale-label"><span class="t">Warning — Amber</span><span class="tok">--itkaarhus-warning-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-warning-50)"><span class="s">50</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-warning-100)"><span class="s">100</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-warning-200)"><span class="s">200</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-warning-300)"><span class="s">300</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-warning-400)"><span class="s">400</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-warning-500)"><span class="s">500</span></div>
+    <div class="step" style="--c: var(--itkaarhus-warning-600)"><span class="s">600</span></div>
+    <div class="step" style="--c: var(--itkaarhus-warning-700)"><span class="s">700</span></div>
+    <div class="step" style="--c: var(--itkaarhus-warning-800)"><span class="s">800</span></div>
+    <div class="step" style="--c: var(--itkaarhus-warning-900)"><span class="s">900</span></div>
+  </div>
+  <div class="scale-label"><span class="t">Danger — Red</span><span class="tok">--itkaarhus-danger-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-danger-50)"><span class="s">50</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-danger-100)"><span class="s">100</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-danger-200)"><span class="s">200</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-danger-300)"><span class="s">300</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-400)"><span class="s">400</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-500)"><span class="s">500</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-600)"><span class="s">600</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-700)"><span class="s">700</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-800)"><span class="s">800</span></div>
+    <div class="step" style="--c: var(--itkaarhus-danger-900)"><span class="s">900</span></div>
+  </div>
+
+  <p class="sub" style="margin-top:24px">The state scales in context — soft surface (<code>50</code>), border (<code>200</code>), icon (<code>500</code>), text (<code>900</code>):</p>
+  <div class="states">
+    <div class="alert info"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span><b>Info</b> Vedligehold planlagt til søndag kl. 02–04.</span></div>
+    <div class="alert success"><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><b>Success</b> Dine ændringer er gemt.</span></div>
+    <div class="alert warning"><svg class="ic" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Warning</b> Sessionen udløber om 5 minutter.</span></div>
+    <div class="alert danger"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg><span><b>Danger</b> Kunne ikke forbinde til serveren.</span></div>
   </div>
 
   <h2>Usage</h2>
+  <p class="sub">Hierarchy over variety. Lead with blue, reach for coral rarely, keep state colors meaningful, and let gray do the rest.</p>
   <div class="usage">
-    <div class="ucard">
-      <div class="hd">Do — lead with blue</div>
+    <div class="ucard do">
+      <div class="hd">Do</div>
       <ul>
-        <li><span class="dot" style="background:var(--itkaarhus-blue)"></span> Primary CTAs, links, headers</li>
-        <li><span class="dot" style="background:var(--itkaarhus-coral)"></span> Coral as the secondary accent — highlights, editorial</li>
-        <li><span class="dot" style="background:var(--itkaarhus-ink)"></span> Body text on paper</li>
+        <li><b>Lead with blue.</b> Primary buttons, links, the focus ring, active nav — one accent carries the interface.</li>
+        <li><b>Use coral sparingly.</b> A single editorial highlight or a secondary CTA per view — not a second primary.</li>
+        <li><b>Reserve state colors for meaning.</b> Green = success, amber = warning, red = danger, cyan = info. Nothing decorative.</li>
+        <li><b>Build surfaces from gray.</b> <code>white</code> page, <code>gray-50</code> muted panels, <code>gray-200</code> borders, <code>gray-500</code>+ for text.</li>
+        <li><b>Pair tints with shades.</b> A <code>-50</code> background wants <code>-700</code>+ text for legible contrast.</li>
       </ul>
     </div>
-    <div class="ucard">
-      <div class="hd">Do — use greens structurally</div>
+    <div class="ucard dont">
+      <div class="hd">Don't</div>
       <ul>
-        <li><span class="dot" style="background:var(--itkaarhus-green)"></span> Status &ldquo;active&rdquo;, success</li>
-        <li><span class="dot" style="background:var(--itkaarhus-mint)"></span> Tag backgrounds, surfaces</li>
-        <li><span class="dot" style="background:var(--itkaarhus-lime)"></span> Highlight on dark backgrounds</li>
-      </ul>
-    </div>
-    <div class="ucard">
-      <div class="hd">Avoid</div>
-      <ul>
-        <li><span class="dot" style="background:var(--itkaarhus-red)"></span> Red as a fill for large areas</li>
-        <li><span class="dot" style="background:#FFC107"></span> Colors outside the palette</li>
-        <li><span class="dot" style="background:linear-gradient(90deg,#ff00ff,#00ffff)"></span> Decorative gradients</li>
+        <li><b>Don't use coral for errors.</b> It's a brand accent — danger (red) signals failure.</li>
+        <li><b>Don't flood with red.</b> Danger stays sharp and rare — small icons, borders, single words, never large fills.</li>
+        <li><b>Don't introduce off-palette hues.</b> If a color isn't a token, it doesn't belong. Add a token instead of inlining a hex.</li>
+        <li><b>Don't use decorative gradients.</b> Flat fills only; gradients are reserved for data-viz.</li>
+        <li><b>Don't put mid-gray text on gray surfaces.</b> Avoid <code>gray-400</code>/<code>500</code> body text on <code>gray-100</code> — it fails contrast.</li>
       </ul>
     </div>
   </div>
+
+  <h2>Role tokens</h2>
+  <p class="sub">Semantic aliases point at scale steps, so intent stays readable in code. Prefer the role token where one exists.</p>
+  <table class="recipe">
+    <thead><tr><th></th><th>Token</th><th>Maps to</th><th>Use for</th></tr></thead>
+    <tbody>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-primary)"></span></td><td class="tk">--itkaarhus-primary</td><td>blue-500</td><td>Primary actions, links, active state</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-primary-hover)"></span></td><td class="tk">--itkaarhus-primary-hover</td><td>blue-600</td><td>Hover / pressed primary</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-secondary)"></span></td><td class="tk">--itkaarhus-secondary</td><td>coral-500</td><td>Secondary emphasis, editorial accent</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-info)"></span></td><td class="tk">--itkaarhus-info</td><td>info-500</td><td>Informational status</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-success)"></span></td><td class="tk">--itkaarhus-success</td><td>success-500</td><td>Success / active status</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-warning)"></span></td><td class="tk">--itkaarhus-warning</td><td>warning-500</td><td>Warnings, caution</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-danger)"></span></td><td class="tk">--itkaarhus-danger</td><td>danger-500</td><td>Errors, destructive actions</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-info-soft)"></span></td><td class="tk">--itkaarhus-{state}-soft</td><td>{state}-100</td><td>Soft surface tint for badges / alerts</td></tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>

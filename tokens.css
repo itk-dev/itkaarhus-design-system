@@ -4,106 +4,118 @@
    ============================================================= */
 
 :root {
-  /* ---- Brand palette (from Farvekoder.pptx) ------------------ */
-  --itkaarhus-red:         #E44930;  /* rgb(228, 73, 48)   */
-  --itkaarhus-lime:        #89BD23;  /* rgb(137,189, 35)   */
-  --itkaarhus-mint:        #73BC99;  /* rgb(115,188,153)   */
-  --itkaarhus-blue:        #007BA6;  /* rgb(  0,123,166)   — primary */
-  --itkaarhus-cyan:        #00A5CD;  /* rgb(  0,165,205)   */
-  --itkaarhus-aqua:        #00B5C9;  /* rgb(  0,181,201)   */
-  --itkaarhus-green:       #008D3D;  /* rgb(  0,141, 61)   */
-  --itkaarhus-coral:       #FF5F31;  /* rgb(255, 95, 49)   — secondary, warm complement to blue */
-  --itkaarhus-amber:       #F5B800;  /* rgb(245,184,  0)   — warning */
+  /* =========================================================
+     COLOR
+     Two brand colors (blue + coral), four state colors, and a
+     neutral gray scale. Every color ships a 50→900 scale; 500 is
+     the base hue. Lighter steps (50–200) for surfaces and soft
+     fills, darker steps (600–900) for text, borders and hover.
+     ========================================================= */
 
-  /* ---- Shade ramps ------------------------------------------
-     50 (lightest) → 900 (darkest). 500 = the brand base hue.
-     Tinted toward white below 500, shaded toward ink above. */
-
-  /* Primary — Blue */
+  /* ---- Brand · Primary (Blue) ------------------------------- */
   --itkaarhus-blue-50:  #e6f2f6;
   --itkaarhus-blue-100: #cce4ed;
   --itkaarhus-blue-200: #99c9db;
   --itkaarhus-blue-300: #66aec9;
   --itkaarhus-blue-400: #3393b6;
-  --itkaarhus-blue-500: #007ba6;  /* base */
+  --itkaarhus-blue-500: #007ba6;  /* base — primary */
   --itkaarhus-blue-600: #006385;  /* primary hover */
   --itkaarhus-blue-700: #004f6b;
   --itkaarhus-blue-800: #003a4f;
   --itkaarhus-blue-900: #002835;
 
-  /* Secondary — Coral */
+  /* ---- Brand · Secondary (Coral) ---------------------------- */
   --itkaarhus-coral-50:  #fff0eb;
   --itkaarhus-coral-100: #ffe1d7;
   --itkaarhus-coral-200: #ffc4b0;
   --itkaarhus-coral-300: #ffa288;
   --itkaarhus-coral-400: #ff8160;
-  --itkaarhus-coral-500: #ff5f31;  /* base */
+  --itkaarhus-coral-500: #ff5f31;  /* base — secondary */
   --itkaarhus-coral-600: #e54d24;
-  --itkaarhus-coral-700: #cc4820;
+  --itkaarhus-coral-700: #cc4820;  /* secondary hover */
   --itkaarhus-coral-800: #a33616;
   --itkaarhus-coral-900: #7a2810;
 
-  /* Success — Green */
-  --itkaarhus-green-50:  #e6f4ec;
-  --itkaarhus-green-100: #cce8d8;
-  --itkaarhus-green-500: #008d3d;  /* base */
-  --itkaarhus-green-700: #006a2d;
-  --itkaarhus-green-900: #00481e;
+  /* ---- State · Info (Cyan) ---------------------------------- */
+  --itkaarhus-info-50:  #e6f6fa;
+  --itkaarhus-info-100: #cceef4;
+  --itkaarhus-info-200: #99dde9;
+  --itkaarhus-info-300: #66cbde;
+  --itkaarhus-info-400: #33bad8;
+  --itkaarhus-info-500: #00a5cd;  /* base */
+  --itkaarhus-info-600: #0090b6;
+  --itkaarhus-info-700: #007b9b;
+  --itkaarhus-info-800: #006076;
+  --itkaarhus-info-900: #005269;
 
-  /* Warning — Amber */
-  --itkaarhus-amber-50:  #fef7e0;
-  --itkaarhus-amber-100: #fdecb8;
-  --itkaarhus-amber-500: #f5b800;  /* base */
-  --itkaarhus-amber-700: #b38600;
-  --itkaarhus-amber-900: #7a5b00;
+  /* ---- State · Success (Green) ------------------------------ */
+  --itkaarhus-success-50:  #e6f4ec;
+  --itkaarhus-success-100: #cce8d8;
+  --itkaarhus-success-200: #99d1b1;
+  --itkaarhus-success-300: #66ba8b;
+  --itkaarhus-success-400: #33a364;
+  --itkaarhus-success-500: #008d3d;  /* base */
+  --itkaarhus-success-600: #007d36;
+  --itkaarhus-success-700: #006a2d;
+  --itkaarhus-success-800: #005624;
+  --itkaarhus-success-900: #00481e;
 
-  /* Danger — Red */
-  --itkaarhus-red-50:  #fcebe8;
-  --itkaarhus-red-100: #fbdad5;
-  --itkaarhus-red-500: #e44930;  /* base */
-  --itkaarhus-red-700: #b3371f;
-  --itkaarhus-red-900: #7a2414;
+  /* ---- State · Warning (Amber) ------------------------------ */
+  --itkaarhus-warning-50:  #fef7e0;
+  --itkaarhus-warning-100: #fdecb8;
+  --itkaarhus-warning-200: #fbdd85;
+  --itkaarhus-warning-300: #f9cd52;
+  --itkaarhus-warning-400: #f7c229;
+  --itkaarhus-warning-500: #f5b800;  /* base */
+  --itkaarhus-warning-600: #d39e00;
+  --itkaarhus-warning-700: #b38600;
+  --itkaarhus-warning-800: #8c6900;
+  --itkaarhus-warning-900: #7a5b00;
 
-  /* Info — Cyan */
-  --itkaarhus-cyan-50:  #e6f6fa;
-  --itkaarhus-cyan-100: #cceef4;
-  --itkaarhus-cyan-500: #00a5cd;  /* base */
-  --itkaarhus-cyan-700: #007b9b;
-  --itkaarhus-cyan-900: #005269;
+  /* ---- State · Danger (Red) --------------------------------- */
+  --itkaarhus-danger-50:  #fcebe8;
+  --itkaarhus-danger-100: #fbdad5;
+  --itkaarhus-danger-200: #f6b3a8;
+  --itkaarhus-danger-300: #f08c7b;
+  --itkaarhus-danger-400: #ea654e;
+  --itkaarhus-danger-500: #e44930;  /* base */
+  --itkaarhus-danger-600: #cc3d26;
+  --itkaarhus-danger-700: #b3371f;
+  --itkaarhus-danger-800: #8c2a18;
+  --itkaarhus-danger-900: #7a2414;
 
-  /* ---- Functional roles ------------------------------------- */
-  --itkaarhus-primary:          var(--itkaarhus-blue);
+  /* ---- Neutral · Gray --------------------------------------- */
+  --itkaarhus-white:    #ffffff;   /* true white — page background */
+  --itkaarhus-gray-50:  #f7f8fa;
+  --itkaarhus-gray-100: #eef1f5;
+  --itkaarhus-gray-200: #dfe3ea;
+  --itkaarhus-gray-300: #c7ccd4;
+  --itkaarhus-gray-400: #9aa1ae;
+  --itkaarhus-gray-500: #6b7484;
+  --itkaarhus-gray-600: #515967;
+  --itkaarhus-gray-700: #3f4654;
+  --itkaarhus-gray-800: #2a2f38;
+  --itkaarhus-gray-900: #111318;   /* body copy, darkest ink */
+
+  /* ---- Roles ------------------------------------------------ */
+  --itkaarhus-primary:          var(--itkaarhus-blue-500);
   --itkaarhus-primary-hover:    var(--itkaarhus-blue-600);
   --itkaarhus-secondary:        var(--itkaarhus-coral-500);
   --itkaarhus-secondary-hover:  var(--itkaarhus-coral-700);
-  --itkaarhus-accent:           var(--itkaarhus-red);
 
-  /* ---- Status roles (base + soft surface) ------------------- */
-  --itkaarhus-success:        var(--itkaarhus-green-500);
-  --itkaarhus-success-soft:   var(--itkaarhus-green-100);
-  --itkaarhus-warning:        var(--itkaarhus-amber-500);
-  --itkaarhus-warning-soft:   var(--itkaarhus-amber-100);
-  --itkaarhus-danger:         var(--itkaarhus-red-500);
-  --itkaarhus-danger-soft:    var(--itkaarhus-red-100);
-  --itkaarhus-info:           var(--itkaarhus-cyan-500);
-  --itkaarhus-info-soft:      var(--itkaarhus-cyan-100);
-  --itkaarhus-secondary-soft: var(--itkaarhus-coral-100);
+  --itkaarhus-info:        var(--itkaarhus-info-500);
+  --itkaarhus-info-soft:   var(--itkaarhus-info-100);
+  --itkaarhus-success:     var(--itkaarhus-success-500);
+  --itkaarhus-success-soft:var(--itkaarhus-success-100);
+  --itkaarhus-warning:     var(--itkaarhus-warning-500);
+  --itkaarhus-warning-soft:var(--itkaarhus-warning-100);
+  --itkaarhus-danger:      var(--itkaarhus-danger-500);
+  --itkaarhus-danger-soft: var(--itkaarhus-danger-100);
 
-  /* ---- Neutral scale ---------------------------------------- */
-  --itkaarhus-ink:         #111318;   /* body copy, logo "Sort" */
-  --itkaarhus-ink-soft:    #2a2f38;
-  --itkaarhus-slate-700:   #3f4654;
-  --itkaarhus-slate-500:   #6b7484;
-  --itkaarhus-slate-300:   #c7ccd4;
-  --itkaarhus-slate-200:   #dfe3ea;
-  --itkaarhus-slate-100:   #eef1f5;
-  --itkaarhus-slate-50:    #f7f8fa;
-  --itkaarhus-paper:       #ffffff;
-
-  /* ---- Surfaces --------------------------------------------- */
-  --itkaarhus-bg:          var(--itkaarhus-paper);
-  --itkaarhus-bg-muted:    var(--itkaarhus-slate-50);
-  --itkaarhus-bg-inverse:  var(--itkaarhus-ink);
+  /* ---- Surfaces & text -------------------------------------- */
+  --itkaarhus-bg:          var(--itkaarhus-white);
+  --itkaarhus-bg-muted:    var(--itkaarhus-gray-50);
+  --itkaarhus-bg-inverse:  var(--itkaarhus-gray-900);
 
   /* ---- Type stack ------------------------------------------- */
   --itkaarhus-font-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
@@ -168,7 +180,7 @@
 html, body { margin: 0; padding: 0; }
 body {
   font-family: var(--itkaarhus-font-sans);
-  color: var(--itkaarhus-ink);
+  color: var(--itkaarhus-gray-900);
   background: var(--itkaarhus-bg);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "cv11","ss01";
