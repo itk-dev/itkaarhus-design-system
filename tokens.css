@@ -1,0 +1,178 @@
+/* =============================================================
+   ITK Development — Design Tokens
+   Colors extracted from the official ITK Farvekoder document.
+   ============================================================= */
+
+:root {
+  /* ---- Brand palette (from Farvekoder.pptx) ------------------ */
+  --itk-red:         #E44930;  /* rgb(228, 73, 48)   */
+  --itk-lime:        #89BD23;  /* rgb(137,189, 35)   */
+  --itk-mint:        #73BC99;  /* rgb(115,188,153)   */
+  --itk-blue:        #007BA6;  /* rgb(  0,123,166)   — primary */
+  --itk-cyan:        #00A5CD;  /* rgb(  0,165,205)   */
+  --itk-aqua:        #00B5C9;  /* rgb(  0,181,201)   */
+  --itk-green:       #008D3D;  /* rgb(  0,141, 61)   */
+  --itk-coral:       #FF5F31;  /* rgb(255, 95, 49)   — secondary, warm complement to blue */
+  --itk-amber:       #F5B800;  /* rgb(245,184,  0)   — warning */
+
+  /* ---- Shade ramps ------------------------------------------
+     50 (lightest) → 900 (darkest). 500 = the brand base hue.
+     Tinted toward white below 500, shaded toward ink above. */
+
+  /* Primary — Blue */
+  --itk-blue-50:  #e6f2f6;
+  --itk-blue-100: #cce4ed;
+  --itk-blue-200: #99c9db;
+  --itk-blue-300: #66aec9;
+  --itk-blue-400: #3393b6;
+  --itk-blue-500: #007ba6;  /* base */
+  --itk-blue-600: #006385;  /* primary hover */
+  --itk-blue-700: #004f6b;
+  --itk-blue-800: #003a4f;
+  --itk-blue-900: #002835;
+
+  /* Secondary — Coral */
+  --itk-coral-50:  #fff0eb;
+  --itk-coral-100: #ffe1d7;
+  --itk-coral-200: #ffc4b0;
+  --itk-coral-300: #ffa288;
+  --itk-coral-400: #ff8160;
+  --itk-coral-500: #ff5f31;  /* base */
+  --itk-coral-600: #e54d24;
+  --itk-coral-700: #cc4820;
+  --itk-coral-800: #a33616;
+  --itk-coral-900: #7a2810;
+
+  /* Success — Green */
+  --itk-green-50:  #e6f4ec;
+  --itk-green-100: #cce8d8;
+  --itk-green-500: #008d3d;  /* base */
+  --itk-green-700: #006a2d;
+  --itk-green-900: #00481e;
+
+  /* Warning — Amber */
+  --itk-amber-50:  #fef7e0;
+  --itk-amber-100: #fdecb8;
+  --itk-amber-500: #f5b800;  /* base */
+  --itk-amber-700: #b38600;
+  --itk-amber-900: #7a5b00;
+
+  /* Danger — Red */
+  --itk-red-50:  #fcebe8;
+  --itk-red-100: #fbdad5;
+  --itk-red-500: #e44930;  /* base */
+  --itk-red-700: #b3371f;
+  --itk-red-900: #7a2414;
+
+  /* Info — Cyan */
+  --itk-cyan-50:  #e6f6fa;
+  --itk-cyan-100: #cceef4;
+  --itk-cyan-500: #00a5cd;  /* base */
+  --itk-cyan-700: #007b9b;
+  --itk-cyan-900: #005269;
+
+  /* ---- Functional roles ------------------------------------- */
+  --itk-primary:          var(--itk-blue);
+  --itk-primary-hover:    var(--itk-blue-600);
+  --itk-secondary:        var(--itk-coral-500);
+  --itk-secondary-hover:  var(--itk-coral-700);
+  --itk-accent:           var(--itk-red);
+
+  /* ---- Status roles (base + soft surface) ------------------- */
+  --itk-success:        var(--itk-green-500);
+  --itk-success-soft:   var(--itk-green-100);
+  --itk-warning:        var(--itk-amber-500);
+  --itk-warning-soft:   var(--itk-amber-100);
+  --itk-danger:         var(--itk-red-500);
+  --itk-danger-soft:    var(--itk-red-100);
+  --itk-info:           var(--itk-cyan-500);
+  --itk-info-soft:      var(--itk-cyan-100);
+  --itk-secondary-soft: var(--itk-coral-100);
+
+  /* ---- Neutral scale ---------------------------------------- */
+  --itk-ink:         #111318;   /* body copy, logo "Sort" */
+  --itk-ink-soft:    #2a2f38;
+  --itk-slate-700:   #3f4654;
+  --itk-slate-500:   #6b7484;
+  --itk-slate-300:   #c7ccd4;
+  --itk-slate-200:   #dfe3ea;
+  --itk-slate-100:   #eef1f5;
+  --itk-slate-50:    #f7f8fa;
+  --itk-paper:       #ffffff;
+
+  /* ---- Surfaces --------------------------------------------- */
+  --itk-bg:          var(--itk-paper);
+  --itk-bg-muted:    var(--itk-slate-50);
+  --itk-bg-inverse:  var(--itk-ink);
+
+  /* ---- Type stack ------------------------------------------- */
+  --itk-font-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --itk-font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  /* Serif — opt-in for editorial/website surfaces (heroes, headings, KPI numbers). */
+  --itk-font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --itk-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- Type scale (modular, base 16) ------------------------ */
+  --itk-text-xs:   12px;
+  --itk-text-sm:   14px;
+  --itk-text-base: 16px;
+  --itk-text-md:   18px;
+  --itk-text-lg:   22px;
+  --itk-text-xl:   28px;
+  --itk-text-2xl:  36px;
+  --itk-text-3xl:  48px;
+  --itk-text-4xl:  64px;
+  --itk-text-5xl:  88px;
+
+  /* ---- Spacing (4px base) ----------------------------------- */
+  --itk-space-1:  4px;
+  --itk-space-2:  8px;
+  --itk-space-3: 12px;
+  --itk-space-4: 16px;
+  --itk-space-5: 24px;
+  --itk-space-6: 32px;
+  --itk-space-7: 48px;
+  --itk-space-8: 64px;
+  --itk-space-9: 96px;
+
+  /* ---- Radii ------------------------------------------------ */
+  --itk-radius-0: 0;
+  --itk-radius-1: 2px;
+  --itk-radius-2: 6px;
+  --itk-radius-3: 10px;
+  --itk-radius-4: 16px;
+  --itk-radius-pill: 999px;
+
+  /* ---- Elevation -------------------------------------------- */
+  --itk-shadow-1: 0 1px 2px rgba(17,19,24,0.06);
+  --itk-shadow-2: 0 4px 10px -2px rgba(17,19,24,0.08), 0 2px 4px -1px rgba(17,19,24,0.04);
+  --itk-shadow-3: 0 16px 32px -12px rgba(17,19,24,0.18), 0 4px 8px -2px rgba(17,19,24,0.06);
+
+  /* ---- Focus ring ------------------------------------------- */
+  --itk-focus: 0 0 0 3px rgba(0,123,166,0.35);
+
+  /* ---- Layout ----------------------------------------------- */
+  --itk-container: 1200px;
+  --itk-gutter: 24px;
+
+  /* ---- Breakpoints ------------------------------------------
+     Reference values only — `var()` cannot be used in `@media`
+     conditions, so the runtime queries hardcode 1023.98px / 767.98px.
+     Update both places together if you change a breakpoint. */
+  --itk-bp-md: 48rem; /* 768px  — drop user-menu name */
+  --itk-bp-lg: 64rem; /* 1024px — collapse + share become icon-only */
+}
+
+/* Base reset-ish */
+*,*::before,*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--itk-font-sans);
+  color: var(--itk-ink);
+  background: var(--itk-bg);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11","ss01";
+  line-height: 1.55;
+}
+a { color: var(--itk-primary); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--itk-primary-hover); }

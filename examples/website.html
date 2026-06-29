@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>ITK Aarhus — itk.aarhus.dk applied</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { background: var(--itk-paper); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header { border-bottom: 1px solid var(--itk-slate-200); padding: 16px 0; background: #fff; position: sticky; top: 0; z-index: 10; }
+  header .wrap { display: flex; align-items: center; gap: 40px; }
+  header img { height: 40px; }
+  header nav { display: flex; gap: 28px; margin-left: 8px; }
+  header nav a { color: var(--itk-ink); text-decoration: none; font-weight: 500; font-size: 15px; }
+  header nav a.active { color: var(--itk-blue); }
+  header .spacer { flex: 1; }
+  header .lang { font-size: 13px; color: var(--itk-slate-500); text-decoration: none; }
+  header .search { background: var(--itk-slate-100); border: 0; padding: 9px 14px 9px 36px; border-radius: var(--itk-radius-pill); font-family: inherit; font-size: 14px; width: 220px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7484' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='m20 20-3-3'/></svg>"); background-repeat: no-repeat; background-position: 12px center; background-size: 16px;
+  }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; background: var(--itk-ink); color: #fff; border-radius: 0; margin-bottom: 0; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 88px 24px 112px; position: relative; z-index: 2; }
+  .hero .kicker { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-aqua); font-weight: 600; }
+  .hero h1 { font-size: 88px; line-height: 0.96; letter-spacing: -0.035em; font-weight: 700; margin: 16px 0 24px; max-width: 920px; }
+  .hero h1 em { font-style: normal; color: var(--itk-lime); }
+  .hero p { font-size: 20px; max-width: 600px; line-height: 1.5; color: rgba(255,255,255,0.78); margin: 0 0 32px; }
+  .hero .cta-row { display: flex; gap: 12px; }
+  .hero-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; }
+  .hero-btn.primary { background: var(--itk-lime); color: #1a2a08; }
+  .hero-btn.secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  /* Single, very-subtle brand wash — calmer than the old multi-stop composition. */
+  .hero::before { content:""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 90% 20%, rgba(0,123,166,0.12), transparent 70%);
+  }
+  .hero svg.tri { position: absolute; right: -60px; bottom: -80px; width: 620px; height: 620px; opacity: 0.9; z-index: 1; }
+
+  /* Section header */
+  section { padding: 96px 0; }
+  section.alt { background: var(--itk-slate-50); }
+  .shead { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 32px; }
+  .shead .k { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-blue); font-weight: 600; }
+  .shead h2 { font-size: 48px; line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 8px 0 0; max-width: 640px; }
+  .shead .rt { font-size: 14px; color: var(--itk-slate-500); }
+  .shead .rt a { color: var(--itk-blue); text-decoration: none; font-weight: 600; }
+
+  /* News grid */
+  .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ncard { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--itk-slate-200); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+  .ncard:hover { transform: translateY(-2px); box-shadow: var(--itk-shadow-2); }
+  .ncard .img { aspect-ratio: 16/10; position: relative; overflow: hidden; }
+  .ncard .img::before { content:""; position: absolute; inset: 0; }
+  .n1 .img::before { background: var(--itk-blue); }
+  .n2 .img::before { background: var(--itk-green); }
+  .n3 .img::before { background: var(--itk-coral); }
+  .ncard .tag { position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.9); color: var(--itk-ink); padding: 4px 10px; border-radius: var(--itk-radius-pill); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; z-index: 2; }
+  .ncard .body { padding: 24px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .ncard .date { font-size: 12px; color: var(--itk-slate-500); font-family: var(--itk-font-mono); }
+  .ncard h3 { font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; margin: 0; }
+  .ncard p { font-size: 14px; color: var(--itk-slate-700); line-height: 1.55; margin: 0; }
+  .ncard .more { margin-top: auto; font-size: 13px; color: var(--itk-blue); font-weight: 600; padding-top: 12px; }
+
+  /* Departments band */
+  .dep-band { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #fff; border: 1px solid var(--itk-slate-200); border-radius: 16px; overflow: hidden; }
+  .dep-band > * { padding: 56px; border-right: 1px solid var(--itk-slate-200); }
+  .dep-band > *:last-child { border-right: 0; }
+  .dep-band .eye { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-blue); font-weight: 600; }
+  .dep-band h3 { font-size: 32px; line-height: 1.1; letter-spacing: -0.015em; font-weight: 700; margin: 8px 0 12px; }
+  .dep-band p { font-size: 15px; color: var(--itk-slate-700); line-height: 1.6; margin: 0 0 20px; max-width: 420px; }
+  .dep-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
+  .dep-list li { padding: 18px 0; border-top: 1px solid var(--itk-slate-200); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .dep-list li:first-child { border-top: 0; padding-top: 0; }
+  .dep-list .name { font-weight: 600; font-size: 16px; }
+  .dep-list .desc { font-size: 13px; color: var(--itk-slate-500); flex: 1; margin-left: 16px; }
+  .dep-list .arrow { color: var(--itk-blue); font-size: 18px; }
+
+  /* Projects stat strip */
+  .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--itk-slate-200); border: 1px solid var(--itk-slate-200); border-radius: 12px; overflow: hidden; }
+  .stat-strip .st { background: #fff; padding: 32px 28px; }
+  .stat-strip .st .n { font-size: 56px; letter-spacing: -0.03em; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat-strip .st .l { font-size: 13px; color: var(--itk-slate-500); margin-top: 8px; }
+  .stat-strip .st:nth-child(1) .n { color: var(--itk-blue); }
+  .stat-strip .st:nth-child(2) .n { color: var(--itk-green); }
+  .stat-strip .st:nth-child(3) .n { color: var(--itk-aqua); }
+  .stat-strip .st:nth-child(4) .n { color: var(--itk-red); }
+
+  /* Footer */
+  footer { background: var(--itk-ink); color: rgba(255,255,255,0.8); padding: 72px 0 32px; }
+  footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; }
+  footer img.logo { height: 40px; margin-bottom: 20px; }
+  footer h4 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itk-aqua); font-weight: 600; margin: 0 0 16px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  footer a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
+  footer a:hover { color: #fff; }
+  footer .bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.5); }
+  footer .co { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.6); }
+  footer .co strong { color: #fff; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="../assets/logos/itk-dev-4f.png" alt="ITK Development" style="height: 36px;">
+    <nav>
+      <a href="#" class="active">Nyheder</a>
+      <a href="#">Om ITK</a>
+      <a href="#">Projekter</a>
+      <a href="#">Infostander</a>
+      <a href="#">Kontakt</a>
+    </nav>
+    <div class="spacer"></div>
+    <input class="search" placeholder="Søg">
+    <a href="#" class="lang">English ↗</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="kicker">ITK · Innovation · Teknologi · Kreativitet</div>
+    <h1>Hvordan skaber vi en <em>smartere by</em> for hinanden?</h1>
+    <p>I dag er både by og borgere mere digitale end nogensinde. ITK arbejder for at finde de løsninger, der bedst favner morgendagens udfordringer og vores fælles hverdag.</p>
+    <div class="cta-row">
+      <a href="#" class="hero-btn primary">Se aktive projekter →</a>
+      <a href="#" class="hero-btn secondary">Om ITK</a>
+    </div>
+  </div>
+  <svg class="tri" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.85">
+      <polygon points="300,40 560,500 40,500" fill="#007BA6" opacity="0.7"/>
+      <polygon points="300,140 500,500 100,500" fill="#00A5CD" opacity="0.65"/>
+      <polygon points="300,240 440,500 160,500" fill="#00B5C9" opacity="0.6"/>
+      <polygon points="200,360 280,500 120,500" fill="#73BC99" opacity="0.75"/>
+      <polygon points="420,320 520,500 320,500" fill="#89BD23" opacity="0.75"/>
+      <polygon points="490,420 540,500 440,500" fill="#E44930" opacity="0.85"/>
+    </g>
+  </svg>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <div class="k">Seneste nyheder</div>
+        <h2>Hvad vi arbejder på lige nu</h2>
+      </div>
+      <div class="rt"><a href="#">Alle nyheder →</a></div>
+    </div>
+    <div class="news">
+      <a class="ncard n1" href="#">
+        <div class="img"><span class="tag">Projektnyhed</span></div>
+        <div class="body">
+          <div class="date">08 · apr · 2026</div>
+          <h3>Vilde Teknologier slippes løs på Dokk1</h3>
+          <p>Aarhus Kommunes teknologifestival byder på tre dages udstilling, talks og prototyper.</p>
+          <div class="more">Læs mere →</div>
+        </div>
+      </a>
+      <a class="ncard n2" href="#">
+        <div class="img"><span class="tag">EU &amp; Projekter</span></div>
+        <div class="body">
+          <div class="date">21 · mar · 2026</div>
+          <h3>Fra problem til produkt på fem dage</h3>
+          <p>Et projektteam i TechLab har gennemført et designsprint faciliteret af Center for Innovation.</p>
+          <div class="more">Læs mere →</div>
+        </div>
+      </a>
+      <a class="ncard n3" href="#">
+        <div class="img"><span class="tag">Drift</span></div>
+        <div class="body">
+          <div class="date">04 · mar · 2026</div>
+          <h3>ITK skifter til europæisk cloud-hosting</h3>
+          <p>ITK flytter cloud-hosting fra Azure til Hetzner sammen med Kultur og Borgerservice.</p>
+          <div class="more">Læs mere →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <div class="k">Afdelinger &amp; services</div>
+        <h2>Et hus af arbejdsfællesskaber</h2>
+      </div>
+    </div>
+    <div class="dep-band">
+      <div>
+        <div class="eye">Development</div>
+        <h3>Vi bygger digitale løsninger for hele Aarhus Kommune.</h3>
+        <p>ITK Development designer, udvikler og drifter websites, integrationer og fagsystemer for alle magistratsafdelinger. Open source via OS2-samarbejdet.</p>
+        <a href="#" style="color: var(--itk-blue); font-weight: 600; text-decoration: none; font-size: 15px">Mød teamet →</a>
+      </div>
+      <ul class="dep-list">
+        <li><span class="name">Tech Lab</span><span class="desc">IoT, AI, robotter, droner</span><span class="arrow">→</span></li>
+        <li><span class="name">Grafisk Service</span><span class="desc">Tryksager og visuel identitet</span><span class="arrow">→</span></li>
+        <li><span class="name">eReolen</span><span class="desc">Digitalt bibliotek for hele DK</span><span class="arrow">→</span></li>
+        <li><span class="name">Center for Innovation</span><span class="desc">Samskabelse på tværs</span><span class="arrow">→</span></li>
+        <li><span class="name">GovTech Midtjylland</span><span class="desc">13 kommuner, 1 region</span><span class="arrow">→</span></li>
+        <li><span class="name">Open Data DK</span><span class="desc">Fællesoffentligt datakatalog</span><span class="arrow">→</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <div class="k">I tal</div>
+        <h2>ITK Development i 2026</h2>
+      </div>
+    </div>
+    <div class="stat-strip">
+      <div class="st"><div class="n">333</div><div class="l">Repos på GitHub</div></div>
+      <div class="st"><div class="n">27</div><div class="l">Aktive projekter</div></div>
+      <div class="st"><div class="n">13</div><div class="l">Kommuner i GovTech MJ</div></div>
+      <div class="st"><div class="n">2030</div><div class="l">Klimaneutral smart city</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="../assets/logos/itk-dev-hvid.png" alt="ITK Development" class="logo" style="height: 36px;">
+      <p style="font-size:14px; line-height:1.6; margin: 0; max-width: 320px; color: rgba(255,255,255,0.75)">ITK er Aarhus Kommunes afdeling for Innovation, Teknologi og Kreativitet. Vi bor på Dokk1.</p>
+      <div class="co">
+        <strong>En del af Aarhus Kommune</strong>
+      </div>
+    </div>
+    <div>
+      <h4>Afdelinger</h4>
+      <ul>
+        <li><a href="#">Development</a></li>
+        <li><a href="#">Tech Lab</a></li>
+        <li><a href="#">Grafisk Service</a></li>
+        <li><a href="#">eReolen</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Infostander</a></li>
+        <li><a href="#">Open Data DK</a></li>
+        <li><a href="#">GovTech MJ</a></li>
+        <li><a href="#">OS2</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li>Dokk1, Hack Kampmanns Plads 2</li>
+        <li>8000 Aarhus C</li>
+        <li>+45 89 40 92 00</li>
+        <li><a href="mailto:itk@mkb.aarhus.dk">itk@mkb.aarhus.dk</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="bottom">
+      <div>© 2026 ITK · Aarhus Kommune · Kultur og Borgerservice</div>
+      <div><a href="#" style="color: rgba(255,255,255,0.5)">Tilgængelighedserklæring</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

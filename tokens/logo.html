@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Logo — ITK Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 48px; }
+  .page { max-width: 1040px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; }
+  h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
+  p.lede { font-size: 18px; color: var(--itk-slate-700); max-width: 640px; margin: 0 0 40px; }
+  h2.sh { font-size: 22px; margin: 48px 0 20px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .primary-wrap { border: 1px solid var(--itk-slate-200); border-radius: 12px; padding: 56px 40px; display: flex; align-items: center; justify-content: center; background: var(--itk-slate-50); }
+  .primary-wrap img { max-width: 520px; width: 100%; }
+
+  .anat { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .anat-card { border: 1px solid var(--itk-slate-200); border-radius: 12px; padding: 24px; }
+  .anat-card .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; }
+  .anat-card .h { font-size: 16px; font-weight: 600; margin: 6px 0 4px; }
+  .anat-card p { font-size: 14px; color: var(--itk-slate-700); margin: 0 0 16px; }
+
+  .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .var { border: 1px solid var(--itk-slate-200); border-radius: 10px; overflow: hidden; background: #fff; }
+  .var .box { aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .var.black .box { background: var(--itk-slate-50); }
+  .var.white .box { background: var(--itk-ink); }
+  .var.color .box { background: #fff; }
+  .var img { max-width: 65%; max-height: 80%; object-fit: contain; }
+  .var .cap { padding: 12px 16px; border-top: 1px solid var(--itk-slate-200); font-size: 12px; color: var(--itk-slate-700); display: flex; justify-content: space-between; }
+  .var .cap span { font-family: var(--itk-font-mono); color: var(--itk-slate-500); font-size: 11px; }
+
+  .alt-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .alt-strip .tile { background: var(--itk-slate-50); border: 1px solid var(--itk-slate-200); aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 16px; border-radius: 8px; }
+  .alt-strip .tile img { max-width: 80%; max-height: 80%; object-fit: contain; }
+
+  .misuse { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .m { border: 1px solid var(--itk-slate-200); border-radius: 10px; overflow: hidden; }
+  .m .mbox { aspect-ratio: 1/0.7; display: flex; align-items: center; justify-content: center; position: relative; }
+  .m .mbox::after { content: "✕"; position: absolute; top: 8px; right: 10px; color: var(--itk-red); font-weight: 700; font-size: 18px; }
+  .m.do .mbox::after { content: "✓"; color: var(--itk-green); }
+  .m img { max-width: 60%; max-height: 70%; object-fit: contain; }
+  .m.stretch img { transform: scaleX(1.6); }
+  .m.tint { filter: hue-rotate(220deg) saturate(2); }
+  .m.shadow img { filter: drop-shadow(4px 4px 0 rgba(0,0,0,.4)); }
+  .m.bg .mbox { background: linear-gradient(45deg, #ff0080, #ffa200); }
+  .m .cap { padding: 10px 14px; font-size: 12px; color: var(--itk-slate-700); border-top: 1px solid var(--itk-slate-200); }
+
+  .clearspace { background: var(--itk-slate-50); border: 1px solid var(--itk-slate-200); border-radius: 12px; padding: 48px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .clearspace .rel { position: relative; display: inline-block; }
+  .clearspace .rel img { display: block; width: 360px; }
+  .clearspace .rel::before { content: ""; position: absolute; inset: -25% ; border: 1px dashed var(--itk-cyan); border-radius: 4px; pointer-events: none; }
+  .clearspace .rel::after { content: "X"; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--itk-slate-50); padding: 0 6px; font-size: 11px; font-family: var(--itk-font-mono); color: var(--itk-cyan); }
+  .clearspace .label { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--itk-slate-500); font-family: var(--itk-font-mono); }
+
+  .cobrand { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
+  .cobox { background: var(--itk-ink); color: #fff; padding: 32px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 32px; min-height: 120px; }
+  .cobox.inv { background: #fff; color: var(--itk-ink); border: 1px solid var(--itk-slate-200); }
+  .cobox .div { width: 1px; height: 60%; background: currentColor; opacity: 0.3; }
+  .cobox img { height: 48px; object-fit: contain; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Brand · Logo</div>
+  <h1 class="title">A faceted &ldquo;itk&rdquo; built from triangles.</h1>
+  <p class="lede">The mark layers translucent triangles in the brand palette — a visual metaphor for Innovation, Teknologi, Kreativitet. Three primary variants cover every surface; a family of alternates exists for special contexts.</p>
+
+  <h2 class="sh">Primary mark</h2>
+  <div class="primary-wrap">
+    <img src="../assets/logos/itk-4f-1.png" alt="ITK primary four-colour logo">
+  </div>
+
+  <h2 class="sh">Three must-have variants</h2>
+  <div class="variants">
+    <div class="var color">
+      <div class="box"><img src="../assets/logos/itk-4f-1.png" alt="4-farve"></div>
+      <div class="cap">4 farve · on light <span>itk-4f-1.png</span></div>
+    </div>
+    <div class="var black">
+      <div class="box"><img src="../assets/logos/itk-sort-1.png" alt="Sort"></div>
+      <div class="cap">Sort · single ink <span>itk-sort-1.png</span></div>
+    </div>
+    <div class="var white">
+      <div class="box"><img src="../assets/logos/itk-hvid-1.png" alt="Hvid"></div>
+      <div class="cap" style="background:var(--itk-ink); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">itk-hvid-1.png</span></div>
+    </div>
+  </div>
+
+  <h2 class="sh">ITK Development sub-brand lockup</h2>
+  <p style="font-size:14px; color:var(--itk-slate-500); margin: -8px 0 16px; max-width:640px">When the unit needs to sign itself explicitly — on product repos, service headers, developer-facing materials — use the <em>ITK Development</em> horizontal lockup. Same three variants as the master mark.</p>
+  <div class="variants">
+    <div class="var color">
+      <div class="box" style="padding: 36px 28px;"><img src="../assets/logos/itk-dev-4f.png" alt="ITK Development 4-farve" style="max-width: 90%;"></div>
+      <div class="cap">4 farve · on light <span>itk-dev-4f.png</span></div>
+    </div>
+    <div class="var black">
+      <div class="box" style="padding: 36px 28px;"><img src="../assets/logos/itk-dev-sort.png" alt="ITK Development sort" style="max-width: 90%;"></div>
+      <div class="cap">Sort · single ink <span>itk-dev-sort.png</span></div>
+    </div>
+    <div class="var white">
+      <div class="box" style="padding: 36px 28px;"><img src="../assets/logos/itk-dev-hvid.png" alt="ITK Development hvid" style="max-width: 90%;"></div>
+      <div class="cap" style="background:var(--itk-ink); color:#fff; border-color:#333">Hvid · on dark <span style="color:#888">itk-dev-hvid.png</span></div>
+    </div>
+  </div>
+  <p style="font-size:13px; color:var(--itk-slate-500); margin: 16px 0 0;">The wordmark sets in a neutral grey sans, vertically centred on the &ldquo;K&rdquo;. Do not recreate it — always use the supplied files. Prefer the master &ldquo;itk&rdquo; mark wherever context already makes the unit clear.</p>
+
+  <h2 class="sh">Alternate marks</h2>
+  <p style="font-size:14px; color:var(--itk-slate-500); margin: -8px 0 16px; max-width:640px">A family of numbered alt logos explores different triangle arrangements. Use only for campaigns, illustrations, or secondary surfaces where the primary mark would over-saturate.</p>
+  <div class="alt-strip">
+    <div class="tile"><img src="../assets/logos/alt/logo-02.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-03.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-04.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-05.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-06.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-07.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-08.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-09.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/alt/logo-10.png" alt=""></div>
+    <div class="tile"><img src="../assets/logos/itk-dev-500.png" alt=""></div>
+  </div>
+
+  <h2 class="sh">Clear space &amp; minimum size</h2>
+  <div class="clearspace">
+    <div class="rel">
+      <img src="../assets/logos/itk-4f-1.png" alt="Logo with clearspace">
+    </div>
+  </div>
+  <p style="font-size:14px; color:var(--itk-slate-500); margin: 12px 0 0">Minimum clear space equals 25 % of the mark's height on every side. Minimum print size: 18 mm wide. Minimum screen size: 56 px wide.</p>
+
+  <h2 class="sh">Do not</h2>
+  <div class="misuse">
+    <div class="m"><div class="mbox stretch"><img src="../assets/logos/itk-4f-1.png" alt=""></div><div class="cap">Don't stretch</div></div>
+    <div class="m tint"><div class="mbox"><img src="../assets/logos/itk-4f-1.png" alt=""></div><div class="cap">Don't recolour</div></div>
+    <div class="m bg"><div class="mbox"><img src="../assets/logos/itk-4f-1.png" alt=""></div><div class="cap">Don't place on busy backgrounds</div></div>
+    <div class="m shadow"><div class="mbox"><img src="../assets/logos/itk-4f-1.png" alt=""></div><div class="cap">Don't add effects</div></div>
+  </div>
+
+  <h2 class="sh">Co-branding with Aarhus Kommune</h2>
+  <div class="cobrand">
+    <div class="cobox">
+      <img src="../assets/logos/itk-hvid-1.png" alt="ITK">
+      <div class="div"></div>
+      <div style="font-size:13px; line-height:1.4; opacity:.85">En del af<br><strong style="font-size:16px; opacity:1">Aarhus Kommune</strong><br>Kultur og Borgerservice</div>
+    </div>
+    <div class="cobox inv">
+      <img src="../assets/logos/itk-4f-1.png" alt="ITK">
+      <div class="div"></div>
+      <div style="font-size:13px; line-height:1.4; color:var(--itk-slate-500)">En del af<br><strong style="font-size:16px; color:var(--itk-ink)">Aarhus Kommune</strong><br>Kultur og Borgerservice</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

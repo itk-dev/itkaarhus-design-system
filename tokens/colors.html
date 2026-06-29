@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Colors — ITK Design System</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  body { padding: 48px; background: var(--itk-paper); }
+  .page { max-width: 1040px; margin: 0 auto; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; }
+  h1 { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
+  p.lede { font-size: 18px; color: var(--itk-slate-700); max-width: 640px; margin: 0 0 40px; }
+  h2 { font-size: 22px; margin: 48px 0 16px; font-weight: 600; letter-spacing: -0.01em; }
+
+  /* Primary palette grid */
+  .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--itk-slate-200); border: 1px solid var(--itk-slate-200); }
+  .swatch { background: var(--c); aspect-ratio: 1.1/1; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; position: relative; }
+  .swatch.ink-dark { color: var(--itk-ink); }
+  .swatch .name { font-size: 16px; font-weight: 600; }
+  .swatch .tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; font-weight: 500; }
+  .swatch .codes { font-family: var(--itk-font-mono); font-size: 11px; line-height: 1.55; opacity: 0.92; }
+  .swatch .codes div { display: flex; justify-content: space-between; gap: 12px; }
+  .swatch .codes span:first-child { opacity: 0.7; }
+
+  /* Neutral row */
+  .neutrals { display: grid; grid-template-columns: repeat(8,1fr); gap: 1px; background: var(--itk-slate-200); border: 1px solid var(--itk-slate-200); }
+  .n { background: var(--c); aspect-ratio: 1/1.1; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+  .n.ink-dark { color: var(--itk-ink); }
+  .n .nm { font-size: 12px; font-weight: 600; }
+  .n .hx { font-family: var(--itk-font-mono); font-size: 10px; opacity: 0.8; }
+
+  /* Usage row */
+  .usage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .ucard { border: 1px solid var(--itk-slate-200); border-radius: 10px; padding: 20px; }
+  .ucard .hd { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--itk-slate-500); font-weight: 600; margin-bottom: 12px; }
+  .ucard ul { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--itk-slate-700); }
+  .ucard li { padding: 6px 0; border-top: 1px solid var(--itk-slate-100); display: flex; gap: 10px; align-items: center; }
+  .ucard li:first-child { border-top: 0; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+
+  /* Gradient strip */
+  .rainbow { height: 16px; margin-top: 10px;
+    background: linear-gradient(to right, var(--itk-red) 0%, var(--itk-red) 14%, var(--itk-lime) 14%, var(--itk-lime) 28%, var(--itk-green) 28%, var(--itk-green) 42%, var(--itk-mint) 42%, var(--itk-mint) 56%, var(--itk-aqua) 56%, var(--itk-aqua) 70%, var(--itk-cyan) 70%, var(--itk-cyan) 85%, var(--itk-blue) 85%, var(--itk-blue) 100%);
+  }
+
+  /* Shade ramps */
+  .ramp { display: grid; grid-template-columns: repeat(10, 1fr); gap: 1px; background: var(--itk-slate-200); border: 1px solid var(--itk-slate-200); margin-bottom: 8px; }
+  .ramp .step { aspect-ratio: 1/1.3; background: var(--c); display: flex; align-items: flex-end; padding: 8px; font-family: var(--itk-font-mono); font-size: 10px; color: #fff; }
+  .ramp .step.dk { color: var(--itk-ink); }
+  .ramp-label { font-size: 13px; font-weight: 600; color: var(--itk-slate-700); margin: 16px 0 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Design tokens · Colors</div>
+  <h1>A faceted spectrum: blue-forward, green-rich, red-accented.</h1>
+  <p class="lede">Drawn from the official ITK logo. Seven brand hues plus a neutral slate scale. Deep blue leads; greens expand; red stays sharp and rare.</p>
+
+  <h2>Brand palette</h2>
+  <div class="palette">
+    <div class="swatch" style="--c: var(--itk-blue);">
+      <div><div class="tag">Primary</div><div class="name">ITK Blue</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#007BA6</span></div>
+        <div><span>RGB</span><span>0 · 123 · 166</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-coral);">
+      <div><div class="tag">Secondary</div><div class="name">ITK Coral</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#FF5F31</span></div>
+        <div><span>RGB</span><span>255 · 95 · 49</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-cyan);">
+      <div><div class="tag">Info</div><div class="name">ITK Cyan</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#00A5CD</span></div>
+        <div><span>RGB</span><span>0 · 165 · 205</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-aqua);">
+      <div><div class="tag">Supporting</div><div class="name">ITK Aqua</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#00B5C9</span></div>
+        <div><span>RGB</span><span>0 · 181 · 201</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-mint);">
+      <div><div class="tag">Supporting</div><div class="name">ITK Mint</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#73BC99</span></div>
+        <div><span>RGB</span><span>115 · 188 · 153</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-green);">
+      <div><div class="tag">Success</div><div class="name">ITK Green</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#008D3D</span></div>
+        <div><span>RGB</span><span>0 · 141 · 61</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-lime);">
+      <div><div class="tag">Pilot / draft</div><div class="name">ITK Lime</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#89BD23</span></div>
+        <div><span>RGB</span><span>137 · 189 · 35</span></div>
+      </div>
+    </div>
+    <div class="swatch ink-dark" style="--c: var(--itk-amber);">
+      <div><div class="tag">Warning</div><div class="name">ITK Amber</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#F5B800</span></div>
+        <div><span>RGB</span><span>245 · 184 · 0</span></div>
+      </div>
+    </div>
+    <div class="swatch" style="--c: var(--itk-red);">
+      <div><div class="tag">Danger</div><div class="name">ITK Red</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#E44930</span></div>
+        <div><span>RGB</span><span>228 · 73 · 48</span></div>
+      </div>
+    </div>
+    <div class="swatch ink-dark" style="--c: var(--itk-paper); border: 1px solid var(--itk-slate-200);">
+      <div><div class="tag">Paper</div><div class="name">Paper</div></div>
+      <div class="codes">
+        <div><span>HEX</span><span>#FFFFFF</span></div>
+        <div><span>RGB</span><span>255 · 255 · 255</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rainbow" aria-hidden="true"></div>
+
+  <h2>Shade ramps</h2>
+  <p class="lede" style="margin-bottom:16px">Each role colour ships a 50→900 ramp. <code>500</code> is the base hue; lighter tints (50–400) for soft surfaces, darker shades (600–900) for text and hover. Token names: <code>--itk-{blue,coral,green,amber,red,cyan}-{50..900}</code>.</p>
+  <div class="ramp-label">Blue — primary</div>
+  <div class="ramp" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itk-blue-50)">50</div>
+    <div class="step dk" style="--c: var(--itk-blue-100)">100</div>
+    <div class="step dk" style="--c: var(--itk-blue-200)">200</div>
+    <div class="step dk" style="--c: var(--itk-blue-300)">300</div>
+    <div class="step" style="--c: var(--itk-blue-400)">400</div>
+    <div class="step" style="--c: var(--itk-blue-500)">500</div>
+    <div class="step" style="--c: var(--itk-blue-600)">600</div>
+    <div class="step" style="--c: var(--itk-blue-700)">700</div>
+    <div class="step" style="--c: var(--itk-blue-800)">800</div>
+    <div class="step" style="--c: var(--itk-blue-900)">900</div>
+  </div>
+  <div class="ramp-label">Coral — secondary</div>
+  <div class="ramp" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itk-coral-50)">50</div>
+    <div class="step dk" style="--c: var(--itk-coral-100)">100</div>
+    <div class="step dk" style="--c: var(--itk-coral-200)">200</div>
+    <div class="step dk" style="--c: var(--itk-coral-300)">300</div>
+    <div class="step" style="--c: var(--itk-coral-400)">400</div>
+    <div class="step" style="--c: var(--itk-coral-500)">500</div>
+    <div class="step" style="--c: var(--itk-coral-600)">600</div>
+    <div class="step" style="--c: var(--itk-coral-700)">700</div>
+    <div class="step" style="--c: var(--itk-coral-800)">800</div>
+    <div class="step" style="--c: var(--itk-coral-900)">900</div>
+  </div>
+
+  <h2>Neutral scale</h2>
+  <div class="neutrals">
+    <div class="n ink-dark" style="--c: var(--itk-paper);"><div><div class="nm">Paper</div><div class="hx">#FFFFFF</div></div></div>
+    <div class="n ink-dark" style="--c: var(--itk-slate-50);"><div><div class="nm">Slate 50</div><div class="hx">#F7F8FA</div></div></div>
+    <div class="n ink-dark" style="--c: var(--itk-slate-100);"><div><div class="nm">Slate 100</div><div class="hx">#EEF1F5</div></div></div>
+    <div class="n ink-dark" style="--c: var(--itk-slate-200);"><div><div class="nm">Slate 200</div><div class="hx">#DFE3EA</div></div></div>
+    <div class="n ink-dark" style="--c: var(--itk-slate-300);"><div><div class="nm">Slate 300</div><div class="hx">#C7CCD4</div></div></div>
+    <div class="n" style="--c: var(--itk-slate-500);"><div><div class="nm">Slate 500</div><div class="hx">#6B7484</div></div></div>
+    <div class="n" style="--c: var(--itk-slate-700);"><div><div class="nm">Slate 700</div><div class="hx">#3F4654</div></div></div>
+    <div class="n" style="--c: var(--itk-ink);"><div><div class="nm">Ink</div><div class="hx">#111318</div></div></div>
+  </div>
+
+  <h2>Usage</h2>
+  <div class="usage">
+    <div class="ucard">
+      <div class="hd">Do — lead with blue</div>
+      <ul>
+        <li><span class="dot" style="background:var(--itk-blue)"></span> Primary CTAs, links, headers</li>
+        <li><span class="dot" style="background:var(--itk-coral)"></span> Coral as the secondary accent — highlights, editorial</li>
+        <li><span class="dot" style="background:var(--itk-ink)"></span> Body text on paper</li>
+      </ul>
+    </div>
+    <div class="ucard">
+      <div class="hd">Do — use greens structurally</div>
+      <ul>
+        <li><span class="dot" style="background:var(--itk-green)"></span> Status &ldquo;active&rdquo;, success</li>
+        <li><span class="dot" style="background:var(--itk-mint)"></span> Tag backgrounds, surfaces</li>
+        <li><span class="dot" style="background:var(--itk-lime)"></span> Highlight on dark backgrounds</li>
+      </ul>
+    </div>
+    <div class="ucard">
+      <div class="hd">Avoid</div>
+      <ul>
+        <li><span class="dot" style="background:var(--itk-red)"></span> Red as a fill for large areas</li>
+        <li><span class="dot" style="background:#FFC107"></span> Colors outside the palette</li>
+        <li><span class="dot" style="background:linear-gradient(90deg,#ff00ff,#00ffff)"></span> Decorative gradients</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
