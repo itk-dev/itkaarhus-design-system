@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+const file = 'examples/website-content.html';
+---
+
+<Layout title="Website content page" bleed={true}>
+  <iframe class="ex-frame" src={`${base}${file}`} title="Min Aarhus — content page" loading="lazy"></iframe>
+</Layout>
+
+<style>
+  .ex-frame { flex: 1; width: 100%; border: 0; background: var(--itkaarhus-white); }
+</style>

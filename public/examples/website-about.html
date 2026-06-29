@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Om Min Aarhus</title>
+<link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/examples/site.css">
+<style>
+  /* Page-specific helpers for the About page — tokens only, no hardcoded values except #fff. */
+  .about-hero { background: var(--itkaarhus-white); border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .about-hero__inner { padding: 48px 40px 40px; }
+  .about-hero h1 { font-family: var(--itkaarhus-font-serif); font-weight: 500; font-size: 44px; line-height: 1.06; letter-spacing: -0.02em; margin: 8px 0 18px; max-width: 18ch; }
+  .about-hero__lede { font-size: 19px; line-height: 1.55; color: var(--itkaarhus-gray-700); margin: 0; max-width: 46ch; }
+
+  /* Prose block */
+  .prose { max-width: 38rem; }
+  .prose h2 { font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 16px; }
+  .prose p { font-size: 17px; line-height: 1.65; color: var(--itkaarhus-gray-700); margin: 0 0 16px; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* Stats strip */
+  .stats { border-top: 1px solid var(--itkaarhus-gray-200); border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .stat { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 14px; padding: 28px; }
+  .stat__num { font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: var(--itkaarhus-blue-500); font-variant-numeric: tabular-nums; }
+  .stat__label { font-size: 14px; color: var(--itkaarhus-gray-700); margin: 10px 0 0; }
+
+  /* Accessibility & security callout */
+  .callout { display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start; background: var(--itkaarhus-blue-50); border: 1px solid var(--itkaarhus-blue-200); border-radius: 14px; padding: 28px; }
+  .callout__icon { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: #fff; color: var(--itkaarhus-blue-500); }
+  .callout__icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .callout h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 2px 0 8px; }
+  .callout p { font-size: 15px; line-height: 1.6; color: var(--itkaarhus-gray-700); margin: 0; }
+
+  @media (max-width: 880px) {
+    .about-hero__inner { padding: 36px 20px 32px; }
+    .about-hero h1 { font-size: 34px; }
+    .about-hero__lede { font-size: 17px; }
+    .callout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Spring til indhold</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="website-landing.html">
+      <img class="brand__emblem" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt="" width="28" height="28">
+      <span class="brand__name">Min Aarhus</span>
+    </a>
+    <nav class="site-nav" aria-label="Primær">
+      <a href="website-landing.html">Forside</a>
+      <a href="website-content.html">Selvbetjening</a>
+      <a href="website-about.html" aria-current="page">Om Min Aarhus</a>
+      <a href="#">Hjælp</a>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--secondary btn--sm" href="#">Log ind med MitID</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="about-hero">
+    <div class="wrap about-hero__inner">
+      <p class="eyebrow eyebrow--rule">Om platformen</p>
+      <h1>Én digital indgang til Aarhus Kommune.</h1>
+      <p class="about-hero__lede">Min Aarhus samler kommunens selvbetjeninger, sager og beskeder ét sted — så det er nemt at finde rundt, uanset hvilket ærinde du har. Du logger ind med MitID, og dine oplysninger er klar med det samme.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">Hvad du kan</p>
+          <h2>Hverdagens kommune, samlet</h2>
+        </div>
+        <a class="link" href="website-content.html">Se alle selvbetjeninger →</a>
+      </div>
+      <div class="grid-3">
+        <div class="service">
+          <span class="service__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+          <h3>Book og bestil</h3>
+          <p>Tider hos Borgerservice, pas, kørekort og vielser — vælg selv tidspunktet.</p>
+        </div>
+        <div class="service">
+          <span class="service__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+          <h3>Følg dine sager</h3>
+          <p>Se status på ansøgninger og henvendelser, og få besked når der sker noget.</p>
+        </div>
+        <div class="service">
+          <span class="service__icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2z"/></svg></span>
+          <h3>Læs sikker post</h3>
+          <p>Digital post fra kommunen samlet ét sted — trygt og altid tilgængeligt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="prose">
+        <p class="eyebrow">Formål</p>
+        <h2>Lavet til borgere og medarbejdere i Aarhus</h2>
+        <p>Min Aarhus er Aarhus Kommunes fælles indgang til digital selvbetjening. Målet er enkelt: at du som borger kan klare dit ærinde med kommunen hurtigt og trygt — uden at lede efter den rigtige side eller stå i kø.</p>
+        <p>Platformen er bygget til at favne bredt. Borgere i alle aldre finder de mest brugte opgaver med det samme, og medarbejdere på tværs af kommunens forvaltninger arbejder i de samme, genkendelige flows. Det betyder færre fejl, kortere svartider og en oplevelse, der hænger sammen — uanset om du flytter, søger om en byggetilladelse eller blot læser din post.</p>
+        <p>Vi udvikler Min Aarhus løbende sammen med de mennesker, der bruger den. Sproget er klart dansk, og affordances er til at forstå første gang.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stats">
+    <div class="wrap">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">I tal</p>
+          <h2>Min Aarhus i dag</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="stat">
+          <div class="stat__num">120.000</div>
+          <p class="stat__label">aktive brugere på platformen</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num">40+</div>
+          <p class="stat__label">selvbetjeninger samlet ét sted</p>
+        </div>
+        <div class="stat">
+          <div class="stat__num">24/7</div>
+          <p class="stat__label">adgang til dine sager og beskeder</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="callout">
+        <span class="callout__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div>
+          <h3>Tilgængelighed &amp; sikkerhed</h3>
+          <p>Min Aarhus følger WCAG 2.1 AA, så platformen kan bruges med tastatur, skærmlæser og forstørrelse. Du logger ind med MitID, og dine oplysninger behandles efter gældende regler om databeskyttelse. Vi henter kun de data, der er nødvendige for dit ærinde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-band__inner">
+      <div>
+        <h2>Kom i gang med Min Aarhus</h2>
+        <p>Log ind med MitID og få dine sager, tider og beskeder samlet ét sted.</p>
+      </div>
+      <a class="btn btn--primary btn--lg" href="#">Log ind med MitID</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div>
+      <div class="brand__name brand__name--footer">Min Aarhus</div>
+      <p class="site-footer__about">Din digitale indgang til Aarhus Kommune. Selvbetjening, sager og beskeder ét sted.</p>
+      <div class="endorse">
+        <span class="endorse__label">En del af</span>
+        <img src="/itkaarhus-design-system/assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune">
+      </div>
+    </div>
+    <div>
+      <h4>Selvbetjening</h4>
+      <ul><li><a href="website-content.html">Book tid</a></li><li><a href="website-content.html">Mine sager</a></li><li><a href="website-content.html">Beskeder</a></li><li><a href="website-content.html">Flytning</a></li></ul>
+    </div>
+    <div>
+      <h4>Om</h4>
+      <ul><li><a href="website-about.html">Om Min Aarhus</a></li><li><a href="#">Tilgængelighed</a></li><li><a href="#">Cookies</a></li><li><a href="#">Privatliv</a></li></ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul><li>Dokk1, Hack Kampmanns Plads 2</li><li>8000 Aarhus C</li><li>+45 89 40 20 00</li><li><a href="mailto:kontakt@aarhus.dk">kontakt@aarhus.dk</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__bottom">
+    <span>© 2026 Aarhus Kommune</span>
+    <a href="#">Tilgængelighedserklæring</a>
+  </div>
+</footer>
+
+</body>
+</html>

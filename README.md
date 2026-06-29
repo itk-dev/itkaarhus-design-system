@@ -22,8 +22,8 @@ file you can drop into any project, no framework required.
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
 - `src/pages/components.astro` — buttons, tags, inputs, cards, callouts, stats, editorial type, KPI cards, semantic badges, expandable table, timeline, nav, breadcrumb.
-- `src/pages/applied.astro` — wraps the full reference site in an iframe, keeping the sidebar in place.
-- `public/website.html` — full reference layout (a public site rebuilt with the system), served as a standalone document and shown via the Applied page's iframe.
+- `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
+- `public/examples/` — the standalone example documents (a fictional "Min Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
 - `public/assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 

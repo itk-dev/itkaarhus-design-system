@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Five applied example pages built on a fictional municipal self-service product
+  ("Min Aarhus"), shown in iframes with the design-system sidebar in place:
+  **Website** (landing, content, about) and **App** (dashboard, data tables).
+  Two shared stylesheets — `examples/site.css` (public site chrome) and
+  `examples/app.css` (logged-in app shell). Sidebar gained "Website" and "App" groups.
+
 ### Changed
+
+- Replaced the single ITK-era applied example (smart-city triangles, public-site
+  framing) with the Min Aarhus examples above — no ITK legacy remains.
 
 - Reworked the Components page: buttons split into variants × sizes × states with
   token-aligned colours (the danger variant replaces the old "accent"); inputs gained

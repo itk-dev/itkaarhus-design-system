@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selvbetjening — Min Aarhus</title>
+<link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/examples/site.css">
+<style>
+  /* Page-specific layout for the content/article view. Tokens only. */
+  .page-head { background: var(--itkaarhus-white); border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  .page-head__inner { padding: 36px 40px 40px; }
+  .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; color: var(--itkaarhus-gray-500); margin: 0 0 16px; }
+  .breadcrumb a { color: var(--itkaarhus-gray-700); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--itkaarhus-blue-500); text-decoration: underline; text-underline-offset: 2px; }
+  .breadcrumb__sep { color: var(--itkaarhus-gray-300); }
+  .breadcrumb [aria-current="page"] { color: var(--itkaarhus-gray-900); font-weight: 600; }
+  .page-head h1 { font-size: 44px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; margin: 8px 0 0; max-width: 16em; }
+
+  .article-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.9fr); gap: 56px; align-items: start; padding: 64px 40px 80px; }
+
+  /* Article column */
+  .article { min-width: 0; }
+  .article__lede { font-family: var(--itkaarhus-font-serif); font-size: 22px; line-height: 1.45; color: var(--itkaarhus-gray-900); margin: 0 0 32px; }
+  .prose { font-size: 17px; line-height: 1.65; color: var(--itkaarhus-gray-800); }
+  .prose h2 { font-size: 26px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; color: var(--itkaarhus-gray-900); margin: 40px 0 14px; scroll-margin-top: 88px; }
+  .prose h2:first-of-type { margin-top: 8px; }
+  .prose p { margin: 0 0 18px; }
+  .prose ul { margin: 0 0 18px; padding-left: 0; list-style: none; display: grid; gap: 10px; }
+  .prose ul li { position: relative; padding-left: 28px; }
+  .prose ul li::before { content: ""; position: absolute; left: 6px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--itkaarhus-blue-500); }
+  .prose a { color: var(--itkaarhus-blue-500); text-decoration: underline; text-underline-offset: 2px; }
+  .prose a:hover { color: var(--itkaarhus-primary-hover); }
+
+  /* Callout / note box */
+  .note { display: flex; gap: 14px; background: var(--itkaarhus-info-soft); border: 1px solid var(--itkaarhus-info-200); border-radius: var(--itkaarhus-radius-2); padding: 18px 20px; margin: 28px 0; }
+  .note__icon { flex: none; width: 22px; height: 22px; color: var(--itkaarhus-info-800); }
+  .note__icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .note__body { font-size: 15px; line-height: 1.55; color: var(--itkaarhus-info-800); }
+  .note__body strong { color: var(--itkaarhus-info-800); }
+  .note__body p { margin: 0; }
+  .note__body p + p { margin-top: 8px; }
+
+  /* Feedback row */
+  .feedback { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--itkaarhus-gray-200); }
+  .feedback h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 14px; }
+  .feedback__actions { display: flex; gap: 12px; }
+
+  /* Sidebar */
+  .sidebar { display: grid; gap: 28px; position: sticky; top: 88px; }
+  .sidebar__block h2 { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; margin: 0 0 14px; }
+  .onthispage { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 2px solid var(--itkaarhus-gray-200); }
+  .onthispage a { display: block; padding: 6px 0 6px 16px; margin-left: -2px; border-left: 2px solid transparent; font-size: 14px; color: var(--itkaarhus-gray-700); text-decoration: none; }
+  .onthispage a:hover { color: var(--itkaarhus-blue-500); border-left-color: var(--itkaarhus-blue-500); }
+
+  .related { display: grid; gap: 10px; }
+  .related__card { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: var(--itkaarhus-radius-2); padding: 14px 16px; text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s, transform .15s; }
+  .related__card:hover { border-color: var(--itkaarhus-gray-300); box-shadow: var(--itkaarhus-shadow-1); transform: translateY(-1px); }
+  .related__card h3 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+  .related__card p { font-size: 13px; color: var(--itkaarhus-gray-500); margin: 0; }
+  .related__arrow { flex: none; width: 18px; height: 18px; color: var(--itkaarhus-blue-500); }
+  .related__arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (max-width: 880px) {
+    .page-head h1 { font-size: 32px; }
+    .page-head__inner { padding: 28px 20px 32px; }
+    .article-layout { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 56px; }
+    .sidebar { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Spring til indhold</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="website-landing.html">
+      <img class="brand__emblem" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt="" width="28" height="28">
+      <span class="brand__name">Min Aarhus</span>
+    </a>
+    <nav class="site-nav" aria-label="Primær">
+      <a href="website-landing.html">Forside</a>
+      <a href="website-content.html" aria-current="page">Selvbetjening</a>
+      <a href="website-about.html">Om Min Aarhus</a>
+      <a href="#">Hjælp</a>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn--secondary btn--sm" href="#">Log ind med MitID</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="page-head">
+    <div class="wrap page-head__inner">
+      <nav class="breadcrumb" aria-label="Brødkrumme">
+        <a href="website-landing.html">Forside</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="website-content.html">Selvbetjening</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Book tid til Borgerservice</span>
+      </nav>
+      <h1>Book tid til Borgerservice</h1>
+    </div>
+  </div>
+
+  <div class="wrap article-layout">
+
+    <article class="article">
+      <p class="article__lede">Skal du have nyt pas, kørekort eller hjælp til din folkeregisteradresse? Book en tid på forhånd, så du møder direkte op uden at stå i kø — og har de rigtige dokumenter med fra start.</p>
+
+      <div class="prose">
+        <h2 id="hvad-kan-du-booke">Hvad kan du booke tid til</h2>
+        <p>De fleste opgaver i Borgerservice kræver, at du møder personligt op. Når du booker tid hjemmefra, sikrer du dig en plads og får samtidig en huskeliste over det, du skal medbringe.</p>
+        <ul>
+          <li>Pas til voksne og børn — inkl. optagelse af biometri</li>
+          <li>Kørekort, fornyelse og internationalt kørekort</li>
+          <li>NemID/MitID-support og opretning af spærret konto</li>
+          <li>Folkeregister, flytning og adressebeskyttelse</li>
+          <li>Vielser og navngivning</li>
+        </ul>
+
+        <h2 id="saadan-booker-du">Sådan booker du en tid</h2>
+        <p>Log ind med MitID, så henter vi automatisk dine grundoplysninger. Vælg derefter den opgave, du skal have hjælp til, og find en ledig tid på den afdeling, der passer dig — fx <a href="#">Dokk1</a> eller et af de lokale borgerservicesteder.</p>
+        <p>Når tiden er bekræftet, modtager du en kvittering i Digital Post og en påmindelse dagen før. Du kan altid flytte eller aflyse din tid under <a href="#">Mine sager</a>.</p>
+
+        <div class="note">
+          <span class="note__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </span>
+          <div class="note__body">
+            <p><strong>Husk legitimation.</strong> Til pas og kørekort skal du medbringe gyldigt billed-ID. Skal du have taget pasfoto, så afsæt ekstra tid — du kan med fordel møde 10 minutter før.</p>
+          </div>
+        </div>
+
+        <h2 id="hvad-skal-du-medbringe">Hvad skal du medbringe</h2>
+        <p>Det varierer efter opgaven, men som tommelfingerregel skal du have følgende klar:</p>
+        <ul>
+          <li>Gyldigt sundhedskort eller anden billedlegitimation</li>
+          <li>Eventuelt gammelt pas eller kørekort, hvis du fornyer</li>
+          <li>Samtykke fra begge forældre, når det gælder børn</li>
+        </ul>
+        <p>Du får en præcis liste tilpasset din booking, så snart du har valgt opgave. Er du i tvivl, kan du <a href="#">kontakte Borgerservice</a> inden dit fremmøde.</p>
+
+        <h2 id="aflys-eller-flyt">Aflys eller flyt din tid</h2>
+        <p>Bliver du forhindret, så aflys i god tid, så en anden borger kan få pladsen. Du flytter eller aflyser frit indtil dagen før under <a href="#">Mine sager</a> — det kræver blot, at du er logget ind med MitID.</p>
+      </div>
+
+      <div class="feedback">
+        <h2>Var denne side nyttig?</h2>
+        <div class="feedback__actions">
+          <button type="button" class="btn btn--secondary">Ja, den hjalp</button>
+          <button type="button" class="btn btn--secondary">Nej, jeg mangler noget</button>
+        </div>
+      </div>
+    </article>
+
+    <aside class="sidebar" aria-label="Sidens indhold og relaterede sider">
+      <nav class="sidebar__block" aria-label="På denne side">
+        <p class="eyebrow eyebrow--rule">På denne side</p>
+        <ul class="onthispage">
+          <li><a href="#hvad-kan-du-booke">Hvad kan du booke tid til</a></li>
+          <li><a href="#saadan-booker-du">Sådan booker du en tid</a></li>
+          <li><a href="#hvad-skal-du-medbringe">Hvad skal du medbringe</a></li>
+          <li><a href="#aflys-eller-flyt">Aflys eller flyt din tid</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar__block">
+        <h2>Relaterede selvbetjeninger</h2>
+        <div class="related">
+          <a class="related__card" href="website-content.html">
+            <div>
+              <h3>Mine sager</h3>
+              <p>Følg status på dine henvendelser</p>
+            </div>
+            <span class="related__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="related__card" href="website-content.html">
+            <div>
+              <h3>Digital Post</h3>
+              <p>Læs sikker post fra kommunen</p>
+            </div>
+            <span class="related__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="related__card" href="website-content.html">
+            <div>
+              <h3>Anmeld flytning</h3>
+              <p>Meld ny adresse til Folkeregisteret</p>
+            </div>
+            <span class="related__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div>
+      <div class="brand__name brand__name--footer">Min Aarhus</div>
+      <p class="site-footer__about">Din digitale indgang til Aarhus Kommune. Selvbetjening, sager og beskeder ét sted.</p>
+      <div class="endorse">
+        <span class="endorse__label">En del af</span>
+        <img src="/itkaarhus-design-system/assets/logos/AAK_02_venstrejusteret_hvid.svg" alt="Aarhus Kommune">
+      </div>
+    </div>
+    <div>
+      <h4>Selvbetjening</h4>
+      <ul><li><a href="website-content.html">Book tid</a></li><li><a href="website-content.html">Mine sager</a></li><li><a href="website-content.html">Beskeder</a></li><li><a href="website-content.html">Flytning</a></li></ul>
+    </div>
+    <div>
+      <h4>Om</h4>
+      <ul><li><a href="website-about.html">Om Min Aarhus</a></li><li><a href="#">Tilgængelighed</a></li><li><a href="#">Cookies</a></li><li><a href="#">Privatliv</a></li></ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul><li>Dokk1, Hack Kampmanns Plads 2</li><li>8000 Aarhus C</li><li>+45 89 40 20 00</li><li><a href="mailto:kontakt@aarhus.dk">kontakt@aarhus.dk</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__bottom">
+    <span>© 2026 Aarhus Kommune</span>
+    <a href="#">Tilgængelighedserklæring</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+const file = 'examples/app-data-tables.html';
+---
+
+<Layout title="App data tables" bleed={true}>
+  <iframe class="ex-frame" src={`${base}${file}`} title="Min Aarhus — app data tables" loading="lazy"></iframe>
+</Layout>
+
+<style>
+  .ex-frame { flex: 1; width: 100%; border: 0; background: var(--itkaarhus-gray-50); }
+</style>
