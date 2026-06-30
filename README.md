@@ -22,7 +22,7 @@ file you can drop into any project, no framework required.
 - `src/pages/typography.astro` — Inter + Newsreader (system monospace).
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
-- `src/pages/components.astro` — buttons, tags, inputs, cards, callouts, stats, editorial type, KPI cards, semantic badges, expandable table, timeline, nav, breadcrumb.
+- `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, expandable table, timeline, nav, breadcrumb.
 - `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
 - `public/examples/` — the standalone example documents (a fictional "Min Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
@@ -40,7 +40,7 @@ ships a **50→900 scale** (`-50` lightest → `-900` darkest); `500` is the bas
 | `--itkaarhus-info-*` | `#00A5CD` | State — informational |
 | `--itkaarhus-success-*` | `#008D3D` | State — success / "active" |
 | `--itkaarhus-warning-*` | `#F5B800` | State — warning |
-| `--itkaarhus-danger-*` | `#E44930` | State — danger, errors (sharp and rare) |
+| `--itkaarhus-danger-*` | `#CC1F33` | State — danger, errors (a true cool red, kept distinct from coral; sharp and rare) |
 | `--itkaarhus-gray-*` | — | Neutral — text, surfaces, borders (`50`→`900`; numbered only) |
 
 `--itkaarhus-white` is true white for page backgrounds. Role aliases:
@@ -63,8 +63,9 @@ tint for badges/alerts.
 ## Icons
 
 - **Lucide** line icons (24px viewBox, `currentColor`, stroke 2). The icon set
-  ships as `assets/lucide-sprite.svg` — reference a symbol with
-  `<svg class="icon"><use href="lucide-sprite.svg#lucide-NAME"></use></svg>`.
+  ships as `public/assets/lucide-sprite.svg` — reference a symbol with
+  `<svg class="icon"><use href="assets/lucide-sprite.svg#lucide-NAME"></use></svg>`
+  (resolve the path against the site base).
   Don't hand-roll SVG paths. (Consuming apps may wrap this in their own helper —
   e.g. a `{{ ui.icon('name') }}` Twig macro — but the sprite is the source.)
 
@@ -72,9 +73,7 @@ tint for badges/alerts.
 
 - Clarity over cleverness — calm, gov-grade, long-form Danish.
 - Blue leads, coral accents sparingly, state colours carry meaning, red stays sharp and rare.
-- No emoji, no illustrative SVG. **Gradients are reserved for data-viz**
-  (e.g. the map heatmap) — decorative gradients are out; use flat brand fills or
-  a single very-subtle wash.
+- No emoji, no illustrative SVG, **no gradient backgrounds** — flat brand fills only.
 - The palette **is** the expression — let the colours do the lifting.
 
 ## Viewing locally
