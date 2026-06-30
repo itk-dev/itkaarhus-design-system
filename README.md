@@ -112,5 +112,13 @@ git tag 0.2.0            # bare semver, no "v" prefix — match the existing tag
 git push origin 0.2.0    # this is the release; it triggers the deploy
 ```
 
+> **Repo setting (one-time):** the deploy runs in the `github-pages` environment,
+> which restricts *which refs may deploy*. Because we deploy from tags, that
+> environment must allow tag refs — under **Settings → Environments → github-pages
+> → Deployment branches and tags**, add a tag rule matching `*.*.*` (alongside the
+> `main` branch). Without it, a tagged deploy is rejected with *"Tag … is not
+> allowed to deploy to github-pages due to environment protection rules"* before
+> the build even starts. This lives in repo settings, not in `pages.yml`.
+
 Tag naming and the changelog/version bump follow the ITK Dev release flow — see the
 `/itkdev-release` skill. A manual `workflow_dispatch` run is available as a fallback.
