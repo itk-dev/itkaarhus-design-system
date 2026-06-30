@@ -76,6 +76,14 @@ A small uppercase label above a heading. There are two treatments, and the diffe
   ```
 - Don't hand-roll SVG paths. Add a new icon by copying its inner SVG from lucide.dev into a new `<symbol id="lucide-NAME">` in the sprite.
 
+## Graphs & diagrams
+
+- **Charts use Chart.js** (the team's established tool — see the legacy `itk-workspace`). Bar, line/area, donut, sparkline.
+- **Theme from tokens, never hardcode chart colours.** Use `src/scripts/chart-theme.ts` (`applyChartTheme`, `chartPalette`, `token`) — it reads `--itkaarhus-*` off `:root` at runtime. The categorical series order is blue → coral → info → success → warning → gray; semantic charts use the state colours.
+- **No gradients in charts** — flat fills only (the system-wide no-gradient rule applies here too). For intensity (heatmaps), use steps of the blue scale (`blue-100` → `blue-500`).
+- **Heatmaps and meters are hand-rolled CSS**, not Chart.js. **Every `<canvas>` needs an `aria-label`** summarising the data (canvas is opaque to assistive tech).
+- Astro pages: `import 'chart.js/auto'` (bundled). Standalone `public/examples/` pages load `examples/vendor/chart.umd.min.js` (copied from the dep by `npm run sync:vendor`; never edit or commit it — it's git-ignored).
+
 ## Spacing & layout
 
 - 4px base scale: `--itkaarhus-space-1` (4px) → `--itkaarhus-space-9` (96px). Container `--itkaarhus-container` (1200px), `--itkaarhus-gutter` (24px).

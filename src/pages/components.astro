@@ -216,6 +216,77 @@ const base = import.meta.env.BASE_URL;
       <div class="kpi"><span class="l">Høj risiko</span><span class="v danger">3</span></div>
     </div>
 
+    <h2 class="sh" id="graphs">Graphs &amp; diagrams</h2>
+    <p class="sub">Charts use <strong>Chart.js</strong>, themed from the design tokens at runtime — flat fills only, drawn from the <code>--itkaarhus-*</code> palette and its shades. No gradients. Each canvas carries an <code>aria-label</code> summary; the heatmap and meters are real DOM, not canvas. Series follow a fixed palette order (blue, coral, info, success, warning, gray).</p>
+
+    <div class="graph-grid">
+      <div class="demo">
+        <div class="demo-label">Bar — sager pr. måned</div>
+        <div class="chart-box"><canvas id="cBar" role="img" aria-label="Søjlediagram: nye sager pr. måned, januar til juni 2026 — mellem 28 og 61 sager."></canvas></div>
+      </div>
+      <div class="demo">
+        <div class="demo-label">Line / area — svartid</div>
+        <div class="chart-box"><canvas id="cLine" role="img" aria-label="Linjediagram: gennemsnitlig svartid i dage, faldende fra 5,1 til 3,8 over seks måneder."></canvas></div>
+      </div>
+      <div class="demo">
+        <div class="demo-label">Donut — status­fordeling</div>
+        <div class="chart-box"><canvas id="cDonut" role="img" aria-label="Cirkeldiagram: status­fordeling — 128 godkendt, 42 i behandling, 18 afventer, 9 afvist."></canvas></div>
+      </div>
+      <div class="demo">
+        <div class="demo-label">Sparkline — inline trend</div>
+        <div class="spark-row">
+          <div class="spark-stat">
+            <span class="spark-stat__l">Henvendelser, 30 dage</span>
+            <span class="spark-stat__v">1.284</span>
+          </div>
+          <canvas id="cSpark" class="spark" role="img" aria-label="Sparkline: henvendelser de seneste 30 dage, svagt stigende."></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo" style="margin-top:20px">
+      <div class="demo-label">Heatmap — temaer × afdelinger</div>
+      <p class="sub" style="margin:-4px 0 16px">CSS-grid, no library. Cell intensity uses the blue scale (<code>blue-100</code> → <code>blue-700</code>); empty is a neutral tint.</p>
+      <div class="heatmap" role="img" aria-label="Varmekort over aktivitet pr. tema og afdeling; mørkere blå betyder flere sager.">
+        <span class="heatmap__corner"></span>
+        <span class="heatmap__col">Byg</span>
+        <span class="heatmap__col">Miljø</span>
+        <span class="heatmap__col">Social</span>
+        <span class="heatmap__col">Kultur</span>
+        <span class="heatmap__col">IT</span>
+
+        <span class="heatmap__row">Teknik</span>
+        <span class="heatmap__cell" data-v="5">12</span>
+        <span class="heatmap__cell" data-v="3">6</span>
+        <span class="heatmap__cell" data-v="1">1</span>
+        <span class="heatmap__cell" data-v="0">·</span>
+        <span class="heatmap__cell" data-v="2">4</span>
+
+        <span class="heatmap__row">Borger</span>
+        <span class="heatmap__cell" data-v="2">3</span>
+        <span class="heatmap__cell" data-v="1">2</span>
+        <span class="heatmap__cell" data-v="5">14</span>
+        <span class="heatmap__cell" data-v="3">7</span>
+        <span class="heatmap__cell" data-v="1">2</span>
+
+        <span class="heatmap__row">Kultur</span>
+        <span class="heatmap__cell" data-v="0">·</span>
+        <span class="heatmap__cell" data-v="2">3</span>
+        <span class="heatmap__cell" data-v="2">5</span>
+        <span class="heatmap__cell" data-v="5">11</span>
+        <span class="heatmap__cell" data-v="1">2</span>
+      </div>
+    </div>
+
+    <div class="demo" style="margin-top:20px">
+      <div class="demo-label">Progress / meter</div>
+      <div class="meters">
+        <div class="meter"><span class="meter__label">Digital selvbetjening</span><span class="meter__track"><i style="width:78%"></i></span><span class="meter__val">78%</span></div>
+        <div class="meter"><span class="meter__label">Sager behandlet til tiden</span><span class="meter__track"><i class="is-success" style="width:91%"></i></span><span class="meter__val">91%</span></div>
+        <div class="meter"><span class="meter__label">Forfaldne sager</span><span class="meter__track"><i class="is-warning" style="width:12%"></i></span><span class="meter__val">12%</span></div>
+      </div>
+    </div>
+
     <h2 class="sh" id="table">Data table — expandable rows</h2>
     <p class="sub">Dense application table. The toggle chevron rotates 180° when open; the detail row animates with a <code>max-height</code> transition. Wrap in <code>overflow-x:auto</code> and add <code>--sticky-actions</code> to pin the last column. From the lønforhandling prototype.</p>
     <div class="demo" style="padding:0; overflow:hidden">
@@ -249,6 +320,88 @@ const base = import.meta.env.BASE_URL;
     </div>
   </div>
 </Layout>
+
+<script>
+  import Chart from 'chart.js/auto';
+  import { applyChartTheme, chartPalette, stateColors, token } from '../scripts/chart-theme';
+
+  applyChartTheme(Chart);
+  const palette = chartPalette();
+  const state = stateColors();
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun'];
+
+  const bar = document.getElementById('cBar') as HTMLCanvasElement | null;
+  if (bar) {
+    new Chart(bar, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{ label: 'Nye sager', data: [42, 38, 51, 47, 61, 55], backgroundColor: palette[0], borderRadius: 4, borderSkipped: false }],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: token('gray-100') } } },
+      },
+    });
+  }
+
+  const line = document.getElementById('cLine') as HTMLCanvasElement | null;
+  if (line) {
+    new Chart(line, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Svartid (dage)', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8],
+          borderColor: palette[0], backgroundColor: token('blue-50'),
+          fill: true, tension: 0.3, pointBackgroundColor: palette[0], pointRadius: 3, borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: token('gray-100') } } },
+      },
+    });
+  }
+
+  const donut = document.getElementById('cDonut') as HTMLCanvasElement | null;
+  if (donut) {
+    new Chart(donut, {
+      type: 'doughnut',
+      data: {
+        labels: ['Godkendt', 'I behandling', 'Afventer', 'Afvist'],
+        datasets: [{
+          data: [128, 42, 18, 9],
+          backgroundColor: [state.success, state.info, state.warning, state.danger],
+          borderColor: '#fff', borderWidth: 3, hoverOffset: 8,
+        }],
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
+    });
+  }
+
+  const spark = document.getElementById('cSpark') as HTMLCanvasElement | null;
+  if (spark) {
+    new Chart(spark, {
+      type: 'line',
+      data: {
+        labels: Array.from({ length: 30 }, (_, i) => i + 1),
+        datasets: [{
+          data: [32, 35, 31, 38, 40, 37, 42, 39, 45, 44, 41, 48, 46, 50, 47, 52, 49, 55, 53, 58, 54, 60, 57, 62, 59, 64, 61, 66, 63, 68],
+          borderColor: token('blue-500'), borderWidth: 2, pointRadius: 0, fill: false, tension: 0.4,
+        }],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: { x: { display: false }, y: { display: false } },
+        elements: { line: { borderCapStyle: 'round' } },
+      },
+    });
+  }
+</script>
 
 <style>
   body { padding: 48px; font-family: var(--itkaarhus-font-sans); }
@@ -447,4 +600,47 @@ const base = import.meta.env.BASE_URL;
   .tl-dot { width:32px; height:32px; border-radius:50%; background:#cce8d8; color:#006a2d; border:1px solid var(--itkaarhus-success-100); display:inline-flex; align-items:center; justify-content:center; z-index:1; }
   .tl-entry .summary { font-weight:500; color: var(--itkaarhus-gray-900); margin:0; }
   .tl-entry .when { display:block; margin-top:2px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
+
+  /* -- Graphs & diagrams -------------------------------------- */
+  .graph-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
+  .chart-box { position:relative; height:240px; }
+  .chart-box canvas { max-width:100%; }
+
+  /* Sparkline — compact inline trend */
+  .spark-row { display:flex; align-items:center; gap:20px; height:240px; }
+  .spark-stat { display:flex; flex-direction:column; gap:4px; }
+  .spark-stat__l { font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
+  .spark-stat__v { font-size:36px; font-weight:700; letter-spacing:-0.02em; line-height:1; font-variant-numeric: tabular-nums; color: var(--itkaarhus-gray-900); }
+  .spark { flex:1; height:64px !important; }
+
+  /* Heatmap — CSS grid, blue-scale intensity (no library) */
+  .heatmap { display:grid; grid-template-columns: 84px repeat(5, 1fr); gap:6px; }
+  .heatmap__corner { }
+  .heatmap__col { font-size:12px; font-weight:600; color: var(--itkaarhus-gray-500); text-align:center; align-self:end; padding-bottom:4px; }
+  .heatmap__row { font-size:13px; font-weight:500; color: var(--itkaarhus-gray-700); display:flex; align-items:center; }
+  .heatmap__cell { height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; font-variant-numeric: tabular-nums; }
+  /* Intensity steps from the blue scale; 0 is a neutral tint */
+  .heatmap__cell[data-v="0"] { background: var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-400); }
+  .heatmap__cell[data-v="1"] { background: var(--itkaarhus-blue-100); color: var(--itkaarhus-blue-700); }
+  .heatmap__cell[data-v="2"] { background: var(--itkaarhus-blue-200); color: var(--itkaarhus-blue-800); }
+  .heatmap__cell[data-v="3"] { background: var(--itkaarhus-blue-300); color: var(--itkaarhus-blue-900); }
+  .heatmap__cell[data-v="4"] { background: var(--itkaarhus-blue-400); color:#fff; }
+  .heatmap__cell[data-v="5"] { background: var(--itkaarhus-blue-500); color:#fff; }
+
+  /* Progress / meter bars */
+  .meters { display:grid; gap:16px; }
+  .meter { display:grid; grid-template-columns: 200px 1fr 48px; align-items:center; gap:16px; }
+  .meter__label { font-size:14px; color: var(--itkaarhus-gray-700); }
+  .meter__track { height:8px; border-radius:999px; background: var(--itkaarhus-gray-100); overflow:hidden; }
+  .meter__track i { display:block; height:100%; border-radius:999px; background: var(--itkaarhus-blue-500); }
+  .meter__track i.is-success { background: var(--itkaarhus-success-500); }
+  .meter__track i.is-warning { background: var(--itkaarhus-warning-500); }
+  .meter__val { font-size:13px; font-weight:600; color: var(--itkaarhus-gray-700); text-align:right; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 720px) {
+    .graph-grid { grid-template-columns: 1fr; }
+    .meter { grid-template-columns: 1fr; gap:6px; }
+    .meter__val { text-align:left; }
+    .heatmap { grid-template-columns: 64px repeat(5, 1fr); }
+  }
 </style>

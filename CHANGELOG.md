@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Graphs & diagrams** on the Components page and a new **app Statistics** example
+  (wired to the dashboard's "Statistik" nav). Charts use Chart.js — bar, line/area,
+  donut, sparkline — themed from the `--itkaarhus-*` tokens at runtime via
+  `src/scripts/chart-theme.ts`; heatmaps and progress/meter bars are hand-rolled CSS.
+  Flat fills only, no gradients. Adds `chart.js` as a dependency (bundled in Astro
+  pages; vendored into `public/examples/` for the standalone pages via `sync:vendor`).
+
 ## [0.2.0] - 2026-06-30
 
 ### Added
