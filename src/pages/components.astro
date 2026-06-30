@@ -239,7 +239,7 @@ const base = import.meta.env.BASE_URL;
             <span class="spark-stat__l">Henvendelser, 30 dage</span>
             <span class="spark-stat__v">1.284</span>
           </div>
-          <canvas id="cSpark" class="spark" role="img" aria-label="Sparkline: henvendelser de seneste 30 dage, svagt stigende."></canvas>
+          <div class="spark-wrap"><canvas id="cSpark" role="img" aria-label="Sparkline: henvendelser de seneste 30 dage, svagt stigende."></canvas></div>
         </div>
       </div>
     </div>
@@ -603,15 +603,20 @@ const base = import.meta.env.BASE_URL;
 
   /* -- Graphs & diagrams -------------------------------------- */
   .graph-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
-  .chart-box { position:relative; height:240px; }
-  .chart-box canvas { max-width:100%; }
+  /* Grid cells must be able to shrink, or a responsive canvas blows the track out. */
+  .graph-grid > .demo { min-width: 0; }
+  /* Chart.js sizes the canvas itself; pin it to fill the box so it can't dictate width. */
+  .chart-box { position:relative; height:240px; width:100%; }
+  .chart-box canvas { position:absolute; inset:0; width:100% !important; height:100% !important; }
 
   /* Sparkline — compact inline trend */
   .spark-row { display:flex; align-items:center; gap:20px; height:240px; }
-  .spark-stat { display:flex; flex-direction:column; gap:4px; }
+  .spark-stat { display:flex; flex-direction:column; gap:4px; flex:none; }
   .spark-stat__l { font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
   .spark-stat__v { font-size:36px; font-weight:700; letter-spacing:-0.02em; line-height:1; font-variant-numeric: tabular-nums; color: var(--itkaarhus-gray-900); }
-  .spark { flex:1; height:64px !important; }
+  /* The sparkline needs a positioned, shrinkable box of its own for Chart.js to fill. */
+  .spark-wrap { position:relative; flex:1; min-width:0; height:64px; }
+  .spark-wrap canvas { position:absolute; inset:0; width:100% !important; height:100% !important; }
 
   /* Heatmap — CSS grid, blue-scale intensity (no library) */
   .heatmap { display:grid; grid-template-columns: 84px repeat(5, 1fr); gap:6px; }

@@ -12,8 +12,11 @@
   /* Statistics-pane layout + viz that app.css doesn't already cover. Tokens only. */
   .stat-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: start; }
   .stat-grid--even { grid-template-columns: 1fr 1fr; }
-  .chart-box { position: relative; height: 260px; }
-  .chart-box canvas { max-width: 100%; }
+  /* Grid items must be able to shrink, or a responsive canvas blows the track out. */
+  .stat-grid > .panel, .stat-grid--even > .panel { min-width: 0; }
+  /* Chart.js sizes the canvas itself; pin it to fill the box so it can't dictate width. */
+  .chart-box { position: relative; height: 260px; width: 100%; }
+  .chart-box canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
 
   /* Heatmap — CSS grid, blue-scale intensity (no library) */
   .heatmap { display: grid; grid-template-columns: 84px repeat(5, 1fr); gap: 6px; }
