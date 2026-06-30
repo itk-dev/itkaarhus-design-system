@@ -13,5 +13,10 @@
 # Logs
 *.log
 
+# Astro / Node
+node_modules/
+dist/
+.astro/
+
 # Claude Code local
 .claude/settings.local.json

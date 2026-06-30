@@ -33,7 +33,7 @@ When asked to "use this design system", "apply the styling", or similar:
 | `color: #FF5F31;` | `color: var(--itkaarhus-secondary);` or `var(--itkaarhus-coral-500);` |
 | `padding: 16px;` | `padding: var(--itkaarhus-space-4);` |
 | `border-radius: 6px;` | `border-radius: var(--itkaarhus-radius-2);` |
-| `font-family: "Source Serif 4", serif;` | `font-family: var(--itkaarhus-font-serif);` |
+| `font-family: "Newsreader", serif;` | `font-family: var(--itkaarhus-font-serif);` |
 | `box-shadow: 0 4px 10px ...;` | `box-shadow: var(--itkaarhus-shadow-2);` |
 
 If a missing token is genuinely needed, add it to `tokens.css` rather than inlining the value.
@@ -51,15 +51,22 @@ There are no decorative/supporting hues — the palette is deliberately just the
 
 ## Typography
 
-- **`--itkaarhus-font-display` / `--itkaarhus-font-sans`** — Inter Tight. UI chrome and dense surfaces. Headings use tight letter-spacing.
-- **`--itkaarhus-font-serif`** — Source Serif 4. **Opt-in** for editorial / website surfaces (heroes, overviews, KPI numbers). Not for app chrome.
-- **`--itkaarhus-font-mono`** — JetBrains Mono. Code, numeric IDs, technical metadata, eyebrow labels.
-- Load fonts from Google Fonts as in `index.html`:
+- **`--itkaarhus-font-display` / `--itkaarhus-font-sans`** — Inter. UI chrome, dense dashboards, long-form prose, and small text all use it. Headings use tight letter-spacing.
+- **`--itkaarhus-font-serif`** — Newsreader. **Opt-in** for editorial / website surfaces (heroes, overviews, KPI numbers). Not for app chrome.
+- **`--itkaarhus-font-mono`** — the system monospace stack (`ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`). The DS ships **no** web monospace font; use it only where monospace genuinely helps (code, logs), not as a styling bias.
+- Load fonts from Google Fonts as in `src/layouts/Layout.astro` (Inter + Newsreader only; no mono):
   ```html
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   ```
 - Type scale runs `--itkaarhus-text-xs` (12px) → `--itkaarhus-text-5xl` (88px). Pick the named step.
 - Body copy is Danish-first (æøå). Don't substitute fonts that lack Danish glyph support.
+
+### Eyebrows
+
+A small uppercase label above a heading. There are two treatments, and the difference is meaningful — keep it consistent:
+
+- **Plain** (no leading rule) — the default for all **app chrome**: page-header eyebrows, card kickers, table-section labels, dashboards.
+- **Ruled** (a leading 24px × 1px `::before` rule — "the dash") — **only** on the **editorial / serif voice** (heroes, overviews, website-style surfaces, paired with a Newsreader heading). The rule signals that voice; don't add it to app chrome, and don't omit it on editorial surfaces. See the Eyebrows section of `tokens/typography` for both.
 
 ## Icons
 

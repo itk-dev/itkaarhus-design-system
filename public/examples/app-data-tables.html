@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sager — Min Aarhus</title>
+<link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/examples/app.css">
+<style>
+  table.data input[type=checkbox] { accent-color: var(--itkaarhus-blue-500); width: 16px; height: 16px; margin: 0; display: block; }
+  table.data th.sel, table.data td.sel { width: 36px; padding-right: 0; }
+  table.data td.sel, table.data th.sel { vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Spring til indhold</a>
+
+<div class="app">
+  <aside class="app-rail" aria-label="Navigation">
+    <a class="brand" href="app-dashboard.html"><img src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><b>Min Aarhus</b></a>
+    <nav>
+      <span class="nav-label">Arbejde</span>
+      <a class="item" href="app-dashboard.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overblik</a>
+      <a class="item" href="app-data-tables.html" aria-current="page"><svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg>Sager</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Bookinger</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2z"/></svg>Beskeder</a>
+      <span class="nav-label">Andet</span>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Statistik</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Indstillinger</a>
+    </nav>
+    <div class="rail-foot">
+      <span class="avatar">MS</span>
+      <div><div class="who">Mette Sørensen</div><div class="role">Sagsbehandler</div></div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="crumb">Min Aarhus · <b>Sager</b></div>
+      <div class="search"><input type="search" placeholder="Søg sager, borgere …" aria-label="Søg"></div>
+      <a class="btn btn--primary btn--sm" href="#">Ny sag</a>
+    </header>
+
+    <main id="main" class="app-content">
+      <div class="page-head">
+        <div>
+          <h1>Sager</h1>
+          <p>248 sager · 7 kræver handling</p>
+        </div>
+        <a class="btn btn--primary btn--sm" href="#">Ny sag</a>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filtrér sager">
+          <button class="chip" type="button" aria-pressed="true">Alle</button>
+          <button class="chip" type="button" aria-pressed="false">Åbne</button>
+          <button class="chip" type="button" aria-pressed="false">Kræver handling</button>
+          <button class="chip" type="button" aria-pressed="false">Afsluttet</button>
+        </div>
+        <span class="spacer"></span>
+        <button class="btn btn--secondary btn--sm" type="button">Eksportér</button>
+        <button class="btn btn--secondary btn--sm" type="button">Kolonner</button>
+      </div>
+
+      <section class="panel">
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr>
+                <th class="sel"><input type="checkbox" aria-label="Vælg alle sager"></th>
+                <th>Sag</th>
+                <th>Type</th>
+                <th>Ansvarlig</th>
+                <th>Modtaget</th>
+                <th>Frist</th>
+                <th class="num">Beløb</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20461"></td>
+                <td><div class="who"><span class="av">AJ</span><div>Anders Jensen<div class="sub">Sag #20461</div></div></div></td>
+                <td>Byggetilladelse</td>
+                <td>Mette Sørensen</td>
+                <td>2. apr 2026</td>
+                <td>I dag</td>
+                <td class="num">12.400 kr.</td>
+                <td><span class="tag tag--danger tag--dot">Forfalder</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20455"></td>
+                <td><div class="who"><span class="av">LH</span><div>Laila Hansen<div class="sub">Sag #20455</div></div></div></td>
+                <td>Aktindsigt</td>
+                <td>Mette Sørensen</td>
+                <td>5. apr 2026</td>
+                <td>18. apr</td>
+                <td class="num">0 kr.</td>
+                <td><span class="tag tag--warning tag--dot">Afventer</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20447"></td>
+                <td><div class="who"><span class="av">JB</span><div>Jonas Bach<div class="sub">Sag #20447</div></div></div></td>
+                <td>Flytning</td>
+                <td>Peter Holm</td>
+                <td>7. apr 2026</td>
+                <td>22. apr</td>
+                <td class="num">680 kr.</td>
+                <td><span class="tag tag--info tag--dot">Sendt til HR</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20440"></td>
+                <td><div class="who"><span class="av">AK</span><div>Aisha Khan<div class="sub">Sag #20440</div></div></div></td>
+                <td>Vielse</td>
+                <td>Mette Sørensen</td>
+                <td>8. apr 2026</td>
+                <td>30. apr</td>
+                <td class="num">1.700 kr.</td>
+                <td><span class="tag tag--success tag--dot">Godkendt</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20438"></td>
+                <td><div class="who"><span class="av">SØ</span><div>Søren Østergaard<div class="sub">Sag #20438</div></div></div></td>
+                <td>Affald</td>
+                <td>Peter Holm</td>
+                <td>9. apr 2026</td>
+                <td>2. maj</td>
+                <td class="num">450 kr.</td>
+                <td><span class="tag tag--info tag--dot">I behandling</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20431"></td>
+                <td><div class="who"><span class="av">MN</span><div>Mette Nørgaard<div class="sub">Sag #20431</div></div></div></td>
+                <td>Byggetilladelse</td>
+                <td>Camilla Borg</td>
+                <td>10. apr 2026</td>
+                <td>6. maj</td>
+                <td class="num">24.900 kr.</td>
+                <td><span class="tag tag--warning tag--dot">Afventer</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20429"></td>
+                <td><div class="who"><span class="av">RP</span><div>Rasmus Poulsen<div class="sub">Sag #20429</div></div></div></td>
+                <td>Aktindsigt</td>
+                <td>Mette Sørensen</td>
+                <td>11. apr 2026</td>
+                <td>—</td>
+                <td class="num">0 kr.</td>
+                <td><span class="tag tag--neutral tag--dot">Kladde</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20422"></td>
+                <td><div class="who"><span class="av">YE</span><div>Yusuf El-Amin<div class="sub">Sag #20422</div></div></div></td>
+                <td>Flytning</td>
+                <td>Camilla Borg</td>
+                <td>12. apr 2026</td>
+                <td>9. maj</td>
+                <td class="num">680 kr.</td>
+                <td><span class="tag tag--success tag--dot">Godkendt</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20417"></td>
+                <td><div class="who"><span class="av">KD</span><div>Karen Dahl<div class="sub">Sag #20417</div></div></div></td>
+                <td>Vielse</td>
+                <td>Peter Holm</td>
+                <td>13. apr 2026</td>
+                <td>16. maj</td>
+                <td class="num">1.700 kr.</td>
+                <td><span class="tag tag--info tag--dot">Sendt til HR</span></td>
+              </tr>
+              <tr>
+                <td class="sel"><input type="checkbox" aria-label="Vælg sag #20410"></td>
+                <td><div class="who"><span class="av">TB</span><div>Thomas Bæk<div class="sub">Sag #20410</div></div></div></td>
+                <td>Affald</td>
+                <td>Mette Sørensen</td>
+                <td>14. apr 2026</td>
+                <td>20. maj</td>
+                <td class="num">450 kr.</td>
+                <td><span class="tag tag--neutral tag--dot">Kladde</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span>Viser 1–10 af 248</span>
+          <nav class="pages" aria-label="Sideinddeling">
+            <a href="#" aria-label="Forrige side">‹</a>
+            <a href="#" aria-current="page">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#" aria-label="Næste side">›</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

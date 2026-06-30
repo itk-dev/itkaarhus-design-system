@@ -73,16 +73,18 @@
   --itkaarhus-warning-900: #7a5b00;
 
   /* ---- State · Danger (Red) --------------------------------- */
-  --itkaarhus-danger-50:  #fcebe8;
-  --itkaarhus-danger-100: #fbdad5;
-  --itkaarhus-danger-200: #f6b3a8;
-  --itkaarhus-danger-300: #f08c7b;
-  --itkaarhus-danger-400: #ea654e;
-  --itkaarhus-danger-500: #e44930;  /* base */
-  --itkaarhus-danger-600: #cc3d26;
-  --itkaarhus-danger-700: #b3371f;
-  --itkaarhus-danger-800: #8c2a18;
-  --itkaarhus-danger-900: #7a2414;
+  /* True cool red — deliberately shifted off coral's orange (hue ~353° vs
+     coral ~13°) so danger and the secondary brand colour stay distinguishable. */
+  --itkaarhus-danger-50:  #fdecee;
+  --itkaarhus-danger-100: #f9d2d7;
+  --itkaarhus-danger-200: #f0a2ac;
+  --itkaarhus-danger-300: #e57382;
+  --itkaarhus-danger-400: #db4458;
+  --itkaarhus-danger-500: #cc1f33;  /* base */
+  --itkaarhus-danger-600: #b51a2c;
+  --itkaarhus-danger-700: #9c1626;
+  --itkaarhus-danger-800: #7d1620;
+  --itkaarhus-danger-900: #64141b;
 
   /* ---- Neutral · Gray --------------------------------------- */
   --itkaarhus-white:    #ffffff;   /* true white — page background */
@@ -118,11 +120,12 @@
   --itkaarhus-bg-inverse:  var(--itkaarhus-gray-900);
 
   /* ---- Type stack ------------------------------------------- */
-  --itkaarhus-font-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --itkaarhus-font-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --itkaarhus-font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --itkaarhus-font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
   /* Serif — opt-in for editorial/website surfaces (heroes, headings, KPI numbers). */
-  --itkaarhus-font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --itkaarhus-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --itkaarhus-font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  /* Mono — system default; the DS doesn't ship a monospace font. */
+  --itkaarhus-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* ---- Type scale (modular, base 16) ------------------------ */
   --itkaarhus-text-xs:   12px;

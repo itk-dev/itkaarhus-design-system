@@ -1,0 +1,129 @@
+---
+import '../styles/sidebar.css';
+
+interface Props {
+  /** Document title (without the design-system suffix). */
+  title: string;
+  /** Whether the main area should be full-bleed (e.g. the iframed applied example). */
+  bleed?: boolean;
+}
+
+const { title, bleed = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+// Normalise the current path so the active link is matched regardless of trailing slash.
+const current = Astro.url.pathname.replace(/\/$/, '') || base.replace(/\/$/, '');
+
+const groups = [
+  {
+    label: 'Foundations',
+    links: [
+      { href: '', label: 'Overview' },
+      { href: 'colors', label: 'Colors' },
+      { href: 'typography', label: 'Typography' },
+      { href: 'spacing', label: 'Spacing' },
+      {
+        href: 'components',
+        label: 'Components',
+        children: [
+          { hash: 'buttons', label: 'Buttons' },
+          { hash: 'tags', label: 'Tags & status' },
+          { hash: 'inputs', label: 'Inputs' },
+          { hash: 'cards', label: 'Cards' },
+          { hash: 'callouts', label: 'Callouts' },
+          { hash: 'stats', label: 'Stats' },
+          { hash: 'navigation', label: 'Navigation' },
+          { hash: 'editorial', label: 'Editorial type' },
+          { hash: 'kpi', label: 'KPI cards' },
+          { hash: 'table', label: 'Data table' },
+          { hash: 'timeline', label: 'Timeline' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Brand',
+    links: [{ href: 'logo', label: 'Logo' }],
+  },
+  {
+    label: 'Website',
+    links: [
+      { href: 'examples/website-landing', label: 'Landing page' },
+      { href: 'examples/website-content', label: 'Content page' },
+      { href: 'examples/website-about', label: 'About page' },
+    ],
+  },
+  {
+    label: 'App',
+    links: [
+      { href: 'examples/app-dashboard', label: 'Dashboard' },
+      { href: 'examples/app-data-tables', label: 'Data tables' },
+    ],
+  },
+];
+
+// Build absolute, base-aware hrefs. The home link keeps `base` verbatim (with its
+// trailing slash) so it resolves to the generated index.html; sub-pages append a segment.
+const withBase = (href: string) => (href ? `${base}${href}` : base);
+// Compare with trailing slashes stripped so the active state matches either form.
+const isCurrent = (href: string) => withBase(href).replace(/\/$/, '') === current;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Design System</title>
+    <link rel="icon" href={`${base}assets/logos/aak-favicon.ico`} sizes="any" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href={`${base}tokens.css`} />
+  </head>
+  <body>
+    <a class="ds-skip" href="#main">Skip to content</a>
+
+    <aside class="ds-sidebar" aria-label="Design system navigation">
+      <a class="ds-brand" href={base}>
+        <span class="ds-brand__product">ITK Aarhus design system</span>
+      </a>
+
+      <nav class="ds-nav">
+        {
+          groups.map((group) => (
+            <div class="ds-nav__group">
+              <p class="ds-nav__label">{group.label}</p>
+              <ul>
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={withBase(link.href)}
+                      aria-current={isCurrent(link.href) ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </a>
+                    {link.children && isCurrent(link.href) && (
+                      <ul class="ds-nav__sub">
+                        {link.children.map((child) => (
+                          <li>
+                            <a href={`${withBase(link.href)}#${child.hash}`}>{child.label}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </nav>
+    </aside>
+
+    <main id="main" class={bleed ? 'ds-main ds-main--bleed' : 'ds-main'}>
+      <slot />
+    </main>
+  </body>
+</html>

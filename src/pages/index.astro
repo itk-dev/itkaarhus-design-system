@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="ITK Aarhus">
+  <div class="shell">
+    <header class="intro">
+      <h1>ITK Aarhus design system</h1>
+      <p>A shared design system for the digital products ITK builds for Aarhus Kommune's staff and collaborators — one palette, one type stack, one set of primitives, so every product looks and behaves consistently.</p>
+    </header>
+
+    <h2 class="sec">01 — Foundations</h2>
+    <div class="cards">
+      <a class="dcard" href={`${base}colors`}>
+        <div class="preview">
+          <div class="mini-palette">
+            <div style="background: var(--itkaarhus-blue-500)"></div>
+            <div style="background: var(--itkaarhus-coral-500)"></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="idx">01 · Foundations</div>
+          <h3>Colors</h3>
+          <p>A blue primary and a coral secondary, each on a full 50→900 scale, plus state colours and a neutral ramp.</p>
+        </div>
+      </a>
+
+      <a class="dcard" href={`${base}typography`}>
+        <div class="preview">
+          <div class="mini-type">
+            <div class="big">Aa 123</div>
+            <div class="alpha">Inter · Newsreader</div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="idx">01 · Foundations</div>
+          <h3>Typography</h3>
+          <p>One display family, a 10-step scale, Danish æøå-ready. Mono for technical detail.</p>
+        </div>
+      </a>
+
+      <a class="dcard" href={`${base}spacing`}>
+        <div class="preview">
+          <div class="mini-space">
+            <div class="r"></div><div class="r"></div><div class="r"></div>
+            <div class="r"></div><div class="r"></div><div class="r"></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="idx">01 · Foundations</div>
+          <h3>Spacing &amp; elevation</h3>
+          <p>Nine-step 4&thinsp;px spacing, five-step radii, three-step shadow. Calm, rhythmic, never cramped.</p>
+        </div>
+      </a>
+    </div>
+
+    <h2 class="sec">02 — Brand</h2>
+    <div class="cards">
+      <a class="dcard" href={`${base}logo`}>
+        <div class="preview" style="padding: 32px;">
+          <img class="mini-logo" src={`${base}assets/logos/AAK_02_venstrejusteret_sh.svg`} alt="" />
+        </div>
+        <div class="meta">
+          <div class="idx">02 · Brand</div>
+          <h3>Logo &amp; endorsement</h3>
+          <p>The Aarhus Kommune endorsement mark, the product emblem, clear space and usage rules.</p>
+        </div>
+      </a>
+
+      <a class="dcard" href={`${base}components`}>
+        <div class="preview">
+          <div class="mini-comp">
+            <div class="btn">Primary action</div>
+            <div class="chips">
+              <div class="chip b">• Projekt</div>
+              <div class="chip g">• Aktiv</div>
+              <div class="chip r">• Afsluttet</div>
+            </div>
+            <div class="card">
+              <div class="t">Projektnyhed</div>
+              <div class="s">Vilde Teknologier på Dokk1</div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="idx">03 · Components</div>
+          <h3>UI components</h3>
+          <p>Buttons, tags, inputs, cards, callouts, stats, navigation. Small set, broad coverage.</p>
+        </div>
+      </a>
+
+      <a class="dcard" href={`${base}examples/website-landing`}>
+        <div class="preview" style="padding: 20px;">
+          <div class="mini-site">
+            <div class="bar"><span></span><span></span><span></span></div>
+            <div class="inner">
+              <h>Et eksempel på systemet i brug</h>
+              <div class="row">
+                <span class="block block--lg"></span>
+                <span class="block"></span>
+                <span class="block"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="idx">04 · Examples</div>
+          <h3>Applied examples</h3>
+          <p>Five reference pages — website landing, content and about, plus an app dashboard and data tables.</p>
+        </div>
+      </a>
+    </div>
+
+    <h2 class="sec">03 — Principles</h2>
+    <div class="principles">
+      <div class="prin">
+        <div class="n">001</div>
+        <h4>One direction for every product.</h4>
+        <p>Every tool ITK builds for Aarhus Kommune — for staff and collaborators alike — draws from the same tokens, so products feel like one family even when teams differ.</p>
+      </div>
+      <div class="prin">
+        <div class="n">002</div>
+        <h4>Built for the work.</h4>
+        <p>These are tools people use to get their job done. Clarity, density, and obvious affordances beat decoration. Danish-first copy, accessible by default.</p>
+      </div>
+      <div class="prin">
+        <div class="n">003</div>
+        <h4>Use the token, not the value.</h4>
+        <p>Colours, type, spacing, and elevation are defined once and reused. Reach for the named token so the system stays consistent and easy to evolve.</p>
+      </div>
+    </div>
+
+    <div class="meta-foot">
+      <div>Design System · <a href="https://github.com/itk-dev/itkaarhus-design-system">github.com/itk-dev/itkaarhus-design-system</a></div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .shell { max-width: 1100px; margin: 0 auto; padding: 56px 48px 96px; }
+
+  /* Intro — simple title + description */
+  .intro { margin-bottom: 64px; }
+  .intro h1 { font-size: 48px; line-height: 1.05; letter-spacing: -0.025em; font-weight: 700; margin: 0 0 16px; max-width: 760px; }
+  .intro p { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 640px; line-height: 1.55; margin: 0; }
+
+  /* Index grid */
+  h2.sec { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; margin: 56px 0 24px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dcard { border: 1px solid var(--itkaarhus-gray-200); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; background: #fff; transition: transform .18s, box-shadow .18s, border-color .18s; }
+  .dcard:hover { transform: translateY(-2px); box-shadow: var(--itkaarhus-shadow-2); border-color: var(--itkaarhus-gray-300); }
+  .dcard .preview { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--itkaarhus-gray-50); display: flex; align-items: center; justify-content: center; padding: 28px; }
+  .dcard .meta { padding: 20px 22px 22px; }
+  .dcard .idx { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
+  .dcard h3 { font-size: 20px; margin: 6px 0 6px; letter-spacing: -0.01em; font-weight: 600; }
+  .dcard p { font-size: 13px; color: var(--itkaarhus-gray-500); margin: 0; line-height: 1.5; }
+
+  /* Preview miniatures */
+  .mini-palette { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; height: 100%; }
+  .mini-palette div { border-radius: 6px; }
+  .mini-type { text-align: center; font-family: var(--itkaarhus-font-display); }
+  .mini-type .big { font-size: 82px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--itkaarhus-gray-900); }
+  .mini-type .alpha { font-size: 12px; color: var(--itkaarhus-gray-500); margin-top: 4px; }
+  .mini-space { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .mini-space .r { height: 10px; background: var(--itkaarhus-blue-500); border-radius: 2px; }
+  .mini-space .r:nth-child(1) { width: 8%; }
+  .mini-space .r:nth-child(2) { width: 16%; }
+  .mini-space .r:nth-child(3) { width: 28%; }
+  .mini-space .r:nth-child(4) { width: 44%; }
+  .mini-space .r:nth-child(5) { width: 66%; }
+  .mini-space .r:nth-child(6) { width: 100%; }
+  .mini-logo { max-width: 80%; max-height: 80%; }
+  .mini-comp { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; width: 100%; }
+  .mini-comp .btn { background: var(--itkaarhus-blue-500); color: #fff; padding: 8px 14px; border-radius: 5px; font-size: 12px; font-weight: 600; }
+  .mini-comp .chips { display: flex; gap: 6px; }
+  .mini-comp .chip { padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 500; }
+  .mini-comp .chip.g { background: rgba(0,141,61,0.15); color: var(--itkaarhus-success-500); }
+  .mini-comp .chip.b { background: rgba(0,123,166,0.15); color: var(--itkaarhus-blue-500); }
+  .mini-comp .chip.r { background: rgba(204,31,51,0.15); color: var(--itkaarhus-danger-500); }
+  .mini-comp .card { width: 100%; padding: 10px 12px; border: 1px solid var(--itkaarhus-gray-200); border-radius: 6px; background: #fff; }
+  .mini-comp .card .t { font-size: 11px; font-weight: 600; }
+  .mini-comp .card .s { font-size: 9px; color: var(--itkaarhus-gray-500); margin-top: 2px; }
+  .mini-site { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 6px; width: 100%; height: 100%; overflow: hidden; display: flex; flex-direction: column; }
+  .mini-site .bar { height: 14px; background: var(--itkaarhus-gray-100); border-bottom: 1px solid var(--itkaarhus-gray-200); display: flex; align-items: center; padding: 0 6px; gap: 3px; }
+  .mini-site .bar span { width: 5px; height: 5px; border-radius: 50%; background: var(--itkaarhus-gray-300); }
+  .mini-site .inner { flex: 1; padding: 14px 12px; background: #fff; color: var(--itkaarhus-gray-900); display: flex; flex-direction: column; gap: 12px; }
+  .mini-site .inner h { display: block; font-size: 13px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; color: var(--itkaarhus-gray-900); }
+  .mini-site .row { display: flex; gap: 6px; margin-top: auto; }
+  .mini-site .block { flex: 1; height: 28px; border-radius: 4px; background: var(--itkaarhus-gray-100); }
+  .mini-site .block--lg { flex: 2; background: var(--itkaarhus-blue-500); }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .prin { padding: 28px 28px 24px; border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; }
+  .prin .n { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-blue-500); }
+  .prin h4 { font-size: 20px; margin: 10px 0 8px; letter-spacing: -0.01em; font-weight: 600; }
+  .prin p { font-size: 14px; color: var(--itkaarhus-gray-700); line-height: 1.6; margin: 0; }
+
+  /* Meta footer */
+  .meta-foot { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--itkaarhus-gray-200); display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; font-size: 13px; color: var(--itkaarhus-gray-500); }
+  .meta-foot a { color: var(--itkaarhus-blue-500); text-decoration: none; font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .shell { padding: 40px 20px 72px; }
+    .intro h1 { font-size: 36px; }
+    .cards, .principles { grid-template-columns: 1fr; }
+  }
+</style>
