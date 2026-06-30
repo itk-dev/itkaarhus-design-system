@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Applied examples kept the sidebar on GitHub Pages. The iframed pages were colliding with their wrapper routes (Pages served the raw `.html`); the embedded docs now live under `examples/embed/`.
+- Applied examples keep the sidebar on GitHub Pages (fixed a wrapper/iframe route collision).
 
 ## [0.3.0] - 2026-06-30
 
