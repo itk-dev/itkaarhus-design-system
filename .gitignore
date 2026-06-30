@@ -19,7 +19,7 @@ dist/
 .astro/
 
 # Vendored libs copied from node_modules at build (npm run sync:vendor)
-public/examples/vendor/
+public/examples/embed/vendor/
 
 # Claude Code local
 .claude/settings.local.json
