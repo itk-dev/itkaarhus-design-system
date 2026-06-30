@@ -22,9 +22,10 @@ file you can drop into any project, no framework required.
 - `src/pages/typography.astro` — Inter + Newsreader (system monospace).
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
-- `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, expandable table, timeline, nav, breadcrumb.
+- `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, graphs & diagrams, expandable table, timeline, nav, breadcrumb.
+- `src/scripts/chart-theme.ts` — shared Chart.js theme: reads the `--itkaarhus-*` tokens at runtime and exposes the categorical palette + defaults (flat fills, no gradients).
 - `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
-- `public/examples/` — the standalone example documents (a fictional "Min Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
+- `public/examples/` — the standalone example documents (a fictional "Min Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, `app-statistics.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
 - `public/assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
@@ -68,6 +69,21 @@ tint for badges/alerts.
   (resolve the path against the site base).
   Don't hand-roll SVG paths. (Consuming apps may wrap this in their own helper —
   e.g. a `{{ ui.icon('name') }}` Twig macro — but the sprite is the source.)
+
+## Graphs & diagrams
+
+- **Charts use [Chart.js](https://www.chartjs.org/)** (bar, line/area, donut,
+  sparkline), themed from the tokens at runtime via `src/scripts/chart-theme.ts`
+  (it reads `--itkaarhus-*` off `:root`). **Flat fills only — no gradients** —
+  drawn from the categorical palette: blue, coral, info, success, warning, gray.
+- **Heatmaps and progress/meter bars are hand-rolled CSS** (no library) —
+  intensity uses the blue scale (`blue-100` → `blue-500`).
+- Astro pages bundle Chart.js via `import 'chart.js/auto'`. The standalone
+  `public/examples/` pages load a vendored copy at `examples/vendor/chart.umd.min.js`,
+  copied from the npm dependency by `npm run sync:vendor` (run automatically on
+  `dev`/`build`; the `vendor/` dir is git-ignored).
+- Canvas charts carry an `aria-label` summary, since canvas content isn't
+  readable by assistive tech.
 
 ## Principles
 

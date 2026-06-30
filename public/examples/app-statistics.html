@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statistik — Min Aarhus</title>
+<link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/examples/app.css">
+<style>
+  /* Statistics-pane layout + viz that app.css doesn't already cover. Tokens only. */
+  .stat-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: start; }
+  .stat-grid--even { grid-template-columns: 1fr 1fr; }
+  /* Grid items must be able to shrink, or a responsive canvas blows the track out. */
+  .stat-grid > .panel, .stat-grid--even > .panel { min-width: 0; }
+  /* Chart.js sizes the canvas itself; pin it to fill the box so it can't dictate width. */
+  .chart-box { position: relative; height: 260px; width: 100%; }
+  .chart-box canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+
+  /* Heatmap — CSS grid, blue-scale intensity (no library) */
+  .heatmap { display: grid; grid-template-columns: 84px repeat(5, 1fr); gap: 6px; }
+  .heatmap__col { font-size: 12px; font-weight: 600; color: var(--itkaarhus-gray-500); text-align: center; align-self: end; padding-bottom: 4px; }
+  .heatmap__row { font-size: 13px; font-weight: 500; color: var(--itkaarhus-gray-700); display: flex; align-items: center; }
+  .heatmap__cell { height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .heatmap__cell[data-v="0"] { background: var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-400); }
+  .heatmap__cell[data-v="1"] { background: var(--itkaarhus-blue-100); color: var(--itkaarhus-blue-700); }
+  .heatmap__cell[data-v="2"] { background: var(--itkaarhus-blue-200); color: var(--itkaarhus-blue-800); }
+  .heatmap__cell[data-v="3"] { background: var(--itkaarhus-blue-300); color: var(--itkaarhus-blue-900); }
+  .heatmap__cell[data-v="4"] { background: var(--itkaarhus-blue-400); color: #fff; }
+  .heatmap__cell[data-v="5"] { background: var(--itkaarhus-blue-500); color: #fff; }
+
+  /* Meters */
+  .meters { display: grid; gap: 16px; }
+  .meter { display: grid; grid-template-columns: 1fr 48px; align-items: center; gap: 8px 14px; }
+  .meter__label { font-size: 14px; color: var(--itkaarhus-gray-700); }
+  .meter__track { grid-column: 1 / -1; order: 3; height: 8px; border-radius: 999px; background: var(--itkaarhus-gray-100); overflow: hidden; }
+  .meter__track i { display: block; height: 100%; border-radius: 999px; background: var(--itkaarhus-blue-500); }
+  .meter__track i.is-success { background: var(--itkaarhus-success-500); }
+  .meter__track i.is-warning { background: var(--itkaarhus-warning-500); }
+  .meter__val { font-size: 13px; font-weight: 600; color: var(--itkaarhus-gray-700); text-align: right; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 980px) { .stat-grid, .stat-grid--even { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Spring til indhold</a>
+
+<div class="app">
+  <aside class="app-rail" aria-label="Navigation">
+    <a class="brand" href="app-dashboard.html"><img src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><b>Min Aarhus</b></a>
+    <nav>
+      <span class="nav-label">Arbejde</span>
+      <a class="item" href="app-dashboard.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overblik</a>
+      <a class="item" href="app-data-tables.html"><svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg>Sager</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Bookinger</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2z"/></svg>Beskeder</a>
+      <span class="nav-label">Andet</span>
+      <a class="item" href="app-statistics.html" aria-current="page"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Statistik</a>
+      <a class="item" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Indstillinger</a>
+    </nav>
+    <div class="rail-foot">
+      <span class="avatar">MS</span>
+      <div><div class="who">Mette Sørensen</div><div class="role">Sagsbehandler</div></div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-topbar">
+      <div class="crumb">Min Aarhus · <b>Statistik</b></div>
+      <div class="search"><input type="search" placeholder="Søg …" aria-label="Søg"></div>
+      <a class="btn btn--secondary btn--sm" href="#">Eksportér</a>
+    </header>
+
+    <main id="main" class="app-content">
+      <div class="page-head">
+        <div>
+          <h1>Statistik</h1>
+          <p>Overblik over sager, svartider og aktivitet — 2026.</p>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="l">Sager i alt</div><div class="v">1.284</div><div class="d up">+8% vs. 2025</div></div>
+        <div class="kpi"><div class="l">Afsluttet</div><div class="v">1.061</div><div class="d up">82,6%</div></div>
+        <div class="kpi"><div class="l">Gns. svartid</div><div class="v">3,8 d</div><div class="d up">−0,9 d</div></div>
+        <div class="kpi"><div class="l">Til tiden</div><div class="v">91%</div><div class="d up">+4 pct.point</div></div>
+      </div>
+
+      <div class="stat-grid" style="margin-bottom:20px">
+        <section class="panel">
+          <div class="panel__head"><h2>Nye sager pr. måned</h2></div>
+          <div class="panel__body"><div class="chart-box"><canvas id="cBar" role="img" aria-label="Søjlediagram: nye sager pr. måned i 2026, mellem 168 og 246."></canvas></div></div>
+        </section>
+        <section class="panel">
+          <div class="panel__head"><h2>Statusfordeling</h2></div>
+          <div class="panel__body"><div class="chart-box"><canvas id="cDonut" role="img" aria-label="Cirkeldiagram: statusfordeling — 1061 afsluttet, 142 i behandling, 56 afventer, 25 afvist."></canvas></div></div>
+        </section>
+      </div>
+
+      <div class="stat-grid stat-grid--even" style="margin-bottom:20px">
+        <section class="panel">
+          <div class="panel__head"><h2>Svartid (dage)</h2></div>
+          <div class="panel__body"><div class="chart-box"><canvas id="cLine" role="img" aria-label="Linjediagram: gennemsnitlig svartid, faldende fra 5,1 til 3,8 dage."></canvas></div></div>
+        </section>
+        <section class="panel">
+          <div class="panel__head"><h2>Sager pr. afdeling</h2></div>
+          <div class="panel__body"><div class="chart-box"><canvas id="cHBar" role="img" aria-label="Vandret søjlediagram: sager pr. afdeling, Teknik flest med 312."></canvas></div></div>
+        </section>
+      </div>
+
+      <div class="stat-grid" style="margin-bottom:20px">
+        <section class="panel">
+          <div class="panel__head"><h2>Aktivitet — tema × afdeling</h2></div>
+          <div class="panel__body">
+            <div class="heatmap" role="img" aria-label="Varmekort over sager pr. tema og afdeling; mørkere blå betyder flere sager.">
+              <span></span>
+              <span class="heatmap__col">Byg</span><span class="heatmap__col">Miljø</span><span class="heatmap__col">Social</span><span class="heatmap__col">Kultur</span><span class="heatmap__col">IT</span>
+              <span class="heatmap__row">Teknik</span>
+              <span class="heatmap__cell" data-v="5">94</span><span class="heatmap__cell" data-v="3">41</span><span class="heatmap__cell" data-v="1">8</span><span class="heatmap__cell" data-v="0">·</span><span class="heatmap__cell" data-v="2">22</span>
+              <span class="heatmap__row">Borger</span>
+              <span class="heatmap__cell" data-v="2">19</span><span class="heatmap__cell" data-v="1">11</span><span class="heatmap__cell" data-v="5">88</span><span class="heatmap__cell" data-v="3">37</span><span class="heatmap__cell" data-v="1">9</span>
+              <span class="heatmap__row">Kultur</span>
+              <span class="heatmap__cell" data-v="0">·</span><span class="heatmap__cell" data-v="2">17</span><span class="heatmap__cell" data-v="2">24</span><span class="heatmap__cell" data-v="5">72</span><span class="heatmap__cell" data-v="1">13</span>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel__head"><h2>Mål</h2></div>
+          <div class="panel__body">
+            <div class="meters">
+              <div class="meter"><span class="meter__label">Digital selvbetjening</span><span class="meter__val">78%</span><span class="meter__track"><i style="width:78%"></i></span></div>
+              <div class="meter"><span class="meter__label">Behandlet til tiden</span><span class="meter__val">91%</span><span class="meter__track"><i class="is-success" style="width:91%"></i></span></div>
+              <div class="meter"><span class="meter__label">Forfaldne sager</span><span class="meter__val">12%</span><span class="meter__track"><i class="is-warning" style="width:12%"></i></span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script>
+  (function () {
+    var css = getComputedStyle(document.documentElement);
+    var t = function (n) { return css.getPropertyValue('--itkaarhus-' + n).trim(); };
+
+    // System Chart.js defaults — Inter font, neutral grid, white tooltips. No gradients.
+    Chart.defaults.font.family = t('font-sans') || 'Inter, sans-serif';
+    Chart.defaults.color = t('gray-500');
+    Chart.defaults.borderColor = t('gray-200');
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.boxWidth = 8;
+    Chart.defaults.plugins.legend.labels.padding = 14;
+    Chart.defaults.plugins.tooltip.backgroundColor = '#fff';
+    Chart.defaults.plugins.tooltip.titleColor = t('gray-900');
+    Chart.defaults.plugins.tooltip.bodyColor = t('gray-700');
+    Chart.defaults.plugins.tooltip.borderColor = t('gray-200');
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
+
+    new Chart(document.getElementById('cBar'), {
+      type: 'bar',
+      data: { labels: months, datasets: [{ label: 'Nye sager', data: [186, 174, 203, 198, 221, 246, 168, 172, 214, 231, 209, 195], backgroundColor: t('blue-500'), borderRadius: 4, borderSkipped: false }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: t('gray-100') } } } },
+    });
+
+    new Chart(document.getElementById('cDonut'), {
+      type: 'doughnut',
+      data: { labels: ['Afsluttet', 'I behandling', 'Afventer', 'Afvist'], datasets: [{ data: [1061, 142, 56, 25], backgroundColor: [t('success-500'), t('info-500'), t('warning-500'), t('danger-500')], borderColor: '#fff', borderWidth: 3, hoverOffset: 8 }] },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
+    });
+
+    new Chart(document.getElementById('cLine'), {
+      type: 'line',
+      data: { labels: months.slice(0, 6), datasets: [{ label: 'Svartid', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8], borderColor: t('blue-500'), backgroundColor: t('blue-50'), fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: t('blue-500') }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: t('gray-100') } } } },
+    });
+
+    new Chart(document.getElementById('cHBar'), {
+      type: 'bar',
+      data: { labels: ['Teknik', 'Borger', 'Kultur', 'Social', 'IT'], datasets: [{ label: 'Sager', data: [312, 274, 198, 156, 89], backgroundColor: t('blue-500'), borderRadius: 4, borderSkipped: false }] },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: t('gray-100') } }, y: { grid: { display: false } } } },
+    });
+  })();
+</script>
+
+</body>
+</html>
