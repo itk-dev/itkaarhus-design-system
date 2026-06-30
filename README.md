@@ -1,9 +1,10 @@
-# Aarhus Kommune Design System
+# ITK Aarhus Design System
 
-The shared visual design system for digital products in **Aarhus Kommune** — one
-palette, one type stack, one set of primitives, used from public sites down to
-internal tools. Aarhus Kommune is the institutional brand, expressed quietly as a
-footer endorsement; each product carries its own name in the header.
+The shared visual design system from **ITK Aarhus** for the digital products it
+builds for Aarhus Kommune — one palette, one type stack, one set of primitives,
+used from public sites down to internal tools. Aarhus Kommune is the institutional
+brand, expressed quietly as a footer endorsement; each product carries its own name
+in the header.
 
 > **Live preview:** <https://itk-dev.github.io/itkaarhus-design-system/>
 

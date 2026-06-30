@@ -1,10 +1,10 @@
-# CLAUDE.md — Aarhus Kommune Design System
+# CLAUDE.md — ITK Aarhus Design System
 
 Instructions for Claude Code (and other AI coding agents) when applying this design system to a project.
 
 ## What this is
 
-A static, no-build design system for digital products in **Aarhus Kommune**: one stylesheet (`tokens.css`) defining every brand color, shade ramp, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties; HTML reference pages under `tokens/`; and a canonical applied example in `examples/website.html`.
+The design system from **ITK Aarhus** for the digital products it builds for Aarhus Kommune. It's an Astro site: one stylesheet (`public/tokens.css`) defining every brand color, shade ramp, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties; reference pages under `src/pages/`; and applied examples (the fictional "Min Aarhus" product) under `public/examples/`.
 
 Products built on this system carry their **own name** — in the chrome the product name is a literal `[Product name]` placeholder you swap per product.
 
