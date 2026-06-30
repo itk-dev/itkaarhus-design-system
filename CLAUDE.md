@@ -107,3 +107,4 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 - Astro, no framework integration. `npm run dev` to serve, `npm run build` to output `dist/`.
 - Served under the `/itkaarhus-design-system/` base path; build asset/page URLs from `import.meta.env.BASE_URL` so they resolve on GitHub Pages.
 - Reference pages live in `src/pages/` and share `src/layouts/Layout.astro` (the sidebar + `<head>`). The applied examples are standalone HTML in `public/examples/`, iframed by thin wrappers in `src/pages/examples/`.
+- **Releasing/deploying:** `main` is continuous and does **not** deploy; a release ships by pushing a bare-semver tag (e.g. `0.2.0`), which triggers the Pages build + deploy. See the README "Publishing" section and the `/itkdev-release` skill — don't push tags without the user's go-ahead.
