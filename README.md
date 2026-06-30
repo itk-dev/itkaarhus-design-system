@@ -18,7 +18,7 @@ file you can drop into any project, no framework required.
 - `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon, `tokens.css`).
 - `src/styles/sidebar.css` — sidebar styling (replaces the old top-bar `ds-nav.css`).
 - `src/pages/index.astro` — overview page with previews of every section.
-- `src/pages/colors.astro` — palette, shade ramps, and usage rules.
+- `src/pages/colors.astro` — palette, color scales, and usage rules.
 - `src/pages/typography.astro` — Inter + Newsreader (system monospace).
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
