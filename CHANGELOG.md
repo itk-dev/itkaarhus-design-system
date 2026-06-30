@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-30
+
 ### Added
 
 - Five applied example pages built on a fictional municipal self-service product
@@ -48,6 +50,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The applied example now loads in an **iframe** on its own page, so the
   sidebar stays visible while browsing the full demo site.
 - GitHub Pages now deploys the Astro build output (`dist/`) instead of the repo root.
+- GitHub Pages deploy now runs on a pushed semver tag (e.g. `0.2.0`) rather than on
+  every push to `main`; the build runs on Node 22 (Astro 7 requires Node ≥ 22.12.0)
+  with the Pages actions bumped to current majors.
+- **Breaking:** shifted the `danger` colour to a true cool red (`#CC1F33`, hue ~353°)
+  so it stays clearly distinguishable from the coral secondary. Consuming apps that
+  mirror `--itkaarhus-danger-*` must re-sync.
+- Reframed the project as the **ITK Aarhus Design System** (from ITK Aarhus, for the
+  products it builds for Aarhus Kommune) across the UI title and docs.
 
 - **Breaking:** renamed CSS tokens from `--itk-*` to `--itkaarhus-*` and component
   classes from `.itk-*` to `.itkaarhus-*`. Consuming apps that mirror these must re-sync.

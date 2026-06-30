@@ -2,7 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # A release is shipped by pushing a bare-semver tag (e.g. 0.2.0).
+    # Merges to main do NOT deploy — main accumulates work until a tag is cut.
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
 
 permissions:

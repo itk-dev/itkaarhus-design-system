@@ -98,5 +98,19 @@ GitHub Pages), configured in `astro.config.mjs`.
 
 ## Publishing
 
-Pushing to `main` builds the Astro site and deploys `dist/` to GitHub Pages via
-`.github/workflows/pages.yml` → <https://itk-dev.github.io/itkaarhus-design-system/>.
+`main` is continuous — merge PRs into it freely; **merging does not deploy.** A
+release is shipped by **pushing a bare-semver tag** (e.g. `0.2.0`), which triggers
+`.github/workflows/pages.yml` to build the Astro site on Node 22 and deploy `dist/`
+to GitHub Pages → <https://itk-dev.github.io/itkaarhus-design-system/>.
+
+To cut a release once `main` holds the changes you want to ship:
+
+```sh
+git checkout main && git pull --ff-only
+# roll CHANGELOG [Unreleased] → [<tag>] - <date>, bump VERSION + package.json, commit (via a PR)
+git tag 0.2.0            # bare semver, no "v" prefix — match the existing tags
+git push origin 0.2.0    # this is the release; it triggers the deploy
+```
+
+Tag naming and the changelog/version bump follow the ITK Dev release flow — see the
+`/itkdev-release` skill. A manual `workflow_dispatch` run is available as a fallback.
