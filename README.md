@@ -25,7 +25,7 @@ file you can drop into any project, no framework required.
 - `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, graphs & diagrams, expandable table, timeline, nav, breadcrumb.
 - `src/scripts/chart-theme.ts` — shared Chart.js theme: reads the `--itkaarhus-*` tokens at runtime and exposes the categorical palette + defaults (flat fills, no gradients).
 - `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
-- `public/examples/` — the standalone example documents (a fictional "Min Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, `app-statistics.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
+- `public/examples/` — the standalone example documents (a fictional "Mit Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, `app-statistics.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
 - `public/assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
