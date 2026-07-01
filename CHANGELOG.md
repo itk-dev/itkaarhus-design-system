@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-07-01
+
 ### Fixed
 
 - Renamed the applied-example product from "Min Aarhus" to "Mit Aarhus" — city names are neuter in Danish, so the possessive is *mit*, not *min*.
