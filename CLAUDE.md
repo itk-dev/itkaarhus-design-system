@@ -4,7 +4,7 @@ Instructions for Claude Code (and other AI coding agents) when applying this des
 
 ## What this is
 
-The design system from **ITK Aarhus** for the digital products it builds for Aarhus Kommune. It's an Astro site plus an assets-only Composer package (`itk-dev/itkaarhus-design-system`). The package payload lives in `assets/`: `tokens.css` (every brand color, color scale, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties), `components.css` (all namespaced `.itkaarhus-*` component classes), and `lucide-sprite.svg`. Reference pages live under `src/pages/`; applied examples (the fictional "Mit Aarhus" product) under `public/examples/`. `npm run sync:assets` (automatic on dev/build) copies `assets/` into `public/` for serving — those copies are git-ignored; **edit only `assets/`**.
+The design system from **ITK Aarhus** for the digital products it builds for Aarhus Kommune. It's an Astro site plus an assets-only Composer package (`itk-dev/itkaarhus-design-system`). The package payload lives in `assets/`: `tokens.css` (every brand color, color scale, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties), `components.css` (all namespaced `.itkaarhus-*` component classes), `lucide-sprite.svg`, and `logos/` (the Aarhus Kommune emblem, `aak-emblem.svg` dark / `aak-emblem-hvid.svg` white). Reference pages live under `src/pages/`; applied examples (the fictional "Mit Aarhus" product) under `public/examples/`. `npm run sync:assets` (automatic on dev/build) copies `assets/` into `public/` for serving — those copies are git-ignored; **edit only `assets/`**.
 
 Products built on this system carry their **own name** — in the chrome the product name is a literal `[Product name]` placeholder you swap per product.
 
@@ -20,7 +20,7 @@ When asked to "use this design system", "apply the styling", or similar:
 **Aarhus Kommune is the institutional brand, expressed quietly.** It signs a product as a footer endorsement, not a banner at the top.
 
 - **Footer endorsement** — small "En del af" label + the Aarhus Kommune mark, low and unobtrusive. Use `public/assets/logos/AAK_02_venstrejusteret_sh.svg` (dark) on light backgrounds, `AAK_02_venstrejusteret_hvid.svg` (white) on dark.
-- **Header** — a small emblem (`public/assets/logos/aak-favicon.ico`, the Aarhus Kommune crest, ~24–28px) + the product name. **No ITK wordmark**, no large Aarhus Kommune logo in the header.
+- **Header** — a small emblem (the Aarhus Kommune crest, ~24–32px) + the product name. Use `assets/logos/aak-emblem.svg` (dark) on light chrome, `aak-emblem-hvid.svg` (white) on dark — crisp SVG, emblem only, no wordmark. **No ITK wordmark**, no large Aarhus Kommune logo in the header.
 - **Favicon** — `public/assets/logos/aak-favicon.ico` on every page.
 - **Product name** — always the literal placeholder `[Product name]` until a real product name is assigned; keep it consistent so it's a trivial find-and-replace.
 
@@ -95,7 +95,7 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 ## Logo
 
 - **Brand mark — Aarhus Kommune.** `public/assets/logos/AAK_02_venstrejusteret_sh.svg` (dark) on light; `AAK_02_venstrejusteret_hvid.svg` (white) on dark; `AAK_02_hoejrejusteret_dark.svg` (right-aligned alt). Use small, as a footer endorsement. Maintain clear space; do not recolour or recreate the mark — always use the supplied SVGs.
-- **Header emblem.** `public/assets/logos/aak-favicon.ico` (the crest), paired with the product name.
+- **Header emblem.** `assets/logos/aak-emblem.svg` (dark) / `aak-emblem-hvid.svg` (white) — the crest only, derived from the supplied lockups, intrinsic 32px tall — paired with the product name. The favicon (`public/assets/logos/aak-favicon.ico`) stays the `.ico`.
 - The old ITK marks have been **removed** from the design system entirely — don't reintroduce them.
 - See the Logo page (`src/pages/logo.astro`, route `/logo`).
 
