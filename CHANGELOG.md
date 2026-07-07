@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-07-07
+
 ### Added
 
 - Aarhus Kommune emblem in the package payload: `assets/logos/aak-emblem.svg` (dark) and `aak-emblem-hvid.svg` (white) — the crest only, derived from the supplied lockups, sized for a ~28–32px header/sidebar mark.
