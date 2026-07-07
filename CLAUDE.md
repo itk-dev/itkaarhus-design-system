@@ -4,15 +4,16 @@ Instructions for Claude Code (and other AI coding agents) when applying this des
 
 ## What this is
 
-The design system from **ITK Aarhus** for the digital products it builds for Aarhus Kommune. It's an Astro site: one stylesheet (`public/tokens.css`) defining every brand color, color scale, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties; reference pages under `src/pages/`; and applied examples (the fictional "Mit Aarhus" product) under `public/examples/`.
+The design system from **ITK Aarhus** for the digital products it builds for Aarhus Kommune. It's an Astro site plus an assets-only Composer package (`itk-dev/itkaarhus-design-system`). The package payload lives in `assets/`: `tokens.css` (every brand color, color scale, type ramp, spacing step, radius, shadow, and focus ring as CSS custom properties), `components.css` (all namespaced `.itkaarhus-*` component classes), and `lucide-sprite.svg`. Reference pages live under `src/pages/`; applied examples (the fictional "Mit Aarhus" product) under `public/examples/`. `npm run sync:assets` (automatic on dev/build) copies `assets/` into `public/` for serving — those copies are git-ignored; **edit only `assets/`**.
 
 Products built on this system carry their **own name** — in the chrome the product name is a literal `[Product name]` placeholder you swap per product.
 
 When asked to "use this design system", "apply the styling", or similar:
 
-1. Link `public/tokens.css` (or the published version on GitHub Pages).
+1. Load `assets/tokens.css` then `assets/components.css` — via the Composer package (`vendor/itk-dev/itkaarhus-design-system/assets/`), the published GitHub Pages URLs, or a copy.
 2. Style with the custom properties — never hardcode values that exist as tokens.
-3. Match the look of the applied examples in `public/examples/` for layout, typography, and color usage.
+3. Reuse the `.itkaarhus-*` component classes from `components.css` before writing new CSS.
+4. Match the look of the applied examples in `public/examples/` for layout, typography, and color usage.
 
 ## Brand voice
 
@@ -36,7 +37,7 @@ When asked to "use this design system", "apply the styling", or similar:
 | `font-family: "Newsreader", serif;` | `font-family: var(--itkaarhus-font-serif);` |
 | `box-shadow: 0 4px 10px ...;` | `box-shadow: var(--itkaarhus-shadow-2);` |
 
-If a missing token is genuinely needed, add it to `public/tokens.css` rather than inlining the value.
+If a missing token is genuinely needed, add it to `assets/tokens.css` rather than inlining the value.
 
 ## Color roles
 
@@ -70,7 +71,7 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 
 ## Icons
 
-- **Lucide** line icons (24px viewBox, `currentColor`, stroke 2), shipped as `public/assets/lucide-sprite.svg`. Reference a symbol (resolve the path against the site base, e.g. `${base}assets/lucide-sprite.svg`):
+- **Lucide** line icons (24px viewBox, `currentColor`, stroke 2), shipped as `assets/lucide-sprite.svg` (served at `assets/lucide-sprite.svg` under the site base). Reference a symbol (resolve the path against the site base, e.g. `${base}assets/lucide-sprite.svg`):
   ```html
   <svg class="icon" width="16" height="16"><use href="assets/lucide-sprite.svg#lucide-chevron-down"></use></svg>
   ```
@@ -106,7 +107,8 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 
 ## Reference
 
-- `public/tokens.css` — all tokens
+- `assets/tokens.css` — all tokens
+- `assets/components.css` — all `.itkaarhus-*` component classes
 - `src/pages/*.astro` — visual reference per category (colors, typography, spacing, components, logo)
 - `public/examples/` — the applied "Mit Aarhus" examples (website + app) shown in iframes; the canonical "this is what good looks like"
 

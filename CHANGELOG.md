@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Composer package `itk-dev/itkaarhus-design-system` (assets-only): installs `assets/{tokens.css,components.css,lucide-sprite.svg}` so products can consume the design system without copy/paste.
+- `assets/components.css` — all shared `.itkaarhus-*` component classes, extracted from the reference pages' inline styles.
+
+### Changed
+
+- `assets/` is now the source of truth for tokens and the icon sprite; `npm run sync:assets` copies them into `public/` so existing site URLs (`tokens.css`, `assets/lucide-sprite.svg`) keep working.
+- Namespaced the remaining shared component patterns (stats, KPI cards, data table, timeline, breadcrumb, heatmap, meters, checkbox/radio) under the `.itkaarhus-*` prefix.
+
 ## [0.3.2] - 2026-07-01
 
 ### Fixed

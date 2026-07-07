@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../../assets/components.css';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -99,15 +100,15 @@ const base = import.meta.env.BASE_URL;
       <div>
         <div class="demo-label">Checkbox &amp; radio</div>
         <div class="row" style="gap:32px; align-items:flex-start">
-          <div class="choice-group">
-            <label class="choice"><input type="checkbox" checked /> <span>Send mig nyhedsbrev</span></label>
-            <label class="choice"><input type="checkbox" /> <span>Tillad analyse-cookies</span></label>
-            <label class="choice"><input type="checkbox" disabled /> <span>Slået fra</span></label>
+          <div class="itkaarhus-choice-group">
+            <label class="itkaarhus-choice"><input type="checkbox" checked /> <span>Send mig nyhedsbrev</span></label>
+            <label class="itkaarhus-choice"><input type="checkbox" /> <span>Tillad analyse-cookies</span></label>
+            <label class="itkaarhus-choice"><input type="checkbox" disabled /> <span>Slået fra</span></label>
           </div>
-          <div class="choice-group">
-            <label class="choice"><input type="radio" name="afd" checked /> <span>Hele kommunen</span></label>
-            <label class="choice"><input type="radio" name="afd" /> <span>Min afdeling</span></label>
-            <label class="choice"><input type="radio" name="afd" disabled /> <span>Ekstern (utilgængelig)</span></label>
+          <div class="itkaarhus-choice-group">
+            <label class="itkaarhus-choice"><input type="radio" name="afd" checked /> <span>Hele kommunen</span></label>
+            <label class="itkaarhus-choice"><input type="radio" name="afd" /> <span>Min afdeling</span></label>
+            <label class="itkaarhus-choice"><input type="radio" name="afd" disabled /> <span>Ekstern (utilgængelig)</span></label>
           </div>
         </div>
       </div>
@@ -170,11 +171,11 @@ const base = import.meta.env.BASE_URL;
     </div>
 
     <h2 class="sh" id="stats">Stats</h2>
-    <div class="stat-grid">
-      <div class="stat"><span class="n">333</span><span class="l">Repos på GitHub</span></div>
-      <div class="stat success"><span class="n">27</span><span class="l">Aktive projekter</span></div>
-      <div class="stat info"><span class="n">13</span><span class="l">Kommuner i GovTech MJ</span></div>
-      <div class="stat danger"><span class="n">2030</span><span class="l">Klimaneutral smart city</span></div>
+    <div class="itkaarhus-stat-grid">
+      <div class="itkaarhus-stat"><span class="n">333</span><span class="l">Repos på GitHub</span></div>
+      <div class="itkaarhus-stat itkaarhus-stat--success"><span class="n">27</span><span class="l">Aktive projekter</span></div>
+      <div class="itkaarhus-stat itkaarhus-stat--info"><span class="n">13</span><span class="l">Kommuner i GovTech MJ</span></div>
+      <div class="itkaarhus-stat itkaarhus-stat--danger"><span class="n">2030</span><span class="l">Klimaneutral smart city</span></div>
     </div>
 
     <h2 class="sh" id="navigation">Navigation &amp; breadcrumb</h2>
@@ -192,7 +193,7 @@ const base = import.meta.env.BASE_URL;
       <div class="spacer"></div>
       <a href="#" style="font-size:13px; color:var(--itkaarhus-gray-500); text-decoration:none">English ↗</a>
     </div>
-    <div class="bc" style="margin-top:16px">
+    <div class="itkaarhus-breadcrumb" style="margin-top:16px">
       <a href="#">Forside</a><span class="sep">/</span>
       <a href="#">Om os</a><span class="sep">/</span>
       <a href="#">Afdelinger</a><span class="sep">/</span>
@@ -209,11 +210,11 @@ const base = import.meta.env.BASE_URL;
 
     <h2 class="sh" id="kpi">KPI cards</h2>
     <p class="sub">Stat tiles with serif, tabular numbers. Value tone follows the status roles. From both prototypes' overview pages.</p>
-    <div class="kpi-grid">
-      <div class="kpi"><span class="l">Åbne indsatser</span><span class="v">42</span></div>
-      <div class="kpi"><span class="l">Løst i år</span><span class="v ok">128</span></div>
-      <div class="kpi"><span class="l">Forfaldne</span><span class="v warn">7</span></div>
-      <div class="kpi"><span class="l">Høj risiko</span><span class="v danger">3</span></div>
+    <div class="itkaarhus-kpi-grid">
+      <div class="itkaarhus-kpi"><span class="l">Åbne indsatser</span><span class="v">42</span></div>
+      <div class="itkaarhus-kpi"><span class="l">Løst i år</span><span class="v ok">128</span></div>
+      <div class="itkaarhus-kpi"><span class="l">Forfaldne</span><span class="v warn">7</span></div>
+      <div class="itkaarhus-kpi"><span class="l">Høj risiko</span><span class="v danger">3</span></div>
     </div>
 
     <h2 class="sh" id="graphs">Graphs &amp; diagrams</h2>
@@ -247,50 +248,50 @@ const base = import.meta.env.BASE_URL;
     <div class="demo" style="margin-top:20px">
       <div class="demo-label">Heatmap — temaer × afdelinger</div>
       <p class="sub" style="margin:-4px 0 16px">CSS-grid, no library. Cell intensity uses the blue scale (<code>blue-100</code> → <code>blue-700</code>); empty is a neutral tint.</p>
-      <div class="heatmap" role="img" aria-label="Varmekort over aktivitet pr. tema og afdeling; mørkere blå betyder flere sager.">
-        <span class="heatmap__corner"></span>
-        <span class="heatmap__col">Byg</span>
-        <span class="heatmap__col">Miljø</span>
-        <span class="heatmap__col">Social</span>
-        <span class="heatmap__col">Kultur</span>
-        <span class="heatmap__col">IT</span>
+      <div class="itkaarhus-heatmap" role="img" aria-label="Varmekort over aktivitet pr. tema og afdeling; mørkere blå betyder flere sager.">
+        <span class="itkaarhus-heatmap__corner"></span>
+        <span class="itkaarhus-heatmap__col">Byg</span>
+        <span class="itkaarhus-heatmap__col">Miljø</span>
+        <span class="itkaarhus-heatmap__col">Social</span>
+        <span class="itkaarhus-heatmap__col">Kultur</span>
+        <span class="itkaarhus-heatmap__col">IT</span>
 
-        <span class="heatmap__row">Teknik</span>
-        <span class="heatmap__cell" data-v="5">12</span>
-        <span class="heatmap__cell" data-v="3">6</span>
-        <span class="heatmap__cell" data-v="1">1</span>
-        <span class="heatmap__cell" data-v="0">·</span>
-        <span class="heatmap__cell" data-v="2">4</span>
+        <span class="itkaarhus-heatmap__row">Teknik</span>
+        <span class="itkaarhus-heatmap__cell" data-v="5">12</span>
+        <span class="itkaarhus-heatmap__cell" data-v="3">6</span>
+        <span class="itkaarhus-heatmap__cell" data-v="1">1</span>
+        <span class="itkaarhus-heatmap__cell" data-v="0">·</span>
+        <span class="itkaarhus-heatmap__cell" data-v="2">4</span>
 
-        <span class="heatmap__row">Borger</span>
-        <span class="heatmap__cell" data-v="2">3</span>
-        <span class="heatmap__cell" data-v="1">2</span>
-        <span class="heatmap__cell" data-v="5">14</span>
-        <span class="heatmap__cell" data-v="3">7</span>
-        <span class="heatmap__cell" data-v="1">2</span>
+        <span class="itkaarhus-heatmap__row">Borger</span>
+        <span class="itkaarhus-heatmap__cell" data-v="2">3</span>
+        <span class="itkaarhus-heatmap__cell" data-v="1">2</span>
+        <span class="itkaarhus-heatmap__cell" data-v="5">14</span>
+        <span class="itkaarhus-heatmap__cell" data-v="3">7</span>
+        <span class="itkaarhus-heatmap__cell" data-v="1">2</span>
 
-        <span class="heatmap__row">Kultur</span>
-        <span class="heatmap__cell" data-v="0">·</span>
-        <span class="heatmap__cell" data-v="2">3</span>
-        <span class="heatmap__cell" data-v="2">5</span>
-        <span class="heatmap__cell" data-v="5">11</span>
-        <span class="heatmap__cell" data-v="1">2</span>
+        <span class="itkaarhus-heatmap__row">Kultur</span>
+        <span class="itkaarhus-heatmap__cell" data-v="0">·</span>
+        <span class="itkaarhus-heatmap__cell" data-v="2">3</span>
+        <span class="itkaarhus-heatmap__cell" data-v="2">5</span>
+        <span class="itkaarhus-heatmap__cell" data-v="5">11</span>
+        <span class="itkaarhus-heatmap__cell" data-v="1">2</span>
       </div>
     </div>
 
     <div class="demo" style="margin-top:20px">
       <div class="demo-label">Progress / meter</div>
-      <div class="meters">
-        <div class="meter"><span class="meter__label">Digital selvbetjening</span><span class="meter__track"><i style="width:78%"></i></span><span class="meter__val">78%</span></div>
-        <div class="meter"><span class="meter__label">Sager behandlet til tiden</span><span class="meter__track"><i class="is-success" style="width:91%"></i></span><span class="meter__val">91%</span></div>
-        <div class="meter"><span class="meter__label">Forfaldne sager</span><span class="meter__track"><i class="is-warning" style="width:12%"></i></span><span class="meter__val">12%</span></div>
+      <div class="itkaarhus-meters">
+        <div class="itkaarhus-meter"><span class="itkaarhus-meter__label">Digital selvbetjening</span><span class="itkaarhus-meter__track"><i style="width:78%"></i></span><span class="itkaarhus-meter__val">78%</span></div>
+        <div class="itkaarhus-meter"><span class="itkaarhus-meter__label">Sager behandlet til tiden</span><span class="itkaarhus-meter__track"><i class="is-success" style="width:91%"></i></span><span class="itkaarhus-meter__val">91%</span></div>
+        <div class="itkaarhus-meter"><span class="itkaarhus-meter__label">Forfaldne sager</span><span class="itkaarhus-meter__track"><i class="is-warning" style="width:12%"></i></span><span class="itkaarhus-meter__val">12%</span></div>
       </div>
     </div>
 
     <h2 class="sh" id="table">Data table — expandable rows</h2>
     <p class="sub">Dense application table. The toggle chevron rotates 180° when open; the detail row animates with a <code>max-height</code> transition. Wrap in <code>overflow-x:auto</code> and add <code>--sticky-actions</code> to pin the last column. From the lønforhandling prototype.</p>
     <div class="demo" style="padding:0; overflow:hidden">
-      <table class="dt">
+      <table class="itkaarhus-table">
         <thead><tr><th>Medarbejder</th><th>Trin</th><th>Beregnet</th><th>Status</th></tr></thead>
         <tbody>
           <tr>
@@ -313,9 +314,9 @@ const base = import.meta.env.BASE_URL;
     <h2 class="sh" id="timeline">Timeline</h2>
     <p class="sub">Activity log with state-colored dots and a connector line. From the arbejdsmiljø prototype.</p>
     <div class="demo">
-      <div class="tl">
-        <div class="tl-entry"><span class="tl-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><div><p class="summary">Handleplan oprettet</p><span class="when">14. apr 2026</span></div></div>
-        <div class="tl-entry"><span class="tl-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><div><p class="summary">Delt med arbejdsmiljøgruppen</p><span class="when">16. apr 2026</span></div></div>
+      <div class="itkaarhus-timeline">
+        <div class="itkaarhus-timeline__entry"><span class="itkaarhus-timeline__dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><div><p class="summary">Handleplan oprettet</p><span class="when">14. apr 2026</span></div></div>
+        <div class="itkaarhus-timeline__entry"><span class="itkaarhus-timeline__dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><div><p class="summary">Delt med arbejdsmiljøgruppen</p><span class="when">16. apr 2026</span></div></div>
       </div>
     </div>
   </div>
@@ -415,140 +416,10 @@ const base = import.meta.env.BASE_URL;
   .demo { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 32px; background: #fff; }
   .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
   .stack { display: flex; flex-direction: column; gap: 12px; }
-
-  /* -- Buttons ------------------------------------------------ */
-  .itkaarhus-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: inherit; font-weight: 600; font-size: 15px;
-    padding: 12px 20px; border-radius: 6px; border: 1px solid transparent;
-    cursor: pointer; line-height: 1; letter-spacing: -0.005em;
-    transition: background .15s, color .15s, border-color .15s;
-  }
-  .itkaarhus-btn:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); }
-  .itkaarhus-btn:disabled { opacity: .5; cursor: not-allowed; }
-  /* Primary — blue leads */
-  .itkaarhus-btn--primary { background: var(--itkaarhus-blue-500); color: #fff; }
-  .itkaarhus-btn--primary:hover:not(:disabled), .itkaarhus-btn--primary.is-hover { background: var(--itkaarhus-primary-hover); }
-  /* Secondary — neutral outline */
-  .itkaarhus-btn--secondary { background: #fff; color: var(--itkaarhus-gray-900); border-color: var(--itkaarhus-gray-300); }
-  .itkaarhus-btn--secondary:hover:not(:disabled), .itkaarhus-btn--secondary.is-hover { border-color: var(--itkaarhus-gray-500); background: var(--itkaarhus-gray-50); }
-  /* Danger — destructive only, used rarely */
-  .itkaarhus-btn--danger { background: var(--itkaarhus-danger-500); color: #fff; }
-  .itkaarhus-btn--danger:hover:not(:disabled), .itkaarhus-btn--danger.is-hover { background: var(--itkaarhus-danger-700); }
-  .itkaarhus-btn--sm { padding: 8px 14px; font-size: 13px; }
-  .itkaarhus-btn--lg { padding: 16px 28px; font-size: 17px; }
-
-  /* Link — low-emphasis action. A real anchor, underlined, with a clear focus ring,
-     rather than a borderless button whose tabbable area is ambiguous. */
-  .itkaarhus-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: inherit; font-weight: 600; font-size: 15px;
-    color: var(--itkaarhus-blue-500); text-decoration: underline;
-    text-underline-offset: 2px; text-decoration-thickness: 1px;
-    border-radius: var(--itkaarhus-radius-1); cursor: pointer;
-  }
-  .itkaarhus-link:hover { color: var(--itkaarhus-primary-hover); }
-  .itkaarhus-link:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); }
-
   .demo-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--itkaarhus-gray-500); margin-bottom: 12px; }
-
-  /* -- Tags / status badges ----------------------------------- */
-  /* One component for category tags and status. Every role is a soft -100
-     surface with -700 text — an AA-contrast pairing on white. */
-  .itkaarhus-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--itkaarhus-radius-pill); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; }
-  /* Optional leading dot (status use); omit for plain category/metadata tags. */
-  .itkaarhus-tag--dot::before { content:""; width:6px; height:6px; border-radius:50%; background: currentColor; opacity:.8; }
-  .itkaarhus-tag--neutral   { background: var(--itkaarhus-gray-100);    color: var(--itkaarhus-gray-700); }
-  .itkaarhus-tag--primary   { background: var(--itkaarhus-blue-50);     color: var(--itkaarhus-blue-700); }
-  /* Text steps chosen for ≥ 4.5:1 (AA) contrast on each soft surface. */
-  .itkaarhus-tag--info      { background: var(--itkaarhus-info-soft);    color: var(--itkaarhus-info-800); }
-  .itkaarhus-tag--success   { background: var(--itkaarhus-success-soft); color: var(--itkaarhus-success-700); }
-  .itkaarhus-tag--warning   { background: var(--itkaarhus-warning-soft); color: var(--itkaarhus-warning-900); }
-  .itkaarhus-tag--danger    { background: var(--itkaarhus-danger-soft);  color: var(--itkaarhus-danger-700); }
-  .itkaarhus-tag--secondary { background: var(--itkaarhus-coral-100);   color: var(--itkaarhus-coral-800); }
-
-  /* -- Input -------------------------------------------------- */
-  .itkaarhus-field { display: flex; flex-direction: column; gap: 6px; max-width: 320px; }
-  .itkaarhus-field label { font-size: 13px; font-weight: 500; color: var(--itkaarhus-gray-800); }
-  .itkaarhus-field input, .itkaarhus-field select, .itkaarhus-field textarea {
-    font-family: inherit; font-size: 15px; padding: 11px 14px;
-    border: 1px solid var(--itkaarhus-gray-300); border-radius: 6px;
-    background: #fff; color: var(--itkaarhus-gray-900); outline: none;
-    transition: border-color .15s, box-shadow .15s;
-  }
-  .itkaarhus-field input:focus, .itkaarhus-field select:focus { border-color: var(--itkaarhus-blue-500); box-shadow: var(--itkaarhus-focus); }
-  .itkaarhus-field .help { font-size: 12px; color: var(--itkaarhus-gray-500); }
-
-  /* Custom select — hide native caret, draw our own with comfortable right spacing */
-  .itkaarhus-select { position: relative; }
-  .itkaarhus-select select {
-    width: 100%; appearance: none; -webkit-appearance: none; -moz-appearance: none;
-    padding-right: 40px; /* room for the caret so text never collides with it */
-  }
-  .itkaarhus-select::-ms-expand { display: none; }
-  .itkaarhus-select .caret {
-    position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
-    width: 18px; height: 18px; color: var(--itkaarhus-gray-500); pointer-events: none;
-  }
-
-  /* Checkbox & radio — native control, brand accent */
-  .choice-group { display: flex; flex-direction: column; gap: 12px; }
-  .choice { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--itkaarhus-gray-900); cursor: pointer; }
-  .choice input { width: 18px; height: 18px; margin: 0; accent-color: var(--itkaarhus-blue-500); cursor: pointer; }
-  .choice input:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); border-radius: 4px; }
-  .choice input:disabled { cursor: not-allowed; }
-  .choice input:disabled + span { color: var(--itkaarhus-gray-400); }
-
-  /* Toggle — checkbox styled as a switch */
-  .itkaarhus-toggle { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--itkaarhus-gray-900); cursor: pointer; }
-  .itkaarhus-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
-  .itkaarhus-toggle .track {
-    position: relative; flex: none; width: 40px; height: 22px; border-radius: var(--itkaarhus-radius-pill);
-    background: var(--itkaarhus-gray-300); transition: background .15s;
-  }
-  .itkaarhus-toggle .track::after {
-    content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
-    border-radius: 50%; background: #fff; box-shadow: var(--itkaarhus-shadow-1); transition: transform .15s;
-  }
-  .itkaarhus-toggle input:checked + .track { background: var(--itkaarhus-blue-500); }
-  .itkaarhus-toggle input:checked + .track::after { transform: translateX(18px); }
-  .itkaarhus-toggle input:focus-visible + .track { box-shadow: var(--itkaarhus-focus); }
-  .itkaarhus-toggle input:disabled + .track { opacity: .5; }
-  .itkaarhus-toggle input:disabled ~ .toggle-label { color: var(--itkaarhus-gray-400); }
-  .itkaarhus-toggle input:disabled { cursor: not-allowed; }
-
-  /* -- Card --------------------------------------------------- */
-  .itkaarhus-card { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-  .itkaarhus-card__image { aspect-ratio: 16/9; background: var(--itkaarhus-blue-500); position: relative; overflow: hidden; }
-  .itkaarhus-card__body { padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .itkaarhus-card__kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
-  .itkaarhus-card__title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; color: var(--itkaarhus-gray-900); }
-  .itkaarhus-card__excerpt { font-size: 14px; color: var(--itkaarhus-gray-700); margin: 0; line-height: 1.55; }
-  .itkaarhus-card__foot { margin-top: auto; font-size: 12px; color: var(--itkaarhus-gray-500); font-family: var(--itkaarhus-font-sans); padding-top: 12px; display: flex; justify-content: space-between; }
   .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-  /* -- Alert / Callout --------------------------------------- */
-  .itkaarhus-callout { display: flex; gap: 14px; padding: 16px 20px; border-radius: 8px; border-left: 4px solid; font-size: 14px; line-height: 1.55; }
-  .itkaarhus-callout strong { display: block; font-weight: 600; margin-bottom: 2px; color: var(--itkaarhus-gray-900); font-size: 15px; }
-  .itkaarhus-callout--info { background: rgba(0,165,205,0.08); border-color: var(--itkaarhus-info-500); color: var(--itkaarhus-gray-700); }
-  .itkaarhus-callout--success { background: rgba(0,141,61,0.07); border-color: var(--itkaarhus-success-500); color: var(--itkaarhus-gray-700); }
-  .itkaarhus-callout--warn { background: rgba(204,31,51,0.07); border-color: var(--itkaarhus-danger-500); color: var(--itkaarhus-gray-700); }
-  .itkaarhus-callout .ic { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; margin-top: 1px; }
-  .itkaarhus-callout .ic svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .itkaarhus-callout--info .ic { background: var(--itkaarhus-info-500); }
-  .itkaarhus-callout--success .ic { background: var(--itkaarhus-success-500); }
-  .itkaarhus-callout--warn .ic { background: var(--itkaarhus-danger-500); }
-
-  /* -- Stat --------------------------------------------------- */
-  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--itkaarhus-gray-200); border-radius: 10px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
-  .stat { background: #fff; padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; }
-  .stat .n { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; color: var(--itkaarhus-blue-500); line-height: 1; font-variant-numeric: tabular-nums; }
-  .stat .l { font-size: 13px; color: var(--itkaarhus-gray-500); }
-  .stat.danger .n { color: var(--itkaarhus-danger-500); }
-  .stat.success .n { color: var(--itkaarhus-success-500); }
-  .stat.info .n { color: var(--itkaarhus-info-500); }
-
-  /* -- Nav ---------------------------------------------------- */
+  /* -- Nav (demo) --------------------------------------------- */
   .nav-demo { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 16px 24px; display: flex; align-items: center; gap: 32px; }
   .nav-demo .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--itkaarhus-gray-900); }
   .nav-demo .brand img { width: 24px; height: 24px; border-radius: var(--itkaarhus-radius-1); object-fit: contain; }
@@ -558,50 +429,14 @@ const base = import.meta.env.BASE_URL;
   .nav-demo a.active { color: var(--itkaarhus-blue-500); border-bottom: 2px solid var(--itkaarhus-blue-500); padding-bottom: 2px; }
   .nav-demo .spacer { flex: 1; }
 
-  /* -- Breadcrumb -------------------------------------------- */
-  .bc { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--itkaarhus-gray-500); }
-  .bc a { color: var(--itkaarhus-gray-500); text-decoration: none; }
-  .bc a:hover { color: var(--itkaarhus-blue-500); }
-  .bc .sep { color: var(--itkaarhus-gray-300); }
-  .bc .cur { color: var(--itkaarhus-gray-900); font-weight: 500; }
-
-  /* -- Promoted patterns (from the prototypes) ---------------- */
-  /* Editorial type */
+  /* -- Editorial type (voice demo, see /typography) ------------ */
   .ed-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color: var(--itkaarhus-blue-500); }
   .ed-eyebrow::before { content:""; width:24px; height:1px; background: currentColor; }
   .ed-title { font-family: var(--itkaarhus-font-serif); font-weight:400; font-size:40px; line-height:1.05; letter-spacing:-0.02em; color: var(--itkaarhus-gray-900); margin:12px 0; max-width: 18ch; }
   .ed-title em { font-style:italic; color: var(--itkaarhus-coral-500); }
   .ed-lede { font-family: var(--itkaarhus-font-sans); font-size:18px; line-height:1.6; color: var(--itkaarhus-gray-700); max-width: 52ch; margin:0; }
 
-  /* KPI cards */
-  .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; }
-  .kpi { background:#fff; border:1px solid var(--itkaarhus-gray-200); border-radius:10px; padding:24px; display:flex; flex-direction:column; gap:8px; }
-  .kpi .l { font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
-  .kpi .v { font-family: var(--itkaarhus-font-serif); font-weight:500; font-size:36px; line-height:1; color: var(--itkaarhus-gray-900); font-variant-numeric: lining-nums tabular-nums; }
-  .kpi .v.ok { color: var(--itkaarhus-success-700); }
-  .kpi .v.warn { color: var(--itkaarhus-warning-900); }
-  .kpi .v.danger { color: var(--itkaarhus-danger-700); }
-
-  /* Mini data table with expandable row + sticky note */
-  .dt { width:100%; border-collapse:collapse; font-size:14px; }
-  .dt th { background: var(--itkaarhus-gray-50); padding:10px 14px; text-align:left; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color: var(--itkaarhus-gray-500); border-bottom:1px solid var(--itkaarhus-gray-200); }
-  .dt td { padding:10px 14px; border-bottom:1px solid var(--itkaarhus-gray-100); }
-  .dt .toggle { display:inline-flex; align-items:center; gap:8px; background:none; border:none; font:inherit; cursor:pointer; padding:0; color: var(--itkaarhus-gray-900); }
-  .dt .chev { width:14px; height:14px; color: var(--itkaarhus-gray-500); transition: transform .2s ease; }
-  .dt .toggle.open .chev { transform: rotate(180deg); }
-  .dt .detail td { background: var(--itkaarhus-gray-50); font-size:13px; color: var(--itkaarhus-gray-700); }
-  .calc { display:inline-block; padding:5px 8px; background:#e6f2f6; color: var(--itkaarhus-blue-500); font-weight:600; border-radius:2px; }
-
-  /* Timeline */
-  .tl { display:grid; gap:12px; }
-  .tl-entry { display:grid; grid-template-columns:32px 1fr; gap:12px; position:relative; }
-  .tl-entry::before { content:""; position:absolute; left:15px; top:32px; bottom:-12px; width:1px; background: var(--itkaarhus-gray-200); }
-  .tl-entry:last-child::before { display:none; }
-  .tl-dot { width:32px; height:32px; border-radius:50%; background:#cce8d8; color:#006a2d; border:1px solid var(--itkaarhus-success-100); display:inline-flex; align-items:center; justify-content:center; z-index:1; }
-  .tl-entry .summary { font-weight:500; color: var(--itkaarhus-gray-900); margin:0; }
-  .tl-entry .when { display:block; margin-top:2px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
-
-  /* -- Graphs & diagrams -------------------------------------- */
+  /* -- Graph demo layout --------------------------------------- */
   .graph-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
   /* Grid cells must be able to shrink, or a responsive canvas blows the track out. */
   .graph-grid > .demo { min-width: 0; }
@@ -618,34 +453,7 @@ const base = import.meta.env.BASE_URL;
   .spark-wrap { position:relative; flex:1; min-width:0; height:64px; }
   .spark-wrap canvas { position:absolute; inset:0; width:100% !important; height:100% !important; }
 
-  /* Heatmap — CSS grid, blue-scale intensity (no library) */
-  .heatmap { display:grid; grid-template-columns: 84px repeat(5, 1fr); gap:6px; }
-  .heatmap__corner { }
-  .heatmap__col { font-size:12px; font-weight:600; color: var(--itkaarhus-gray-500); text-align:center; align-self:end; padding-bottom:4px; }
-  .heatmap__row { font-size:13px; font-weight:500; color: var(--itkaarhus-gray-700); display:flex; align-items:center; }
-  .heatmap__cell { height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; font-variant-numeric: tabular-nums; }
-  /* Intensity steps from the blue scale; 0 is a neutral tint */
-  .heatmap__cell[data-v="0"] { background: var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-400); }
-  .heatmap__cell[data-v="1"] { background: var(--itkaarhus-blue-100); color: var(--itkaarhus-blue-700); }
-  .heatmap__cell[data-v="2"] { background: var(--itkaarhus-blue-200); color: var(--itkaarhus-blue-800); }
-  .heatmap__cell[data-v="3"] { background: var(--itkaarhus-blue-300); color: var(--itkaarhus-blue-900); }
-  .heatmap__cell[data-v="4"] { background: var(--itkaarhus-blue-400); color:#fff; }
-  .heatmap__cell[data-v="5"] { background: var(--itkaarhus-blue-500); color:#fff; }
-
-  /* Progress / meter bars */
-  .meters { display:grid; gap:16px; }
-  .meter { display:grid; grid-template-columns: 200px 1fr 48px; align-items:center; gap:16px; }
-  .meter__label { font-size:14px; color: var(--itkaarhus-gray-700); }
-  .meter__track { height:8px; border-radius:999px; background: var(--itkaarhus-gray-100); overflow:hidden; }
-  .meter__track i { display:block; height:100%; border-radius:999px; background: var(--itkaarhus-blue-500); }
-  .meter__track i.is-success { background: var(--itkaarhus-success-500); }
-  .meter__track i.is-warning { background: var(--itkaarhus-warning-500); }
-  .meter__val { font-size:13px; font-weight:600; color: var(--itkaarhus-gray-700); text-align:right; font-variant-numeric: tabular-nums; }
-
   @media (max-width: 720px) {
     .graph-grid { grid-template-columns: 1fr; }
-    .meter { grid-template-columns: 1fr; gap:6px; }
-    .meter__val { text-align:left; }
-    .heatmap { grid-template-columns: 64px repeat(5, 1fr); }
   }
 </style>

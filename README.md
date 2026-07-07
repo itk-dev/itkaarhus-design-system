@@ -9,25 +9,55 @@ in the header.
 > **Live preview:** <https://itk-dev.github.io/itkaarhus-design-system/>
 
 The reference site is built with [Astro](https://astro.build) so it can be served
-locally with a single command. The tokens themselves are still plain CSS — one
-file you can drop into any project, no framework required.
+locally with a single command. The design system itself is plain CSS — token and
+component files you can drop into any project, no framework required.
+
+## Using as a Composer package
+
+The repo is an assets-only Composer package (`itk-dev/itkaarhus-design-system`).
+Add it as a VCS repository and require it:
+
+```jsonc
+// composer.json of the consuming project
+{
+  "repositories": [
+    { "type": "vcs", "url": "https://github.com/itk-dev/itkaarhus-design-system" }
+  ],
+  "require": {
+    "itk-dev/itkaarhus-design-system": "^0.4"
+  }
+}
+```
+
+The payload installs to `vendor/itk-dev/itkaarhus-design-system/assets/`:
+
+- `tokens.css` — every `--itkaarhus-*` custom property (colors, type, spacing, radii, shadows, focus). Load first.
+- `components.css` — the namespaced `.itkaarhus-*` component classes (buttons, links, tags, inputs, cards, callouts, stats, KPI cards, tables, timeline, breadcrumb, heatmap, meters). Requires `tokens.css`.
+- `lucide-sprite.svg` — the Lucide icon sprite.
+
+Copy or serve those three files from your app's public path (there is no PHP
+autoload — nothing else in the package is needed at runtime). The same files are
+also published on GitHub Pages at
+`https://itk-dev.github.io/itkaarhus-design-system/{tokens.css,components.css,assets/lucide-sprite.svg}`.
 
 ## Files
 
-- `public/tokens.css` — the single source of truth: CSS custom properties (colors, type scale, spacing, radii, shadows, focus). Consuming apps mirror these tokens into their own runtime CSS — keep them in sync when tokens change.
-- `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon, `tokens.css`).
+- `assets/tokens.css` — the single source of truth for tokens: CSS custom properties (colors, type scale, spacing, radii, shadows, focus).
+- `assets/components.css` — all shared `.itkaarhus-*` component rules, extracted from the reference pages.
+- `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
+- `npm run sync:assets` copies the three files above into `public/` (run automatically on `dev`/`build`) so the site serves them at stable URLs; the copies are git-ignored — edit only `assets/`.
+- `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon); imports `assets/tokens.css`.
 - `src/styles/sidebar.css` — sidebar styling (replaces the old top-bar `ds-nav.css`).
 - `src/pages/index.astro` — overview page with previews of every section.
 - `src/pages/colors.astro` — palette, color scales, and usage rules.
 - `src/pages/typography.astro` — Inter + Newsreader (system monospace).
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
-- `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, graphs & diagrams, expandable table, timeline, nav, breadcrumb.
+- `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, graphs & diagrams, expandable table, timeline, nav, breadcrumb; the component rules themselves live in `assets/components.css`.
 - `src/scripts/chart-theme.ts` — shared Chart.js theme: reads the `--itkaarhus-*` tokens at runtime and exposes the categorical palette + defaults (flat fills, no gradients).
 - `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
 - `public/examples/` — the standalone example documents (a fictional "Mit Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, `app-statistics.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
-- `public/assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 
 ## Color palette
 
@@ -64,7 +94,8 @@ tint for badges/alerts.
 ## Icons
 
 - **Lucide** line icons (24px viewBox, `currentColor`, stroke 2). The icon set
-  ships as `public/assets/lucide-sprite.svg` — reference a symbol with
+  ships as `assets/lucide-sprite.svg` (served at `assets/lucide-sprite.svg` on the
+  site) — reference a symbol with
   `<svg class="icon"><use href="assets/lucide-sprite.svg#lucide-NAME"></use></svg>`
   (resolve the path against the site base).
   Don't hand-roll SVG paths. (Consuming apps may wrap this in their own helper —
@@ -138,3 +169,7 @@ git push origin 0.2.0    # this is the release; it triggers the deploy
 
 Tag naming and the changelog/version bump follow the ITK Dev release flow — see the
 `/itkdev-release` skill. A manual `workflow_dispatch` run is available as a fallback.
+
+The same bare-semver tags double as the **Composer package versions** — consumers
+requiring `itk-dev/itkaarhus-design-system` via a VCS repository resolve `^0.4`
+etc. from these tags, so a tag push releases both the site and the package.
