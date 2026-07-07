@@ -8,9 +8,10 @@
   },
   "scripts": {
     "sync:vendor": "node -e \"import('node:fs').then(fs=>{fs.mkdirSync('public/examples/embed/vendor',{recursive:true});fs.copyFileSync('node_modules/chart.js/dist/chart.umd.min.js','public/examples/embed/vendor/chart.umd.min.js')})\"",
-    "predev": "npm run sync:vendor",
+    "sync:assets": "node -e \"import('node:fs').then(fs=>{fs.mkdirSync('public/assets',{recursive:true});for(const [from,to] of [['assets/tokens.css','public/tokens.css'],['assets/components.css','public/components.css'],['assets/lucide-sprite.svg','public/assets/lucide-sprite.svg']])fs.copyFileSync(from,to)})\"",
+    "predev": "npm run sync:vendor && npm run sync:assets",
     "dev": "astro dev",
-    "prebuild": "npm run sync:vendor",
+    "prebuild": "npm run sync:vendor && npm run sync:assets",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

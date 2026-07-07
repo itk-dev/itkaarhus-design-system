@@ -21,5 +21,10 @@ dist/
 # Vendored libs copied from node_modules at build (npm run sync:vendor)
 public/examples/embed/vendor/
 
+# Served copies of the package payload in assets/ (npm run sync:assets)
+public/tokens.css
+public/components.css
+public/assets/lucide-sprite.svg
+
 # Claude Code local
 .claude/settings.local.json

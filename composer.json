@@ -1,0 +1,17 @@
+{
+    "name": "itk-dev/itkaarhus-design-system",
+    "description": "ITK Aarhus design system — assets-only package shipping the design tokens (tokens.css), namespaced component styles (components.css) and the Lucide icon sprite under assets/.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://itk-dev.github.io/itkaarhus-design-system/",
+    "keywords": [
+        "design-system",
+        "css",
+        "design-tokens",
+        "aarhus-kommune"
+    ],
+    "support": {
+        "issues": "https://github.com/itk-dev/itkaarhus-design-system/issues",
+        "source": "https://github.com/itk-dev/itkaarhus-design-system"
+    }
+}

@@ -1,0 +1,199 @@
+/* =============================================================
+   ITK Aarhus Design System — Components
+   Namespaced .itkaarhus-* component classes. Requires tokens.css
+   (the --itkaarhus-* custom properties) to be loaded first.
+   ============================================================= */
+
+/* -- Buttons ------------------------------------------------ */
+.itkaarhus-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: inherit; font-weight: 600; font-size: 15px;
+  padding: 12px 20px; border-radius: var(--itkaarhus-radius-2); border: 1px solid transparent;
+  cursor: pointer; line-height: 1; letter-spacing: -0.005em;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.itkaarhus-btn:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); }
+.itkaarhus-btn:disabled { opacity: .5; cursor: not-allowed; }
+/* Primary — blue leads */
+.itkaarhus-btn--primary { background: var(--itkaarhus-blue-500); color: var(--itkaarhus-white); }
+.itkaarhus-btn--primary:hover:not(:disabled), .itkaarhus-btn--primary.is-hover { background: var(--itkaarhus-primary-hover); }
+/* Secondary — neutral outline */
+.itkaarhus-btn--secondary { background: var(--itkaarhus-white); color: var(--itkaarhus-gray-900); border-color: var(--itkaarhus-gray-300); }
+.itkaarhus-btn--secondary:hover:not(:disabled), .itkaarhus-btn--secondary.is-hover { border-color: var(--itkaarhus-gray-500); background: var(--itkaarhus-gray-50); }
+/* Danger — destructive only, used rarely */
+.itkaarhus-btn--danger { background: var(--itkaarhus-danger-500); color: var(--itkaarhus-white); }
+.itkaarhus-btn--danger:hover:not(:disabled), .itkaarhus-btn--danger.is-hover { background: var(--itkaarhus-danger-700); }
+.itkaarhus-btn--sm { padding: 8px 14px; font-size: 13px; }
+.itkaarhus-btn--lg { padding: 16px 28px; font-size: 17px; }
+
+/* Link — low-emphasis action. A real anchor, underlined, with a clear focus ring,
+   rather than a borderless button whose tabbable area is ambiguous. */
+.itkaarhus-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: inherit; font-weight: 600; font-size: 15px;
+  color: var(--itkaarhus-blue-500); text-decoration: underline;
+  text-underline-offset: 2px; text-decoration-thickness: 1px;
+  border-radius: var(--itkaarhus-radius-1); cursor: pointer;
+}
+.itkaarhus-link:hover { color: var(--itkaarhus-primary-hover); }
+.itkaarhus-link:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); }
+
+/* -- Tags / status badges ----------------------------------- */
+/* One component for category tags and status. Every role is a soft -100
+   surface with -700 text — an AA-contrast pairing on white. */
+.itkaarhus-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--itkaarhus-radius-pill); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; }
+/* Optional leading dot (status use); omit for plain category/metadata tags. */
+.itkaarhus-tag--dot::before { content:""; width:6px; height:6px; border-radius:50%; background: currentColor; opacity:.8; }
+.itkaarhus-tag--neutral   { background: var(--itkaarhus-gray-100);    color: var(--itkaarhus-gray-700); }
+.itkaarhus-tag--primary   { background: var(--itkaarhus-blue-50);     color: var(--itkaarhus-blue-700); }
+/* Text steps chosen for ≥ 4.5:1 (AA) contrast on each soft surface. */
+.itkaarhus-tag--info      { background: var(--itkaarhus-info-soft);    color: var(--itkaarhus-info-800); }
+.itkaarhus-tag--success   { background: var(--itkaarhus-success-soft); color: var(--itkaarhus-success-700); }
+.itkaarhus-tag--warning   { background: var(--itkaarhus-warning-soft); color: var(--itkaarhus-warning-900); }
+.itkaarhus-tag--danger    { background: var(--itkaarhus-danger-soft);  color: var(--itkaarhus-danger-700); }
+.itkaarhus-tag--secondary { background: var(--itkaarhus-coral-100);   color: var(--itkaarhus-coral-800); }
+
+/* -- Input -------------------------------------------------- */
+.itkaarhus-field { display: flex; flex-direction: column; gap: 6px; max-width: 320px; }
+.itkaarhus-field label { font-size: 13px; font-weight: 500; color: var(--itkaarhus-gray-800); }
+.itkaarhus-field input, .itkaarhus-field select, .itkaarhus-field textarea {
+  font-family: inherit; font-size: 15px; padding: 11px 14px;
+  border: 1px solid var(--itkaarhus-gray-300); border-radius: var(--itkaarhus-radius-2);
+  background: var(--itkaarhus-white); color: var(--itkaarhus-gray-900); outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.itkaarhus-field input:focus, .itkaarhus-field select:focus { border-color: var(--itkaarhus-blue-500); box-shadow: var(--itkaarhus-focus); }
+.itkaarhus-field .help { font-size: 12px; color: var(--itkaarhus-gray-500); }
+
+/* Custom select — hide native caret, draw our own with comfortable right spacing */
+.itkaarhus-select { position: relative; }
+.itkaarhus-select select {
+  width: 100%; appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  padding-right: 40px; /* room for the caret so text never collides with it */
+}
+.itkaarhus-select::-ms-expand { display: none; }
+.itkaarhus-select .caret {
+  position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+  width: 18px; height: 18px; color: var(--itkaarhus-gray-500); pointer-events: none;
+}
+
+/* Checkbox & radio — native control, brand accent */
+.itkaarhus-choice-group { display: flex; flex-direction: column; gap: 12px; }
+.itkaarhus-choice { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--itkaarhus-gray-900); cursor: pointer; }
+.itkaarhus-choice input { width: 18px; height: 18px; margin: 0; accent-color: var(--itkaarhus-blue-500); cursor: pointer; }
+.itkaarhus-choice input:focus-visible { outline: none; box-shadow: var(--itkaarhus-focus); border-radius: 4px; }
+.itkaarhus-choice input:disabled { cursor: not-allowed; }
+.itkaarhus-choice input:disabled + span { color: var(--itkaarhus-gray-400); }
+
+/* Toggle — checkbox styled as a switch */
+.itkaarhus-toggle { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--itkaarhus-gray-900); cursor: pointer; }
+.itkaarhus-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.itkaarhus-toggle .track {
+  position: relative; flex: none; width: 40px; height: 22px; border-radius: var(--itkaarhus-radius-pill);
+  background: var(--itkaarhus-gray-300); transition: background .15s;
+}
+.itkaarhus-toggle .track::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
+  border-radius: 50%; background: var(--itkaarhus-white); box-shadow: var(--itkaarhus-shadow-1); transition: transform .15s;
+}
+.itkaarhus-toggle input:checked + .track { background: var(--itkaarhus-blue-500); }
+.itkaarhus-toggle input:checked + .track::after { transform: translateX(18px); }
+.itkaarhus-toggle input:focus-visible + .track { box-shadow: var(--itkaarhus-focus); }
+.itkaarhus-toggle input:disabled + .track { opacity: .5; }
+.itkaarhus-toggle input:disabled ~ .toggle-label { color: var(--itkaarhus-gray-400); }
+.itkaarhus-toggle input:disabled { cursor: not-allowed; }
+
+/* -- Card --------------------------------------------------- */
+.itkaarhus-card { background: var(--itkaarhus-white); border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.itkaarhus-card__image { aspect-ratio: 16/9; background: var(--itkaarhus-blue-500); position: relative; overflow: hidden; }
+.itkaarhus-card__body { padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.itkaarhus-card__kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--itkaarhus-blue-500); font-weight: 600; }
+.itkaarhus-card__title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; color: var(--itkaarhus-gray-900); }
+.itkaarhus-card__excerpt { font-size: 14px; color: var(--itkaarhus-gray-700); margin: 0; line-height: 1.55; }
+.itkaarhus-card__foot { margin-top: auto; font-size: 12px; color: var(--itkaarhus-gray-500); font-family: var(--itkaarhus-font-sans); padding-top: 12px; display: flex; justify-content: space-between; }
+
+/* -- Alert / Callout --------------------------------------- */
+.itkaarhus-callout { display: flex; gap: 14px; padding: 16px 20px; border-radius: 8px; border-left: 4px solid; font-size: 14px; line-height: 1.55; }
+.itkaarhus-callout strong { display: block; font-weight: 600; margin-bottom: 2px; color: var(--itkaarhus-gray-900); font-size: 15px; }
+.itkaarhus-callout--info { background: rgba(0,165,205,0.08); border-color: var(--itkaarhus-info-500); color: var(--itkaarhus-gray-700); }
+.itkaarhus-callout--success { background: rgba(0,141,61,0.07); border-color: var(--itkaarhus-success-500); color: var(--itkaarhus-gray-700); }
+.itkaarhus-callout--warn { background: rgba(204,31,51,0.07); border-color: var(--itkaarhus-danger-500); color: var(--itkaarhus-gray-700); }
+.itkaarhus-callout .ic { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: var(--itkaarhus-white); font-weight: 700; font-size: 13px; margin-top: 1px; }
+.itkaarhus-callout .ic svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.itkaarhus-callout--info .ic { background: var(--itkaarhus-info-500); }
+.itkaarhus-callout--success .ic { background: var(--itkaarhus-success-500); }
+.itkaarhus-callout--warn .ic { background: var(--itkaarhus-danger-500); }
+
+/* -- Stat --------------------------------------------------- */
+.itkaarhus-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--itkaarhus-gray-200); border-radius: 10px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+.itkaarhus-stat { background: var(--itkaarhus-white); padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; }
+.itkaarhus-stat .n { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; color: var(--itkaarhus-blue-500); line-height: 1; font-variant-numeric: tabular-nums; }
+.itkaarhus-stat .l { font-size: 13px; color: var(--itkaarhus-gray-500); }
+.itkaarhus-stat--danger .n { color: var(--itkaarhus-danger-500); }
+.itkaarhus-stat--success .n { color: var(--itkaarhus-success-500); }
+.itkaarhus-stat--info .n { color: var(--itkaarhus-info-500); }
+
+/* -- Breadcrumb -------------------------------------------- */
+.itkaarhus-breadcrumb { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--itkaarhus-gray-500); }
+.itkaarhus-breadcrumb a { color: var(--itkaarhus-gray-500); text-decoration: none; }
+.itkaarhus-breadcrumb a:hover { color: var(--itkaarhus-blue-500); }
+.itkaarhus-breadcrumb .sep { color: var(--itkaarhus-gray-300); }
+.itkaarhus-breadcrumb .cur { color: var(--itkaarhus-gray-900); font-weight: 500; }
+
+/* -- KPI cards ---------------------------------------------- */
+.itkaarhus-kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; }
+.itkaarhus-kpi { background: var(--itkaarhus-white); border:1px solid var(--itkaarhus-gray-200); border-radius:10px; padding:24px; display:flex; flex-direction:column; gap:8px; }
+.itkaarhus-kpi .l { font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
+.itkaarhus-kpi .v { font-family: var(--itkaarhus-font-serif); font-weight:500; font-size:36px; line-height:1; color: var(--itkaarhus-gray-900); font-variant-numeric: lining-nums tabular-nums; }
+.itkaarhus-kpi .v.ok { color: var(--itkaarhus-success-700); }
+.itkaarhus-kpi .v.warn { color: var(--itkaarhus-warning-900); }
+.itkaarhus-kpi .v.danger { color: var(--itkaarhus-danger-700); }
+
+/* -- Data table with expandable row -------------------------- */
+.itkaarhus-table { width:100%; border-collapse:collapse; font-size:14px; }
+.itkaarhus-table th { background: var(--itkaarhus-gray-50); padding:10px 14px; text-align:left; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color: var(--itkaarhus-gray-500); border-bottom:1px solid var(--itkaarhus-gray-200); }
+.itkaarhus-table td { padding:10px 14px; border-bottom:1px solid var(--itkaarhus-gray-100); }
+.itkaarhus-table .toggle { display:inline-flex; align-items:center; gap:8px; background:none; border:none; font:inherit; cursor:pointer; padding:0; color: var(--itkaarhus-gray-900); }
+.itkaarhus-table .chev { width:14px; height:14px; color: var(--itkaarhus-gray-500); transition: transform .2s ease; }
+.itkaarhus-table .toggle.open .chev { transform: rotate(180deg); }
+.itkaarhus-table .detail td { background: var(--itkaarhus-gray-50); font-size:13px; color: var(--itkaarhus-gray-700); }
+.itkaarhus-table .calc { display:inline-block; padding:5px 8px; background: var(--itkaarhus-blue-50); color: var(--itkaarhus-blue-500); font-weight:600; border-radius: var(--itkaarhus-radius-1); }
+
+/* -- Timeline ------------------------------------------------ */
+.itkaarhus-timeline { display:grid; gap:12px; }
+.itkaarhus-timeline__entry { display:grid; grid-template-columns:32px 1fr; gap:12px; position:relative; }
+.itkaarhus-timeline__entry::before { content:""; position:absolute; left:15px; top:32px; bottom:-12px; width:1px; background: var(--itkaarhus-gray-200); }
+.itkaarhus-timeline__entry:last-child::before { display:none; }
+.itkaarhus-timeline__dot { width:32px; height:32px; border-radius:50%; background: var(--itkaarhus-success-100); color: var(--itkaarhus-success-700); border:1px solid var(--itkaarhus-success-100); display:inline-flex; align-items:center; justify-content:center; z-index:1; }
+.itkaarhus-timeline__entry .summary { font-weight:500; color: var(--itkaarhus-gray-900); margin:0; }
+.itkaarhus-timeline__entry .when { display:block; margin-top:2px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
+
+/* -- Heatmap — CSS grid, blue-scale intensity (no library) ---- */
+.itkaarhus-heatmap { display:grid; grid-template-columns: 84px repeat(5, 1fr); gap:6px; }
+.itkaarhus-heatmap__corner { }
+.itkaarhus-heatmap__col { font-size:12px; font-weight:600; color: var(--itkaarhus-gray-500); text-align:center; align-self:end; padding-bottom:4px; }
+.itkaarhus-heatmap__row { font-size:13px; font-weight:500; color: var(--itkaarhus-gray-700); display:flex; align-items:center; }
+.itkaarhus-heatmap__cell { height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; font-variant-numeric: tabular-nums; }
+/* Intensity steps from the blue scale; 0 is a neutral tint */
+.itkaarhus-heatmap__cell[data-v="0"] { background: var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-400); }
+.itkaarhus-heatmap__cell[data-v="1"] { background: var(--itkaarhus-blue-100); color: var(--itkaarhus-blue-700); }
+.itkaarhus-heatmap__cell[data-v="2"] { background: var(--itkaarhus-blue-200); color: var(--itkaarhus-blue-800); }
+.itkaarhus-heatmap__cell[data-v="3"] { background: var(--itkaarhus-blue-300); color: var(--itkaarhus-blue-900); }
+.itkaarhus-heatmap__cell[data-v="4"] { background: var(--itkaarhus-blue-400); color: var(--itkaarhus-white); }
+.itkaarhus-heatmap__cell[data-v="5"] { background: var(--itkaarhus-blue-500); color: var(--itkaarhus-white); }
+
+/* -- Progress / meter bars ----------------------------------- */
+.itkaarhus-meters { display:grid; gap:16px; }
+.itkaarhus-meter { display:grid; grid-template-columns: 200px 1fr 48px; align-items:center; gap:16px; }
+.itkaarhus-meter__label { font-size:14px; color: var(--itkaarhus-gray-700); }
+.itkaarhus-meter__track { height:8px; border-radius: var(--itkaarhus-radius-pill); background: var(--itkaarhus-gray-100); overflow:hidden; }
+.itkaarhus-meter__track i { display:block; height:100%; border-radius: var(--itkaarhus-radius-pill); background: var(--itkaarhus-blue-500); }
+.itkaarhus-meter__track i.is-success { background: var(--itkaarhus-success-500); }
+.itkaarhus-meter__track i.is-warning { background: var(--itkaarhus-warning-500); }
+.itkaarhus-meter__val { font-size:13px; font-weight:600; color: var(--itkaarhus-gray-700); text-align:right; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 720px) {
+  .itkaarhus-meter { grid-template-columns: 1fr; gap:6px; }
+  .itkaarhus-meter__val { text-align:left; }
+  .itkaarhus-heatmap { grid-template-columns: 64px repeat(5, 1fr); }
+}
