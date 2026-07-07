@@ -8,7 +8,7 @@
   },
   "scripts": {
     "sync:vendor": "node -e \"import('node:fs').then(fs=>{fs.mkdirSync('public/examples/embed/vendor',{recursive:true});fs.copyFileSync('node_modules/chart.js/dist/chart.umd.min.js','public/examples/embed/vendor/chart.umd.min.js')})\"",
-    "sync:assets": "node -e \"import('node:fs').then(fs=>{fs.mkdirSync('public/assets',{recursive:true});for(const [from,to] of [['assets/tokens.css','public/tokens.css'],['assets/components.css','public/components.css'],['assets/lucide-sprite.svg','public/assets/lucide-sprite.svg']])fs.copyFileSync(from,to)})\"",
+    "sync:assets": "node -e \"import('node:fs').then(fs=>{fs.mkdirSync('public/assets/logos',{recursive:true});for(const [from,to] of [['assets/tokens.css','public/tokens.css'],['assets/components.css','public/components.css'],['assets/lucide-sprite.svg','public/assets/lucide-sprite.svg'],['assets/logos/aak-emblem.svg','public/assets/logos/aak-emblem.svg'],['assets/logos/aak-emblem-hvid.svg','public/assets/logos/aak-emblem-hvid.svg']])fs.copyFileSync(from,to)})\"",
     "predev": "npm run sync:vendor && npm run sync:assets",
     "dev": "astro dev",
     "prebuild": "npm run sync:vendor && npm run sync:assets",

@@ -25,6 +25,8 @@ public/examples/embed/vendor/
 public/tokens.css
 public/components.css
 public/assets/lucide-sprite.svg
+public/assets/logos/aak-emblem.svg
+public/assets/logos/aak-emblem-hvid.svg
 
 # Claude Code local
 .claude/settings.local.json

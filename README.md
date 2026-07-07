@@ -34,18 +34,20 @@ The payload installs to `vendor/itk-dev/itkaarhus-design-system/assets/`:
 - `tokens.css` — every `--itkaarhus-*` custom property (colors, type, spacing, radii, shadows, focus). Load first.
 - `components.css` — the namespaced `.itkaarhus-*` component classes (buttons, links, tags, inputs, cards, callouts, stats, KPI cards, tables, timeline, breadcrumb, heatmap, meters). Requires `tokens.css`.
 - `lucide-sprite.svg` — the Lucide icon sprite.
+- `logos/aak-emblem.svg` / `logos/aak-emblem-hvid.svg` — the Aarhus Kommune emblem (crest only, no wordmark; intrinsic 32px tall) in dark and white, for the product header / sidebar mark.
 
-Copy or serve those three files from your app's public path (there is no PHP
+Copy or serve those files from your app's public path (there is no PHP
 autoload — nothing else in the package is needed at runtime). The same files are
 also published on GitHub Pages at
-`https://itk-dev.github.io/itkaarhus-design-system/{tokens.css,components.css,assets/lucide-sprite.svg}`.
+`https://itk-dev.github.io/itkaarhus-design-system/{tokens.css,components.css,assets/lucide-sprite.svg,assets/logos/aak-emblem.svg}`.
 
 ## Files
 
 - `assets/tokens.css` — the single source of truth for tokens: CSS custom properties (colors, type scale, spacing, radii, shadows, focus).
 - `assets/components.css` — all shared `.itkaarhus-*` component rules, extracted from the reference pages.
 - `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
-- `npm run sync:assets` copies the three files above into `public/` (run automatically on `dev`/`build`) so the site serves them at stable URLs; the copies are git-ignored — edit only `assets/`.
+- `assets/logos/` — the emblem-only Aarhus Kommune marks (`aak-emblem.svg` dark, `aak-emblem-hvid.svg` white), derived from the supplied `AAK_02_*` lockups.
+- `npm run sync:assets` copies the payload files above into `public/` (run automatically on `dev`/`build`) so the site serves them at stable URLs; the copies are git-ignored — edit only `assets/`.
 - `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon); imports `assets/tokens.css`.
 - `src/styles/sidebar.css` — sidebar styling (replaces the old top-bar `ds-nav.css`).
 - `src/pages/index.astro` — overview page with previews of every section.
