@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-06
+
 ### Added
 
 - Guidance colour: a purple scale `--itkaarhus-purple-{50..900}` and the role aliases `--itkaarhus-guidance` and `--itkaarhus-guidance-soft`, for help and instructions next to the content.
