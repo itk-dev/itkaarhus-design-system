@@ -6,10 +6,11 @@
 :root {
   /* =========================================================
      COLOR
-     Two brand colors (blue + coral), four state colors, and a
-     neutral gray scale. Every color ships a 50→900 scale; 500 is
-     the base hue. Lighter steps (50–200) for surfaces and soft
-     fills, darker steps (600–900) for text, borders and hover.
+     Two brand colors (blue + coral), four state colors, a guidance
+     color (purple) and a neutral gray scale. Every color ships a
+     50→900 scale; 500 is the base hue. Lighter steps (50–200) for
+     surfaces and soft fills, darker steps (600–900) for text, borders
+     and hover.
      ========================================================= */
 
   /* ---- Brand · Primary (Blue) ------------------------------- */
@@ -86,6 +87,21 @@
   --itkaarhus-danger-800: #7d1620;
   --itkaarhus-danger-900: #64141b;
 
+  /* ---- Guidance · Purple ------------------------------------ */
+  /* Help and instructions: the "how do I" text a product offers next to
+     its content. Not a state and not decoration — kept apart from blue
+     (brand) and info (status) so guidance never reads as either. */
+  --itkaarhus-purple-50:  #f1eef8;
+  --itkaarhus-purple-100: #e3ddf1;
+  --itkaarhus-purple-200: #c7bbe3;
+  --itkaarhus-purple-300: #ab9ad4;
+  --itkaarhus-purple-400: #8f78c6;
+  --itkaarhus-purple-500: #7356b8;  /* base */
+  --itkaarhus-purple-600: #5d4594;
+  --itkaarhus-purple-700: #4a3776;
+  --itkaarhus-purple-800: #362856;
+  --itkaarhus-purple-900: #251c3c;
+
   /* ---- Neutral · Gray --------------------------------------- */
   --itkaarhus-white:    #ffffff;   /* true white — page background */
   --itkaarhus-gray-50:  #f7f8fa;
@@ -113,6 +129,8 @@
   --itkaarhus-warning-soft:var(--itkaarhus-warning-100);
   --itkaarhus-danger:      var(--itkaarhus-danger-500);
   --itkaarhus-danger-soft: var(--itkaarhus-danger-100);
+  --itkaarhus-guidance:      var(--itkaarhus-purple-500);
+  --itkaarhus-guidance-soft: var(--itkaarhus-purple-100);
 
   /* ---- Surfaces & text -------------------------------------- */
   --itkaarhus-bg:          var(--itkaarhus-white);

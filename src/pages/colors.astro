@@ -6,8 +6,8 @@ const base = import.meta.env.BASE_URL;
 <Layout title="Colors">
 <div class="page">
   <div class="eyebrow">Design tokens · Colors</div>
-  <h1>Two brand colors, four states, one gray scale.</h1>
-  <p class="lede">A deliberately small palette. Blue leads and coral complements it; four state colors carry meaning; everything else is neutral gray. Each color ships a 50→900 scale — <code>500</code> is the base, lighter steps for surfaces and softer fills, darker steps for text, borders and hover.</p>
+  <h1>Two brand colors, four states, guidance and one gray scale.</h1>
+  <p class="lede">A deliberately small palette. Blue leads and coral complements it; four state colors carry meaning; purple marks guidance; everything else is neutral gray. Each color ships a 50→900 scale — <code>500</code> is the base, lighter steps for surfaces and softer fills, darker steps for text, borders and hover.</p>
 
   <h2>Primary</h2>
   <p class="sub">Blue is the brand and the workhorse — primary actions, links, focus, active state. Coral is the warm secondary: highlights and editorial accents, used sparingly. Coral is <b>not</b> an error color.</p>
@@ -128,6 +128,22 @@ const base = import.meta.env.BASE_URL;
     <div class="alert danger"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg><span><b>Danger</b> Kunne ikke forbinde til serveren.</span></div>
   </div>
 
+  <h2>Guidance</h2>
+  <p class="sub">Purple marks help and instructions offered next to the content — a page's "how do I" text, onboarding hints. It is neither a state nor decoration: keep it out of status, charts and actions. Use the <code>50</code> tint for the surface, <code>500</code> for the accent and <code>900</code> for text.</p>
+  <div class="scale-label"><span class="t">Guidance — Purple</span><span class="tok">--itkaarhus-purple-50 … 900</span></div>
+  <div class="scale" aria-hidden="true">
+    <div class="step dk" style="--c: var(--itkaarhus-purple-50)"><span class="s">50</span><span class="h">#f1eef8</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-purple-100)"><span class="s">100</span><span class="h">#e3ddf1</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-purple-200)"><span class="s">200</span><span class="h">#c7bbe3</span></div>
+    <div class="step dk" style="--c: var(--itkaarhus-purple-300)"><span class="s">300</span><span class="h">#ab9ad4</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-400)"><span class="s">400</span><span class="h">#8f78c6</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-500)"><span class="s">500</span><span class="h">#7356b8</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-600)"><span class="s">600</span><span class="h">#5d4594</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-700)"><span class="s">700</span><span class="h">#4a3776</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-800)"><span class="s">800</span><span class="h">#362856</span></div>
+    <div class="step" style="--c: var(--itkaarhus-purple-900)"><span class="s">900</span><span class="h">#251c3c</span></div>
+  </div>
+
   <h2>Usage</h2>
   <p class="sub">Hierarchy over variety. Lead with blue, reach for coral rarely, keep state colors meaningful, and let gray do the rest.</p>
   <div class="usage">
@@ -137,6 +153,7 @@ const base = import.meta.env.BASE_URL;
         <li><b>Lead with blue.</b> Primary buttons, links, the focus ring, active nav — one accent carries the interface.</li>
         <li><b>Use coral sparingly.</b> A single editorial highlight or a secondary CTA per view — not a second primary.</li>
         <li><b>Reserve state colors for meaning.</b> Green = success, amber = warning, red = danger, cyan = info. Nothing decorative.</li>
+        <li><b>Use purple only for guidance.</b> Help and instructions next to the content — not status, not actions.</li>
         <li><b>Build surfaces from gray.</b> <code>white</code> page, <code>gray-50</code> muted panels, <code>gray-200</code> borders, <code>gray-500</code>+ for text.</li>
         <li><b>Pair tints with shades.</b> A <code>-50</code> background wants <code>-700</code>+ text for legible contrast.</li>
       </ul>
@@ -166,6 +183,8 @@ const base = import.meta.env.BASE_URL;
       <tr><td class="sw"><span style="background:var(--itkaarhus-warning)"></span></td><td class="tk">--itkaarhus-warning</td><td>warning-500</td><td>Warnings, caution</td></tr>
       <tr><td class="sw"><span style="background:var(--itkaarhus-danger)"></span></td><td class="tk">--itkaarhus-danger</td><td>danger-500</td><td>Errors, destructive actions</td></tr>
       <tr><td class="sw"><span style="background:var(--itkaarhus-info-soft)"></span></td><td class="tk">--itkaarhus-{'{state}'}-soft</td><td>{'{state}'}-100</td><td>Soft surface tint for badges / alerts</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-guidance)"></span></td><td class="tk">--itkaarhus-guidance</td><td>purple-500</td><td>Accent for help and instructions</td></tr>
+      <tr><td class="sw"><span style="background:var(--itkaarhus-guidance-soft)"></span></td><td class="tk">--itkaarhus-guidance-soft</td><td>purple-100</td><td>Soft surface tint for help and instructions</td></tr>
     </tbody>
   </table>
 </div>
