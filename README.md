@@ -63,8 +63,9 @@ also published on GitHub Pages at
 
 ## Color palette
 
-Two brand colours, four state colours, and a neutral gray scale. Every colour
-ships a **50→900 scale** (`-50` lightest → `-900` darkest); `500` is the base hue.
+Two brand colours, four state colours, a guidance colour and a neutral gray
+scale. Every colour ships a **50→900 scale** (`-50` lightest → `-900` darkest);
+`500` is the base hue.
 
 | Scale | Base hex | Role |
 |---|---|---|
@@ -74,12 +75,13 @@ ships a **50→900 scale** (`-50` lightest → `-900` darkest); `500` is the bas
 | `--itkaarhus-success-*` | `#008D3D` | State — success / "active" |
 | `--itkaarhus-warning-*` | `#F5B800` | State — warning |
 | `--itkaarhus-danger-*` | `#CC1F33` | State — danger, errors (a true cool red, kept distinct from coral; sharp and rare) |
+| `--itkaarhus-purple-*` | `#7356B8` | **Guidance** — help and instructions next to the content; not a state and not decoration |
 | `--itkaarhus-gray-*` | — | Neutral — text, surfaces, borders (`50`→`900`; numbered only) |
 
 `--itkaarhus-white` is true white for page backgrounds. Role aliases:
-`--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, and
+`--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`,
 `--itkaarhus-{info,success,warning,danger}` — each state with a `*-soft` surface
-tint for badges/alerts.
+tint for badges/alerts — and `--itkaarhus-guidance` (+ `-soft`).
 
 ## Type
 

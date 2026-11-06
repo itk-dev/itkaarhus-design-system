@@ -41,14 +41,15 @@ If a missing token is genuinely needed, add it to `assets/tokens.css` rather tha
 
 ## Color roles
 
-Two brand colours, four state colours, one neutral scale. Every colour ships a **50→900 scale** (e.g. `--itkaarhus-blue-{50..900}`); `500` is the base hue, lighter steps for surfaces/soft fills, darker steps for text/borders/hover.
+Two brand colours, four state colours, one guidance colour, one neutral scale. Every colour ships a **50→900 scale** (e.g. `--itkaarhus-blue-{50..900}`); `500` is the base hue, lighter steps for surfaces/soft fills, darker steps for text/borders/hover.
 
 - **`--itkaarhus-blue-*` (primary)** — primary actions, links, focus ring, default brand surface. Most UI chrome is blue. Use `-200` for accents on dark backgrounds.
 - **`--itkaarhus-coral-*` (secondary)** — warm complement to the blue. Highlights, editorial accents, secondary emphasis, used sparingly. **Not** an error colour.
 - **State:** **`--itkaarhus-info-*`** (cyan), **`--itkaarhus-success-*`** (green), **`--itkaarhus-warning-*`** (amber), **`--itkaarhus-danger-*`** (red). Reserve for meaning, never decoration. Danger stays sharp and rare; never a large fill.
+- **`--itkaarhus-purple-*` (guidance)** — help and instructions offered next to the content (a page's "how do I" text, onboarding hints). Not a state and not decoration; keep it out of charts and status. Role alias `--itkaarhus-guidance` (+ `-soft`).
 - **`--itkaarhus-gray-*`** (`50`→`900`, numbered only) — body copy, surfaces, borders, muted text. `--itkaarhus-white` is true white for page backgrounds.
 
-There are no decorative/supporting hues — the palette is deliberately just these. Role aliases: `--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, and `--itkaarhus-{info,success,warning,danger}`, each state with a `*-soft` surface tint for badges/alerts.
+There are no decorative/supporting hues — the palette is deliberately just these. Role aliases: `--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, `--itkaarhus-{info,success,warning,danger}`, each state with a `*-soft` surface tint for badges/alerts, and `--itkaarhus-guidance` (+ `-soft`).
 
 ## Typography
 
