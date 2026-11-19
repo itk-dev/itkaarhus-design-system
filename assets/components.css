@@ -23,7 +23,10 @@
 }
 
 /* -- Buttons ------------------------------------------------ */
+/* Also rendered as <a>: the label colour is restated on hover and the underline
+   removed, so the base `a` / `a:hover` rules in tokens.css never leak in. */
 .itkaarhus-btn {
+  text-decoration: none;
   display: inline-flex; align-items: center; gap: 8px;
   font-family: inherit; font-weight: 600; font-size: 15px;
   padding: 12px 20px; border-radius: var(--itkaarhus-radius-2); border: 1px solid transparent;
@@ -34,13 +37,13 @@
 .itkaarhus-btn:disabled { opacity: .5; cursor: not-allowed; }
 /* Primary — blue leads */
 .itkaarhus-btn--primary { background: var(--itkaarhus-primary); color: var(--itkaarhus-text-on-accent); }
-.itkaarhus-btn--primary:hover:not(:disabled), .itkaarhus-btn--primary.is-hover { background: var(--itkaarhus-primary-hover); }
+.itkaarhus-btn--primary:hover:not(:disabled), .itkaarhus-btn--primary.is-hover { background: var(--itkaarhus-primary-hover); color: var(--itkaarhus-text-on-accent); }
 /* Secondary — neutral outline. The hover border (gray-500) reads in both themes. */
 .itkaarhus-btn--secondary { background: var(--itkaarhus-bg-raised); color: var(--itkaarhus-text); border-color: var(--itkaarhus-border-strong); }
-.itkaarhus-btn--secondary:hover:not(:disabled), .itkaarhus-btn--secondary.is-hover { border-color: var(--itkaarhus-gray-500); background: var(--itkaarhus-bg-muted); }
+.itkaarhus-btn--secondary:hover:not(:disabled), .itkaarhus-btn--secondary.is-hover { border-color: var(--itkaarhus-gray-500); background: var(--itkaarhus-bg-muted); color: var(--itkaarhus-text); }
 /* Danger — destructive only, used rarely */
 .itkaarhus-btn--danger { background: var(--itkaarhus-danger); color: var(--itkaarhus-text-on-accent); }
-.itkaarhus-btn--danger:hover:not(:disabled), .itkaarhus-btn--danger.is-hover { background: var(--itkaarhus-danger-hover); }
+.itkaarhus-btn--danger:hover:not(:disabled), .itkaarhus-btn--danger.is-hover { background: var(--itkaarhus-danger-hover); color: var(--itkaarhus-text-on-accent); }
 .itkaarhus-btn--sm { padding: 8px 14px; font-size: 13px; }
 .itkaarhus-btn--lg { padding: 16px 28px; font-size: 17px; }
 

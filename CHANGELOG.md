@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `components.css` now reads every theme-dependent colour from the semantic tokens.
 
+### Fixed
+
+- Buttons rendered as links (`<a class="itkaarhus-btn …">`) keep their label colour on hover and are no longer underlined.
+
 ## [0.6.0] - 2026-11-06
 
 ### Added
