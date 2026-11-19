@@ -1,15 +1,25 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" data-theme="auto">
 <head>
 <meta charset="utf-8">
+<script>
+  (function () {
+    var root = document.documentElement;
+    function apply(t) { if (t === 'light' || t === 'dark' || t === 'auto') root.dataset.theme = t; }
+    try { apply(localStorage.getItem('itkaarhus-theme')); } catch (e) {}
+    // Follow the reference site's theme switch live (the examples run in its iframes).
+    window.addEventListener('storage', function (e) { if (e.key === 'itkaarhus-theme') apply(e.newValue || 'auto'); });
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sager — Mit Aarhus</title>
 <link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/components.css">
 <link rel="stylesheet" href="/itkaarhus-design-system/examples/embed/app.css">
 <style>
-  table.data input[type=checkbox] { accent-color: var(--itkaarhus-blue-500); width: 16px; height: 16px; margin: 0; display: block; }
+  table.data input[type=checkbox] { accent-color: var(--itkaarhus-primary); width: 16px; height: 16px; margin: 0; display: block; }
   table.data th.sel, table.data td.sel { width: 36px; padding-right: 0; }
   table.data td.sel, table.data th.sel { vertical-align: middle; }
 </style>
@@ -20,7 +30,7 @@
 
 <div class="app">
   <aside class="app-rail" aria-label="Navigation">
-    <a class="brand" href="app-dashboard.html"><img src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><b>Mit Aarhus</b></a>
+    <a class="brand" href="app-dashboard.html"><img class="itkaarhus-light-only" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><img class="itkaarhus-dark-only" src="/itkaarhus-design-system/assets/logos/aak-emblem-hvid.svg" alt=""><b>Mit Aarhus</b></a>
     <nav>
       <span class="nav-label">Arbejde</span>
       <a class="item" href="app-dashboard.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overblik</a>

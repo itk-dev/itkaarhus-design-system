@@ -13,5 +13,6 @@
 /package.json    export-ignore
 /package-lock.json export-ignore
 /public          export-ignore
+/scripts         export-ignore
 /src             export-ignore
 /tsconfig.json   export-ignore

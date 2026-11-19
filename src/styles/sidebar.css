@@ -9,8 +9,8 @@
 
 body {
   margin: 0;
-  background: var(--itkaarhus-white);
-  color: var(--itkaarhus-gray-900);
+  background: var(--itkaarhus-bg);
+  color: var(--itkaarhus-text);
   font-family: var(--itkaarhus-font-sans);
 }
 
@@ -20,8 +20,8 @@ body {
   top: 8px;
   left: 8px;
   z-index: 200;
-  background: var(--itkaarhus-blue-500);
-  color: #fff;
+  background: var(--itkaarhus-primary);
+  color: var(--itkaarhus-text-on-accent);
   padding: 8px 14px;
   border-radius: var(--itkaarhus-radius-1);
   font-size: 14px;
@@ -45,8 +45,8 @@ body {
   flex-direction: column;
   gap: 8px;
   padding: 28px 20px 24px;
-  background: var(--itkaarhus-white);
-  border-right: 1px solid var(--itkaarhus-gray-200);
+  background: var(--itkaarhus-bg);
+  border-right: 1px solid var(--itkaarhus-border);
   overflow-y: auto;
   z-index: 100;
 }
@@ -55,7 +55,7 @@ body {
 .ds-brand {
   display: block;
   text-decoration: none;
-  color: var(--itkaarhus-gray-900);
+  color: var(--itkaarhus-text);
   margin-bottom: 12px;
 }
 .ds-brand__product {
@@ -81,14 +81,15 @@ body {
   flex-direction: column;
   gap: 2px;
 }
-.ds-nav__label {
+.ds-nav__label,
+.ds-theme__legend {
   margin: 0 0 8px;
   padding: 0 10px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--itkaarhus-gray-500);
+  color: var(--itkaarhus-text-subtle);
 }
 .ds-nav a {
   display: block;
@@ -97,17 +98,17 @@ body {
   font-family: var(--itkaarhus-font-display);
   font-size: 14px;
   font-weight: 500;
-  color: var(--itkaarhus-gray-700);
+  color: var(--itkaarhus-text-muted);
   text-decoration: none;
   transition: background .15s, color .15s;
 }
 .ds-nav a:hover {
-  background: var(--itkaarhus-gray-50);
-  color: var(--itkaarhus-gray-900);
+  background: var(--itkaarhus-bg-muted);
+  color: var(--itkaarhus-text);
 }
 .ds-nav a[aria-current='page'] {
-  background: var(--itkaarhus-blue-50, var(--itkaarhus-gray-100));
-  color: var(--itkaarhus-blue-500);
+  background: var(--itkaarhus-primary-soft);
+  color: var(--itkaarhus-primary);
   font-weight: 600;
 }
 .ds-nav a:focus-visible {
@@ -120,18 +121,78 @@ body {
   list-style: none;
   margin: 2px 0 6px;
   padding: 0;
-  border-left: 1px solid var(--itkaarhus-gray-200);
+  border-left: 1px solid var(--itkaarhus-border);
   margin-left: 14px;
 }
 .ds-nav__sub a {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--itkaarhus-gray-500);
+  color: var(--itkaarhus-text-subtle);
 }
 .ds-nav__sub a:hover {
-  color: var(--itkaarhus-gray-900);
+  color: var(--itkaarhus-text);
   background: transparent;
+}
+
+/* ---- Theme switch — Light / Dark / System segmented control --- */
+.ds-theme {
+  margin: auto 0 0;
+  padding: 24px 0 0;
+  border: 0;
+  min-width: 0;
+}
+.ds-theme__legend {
+  float: left; /* lets the legend sit in flow above the options like the nav labels */
+  width: 100%;
+}
+.ds-theme__options {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--itkaarhus-border);
+  border-radius: var(--itkaarhus-radius-2);
+  background: var(--itkaarhus-bg-muted);
+}
+.ds-theme__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--itkaarhus-text-muted);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.ds-theme__option:hover { color: var(--itkaarhus-text); }
+.ds-theme__option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.ds-theme__option:has(input:checked) {
+  background: var(--itkaarhus-bg-raised);
+  color: var(--itkaarhus-text);
+  box-shadow: var(--itkaarhus-shadow-1), 0 0 0 1px var(--itkaarhus-border);
+}
+.ds-theme__option:has(input:focus-visible) {
+  box-shadow: var(--itkaarhus-focus);
+}
+.ds-theme__icon {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ---- Main content ------------------------------------------- */
@@ -157,7 +218,7 @@ body {
     gap: 8px 20px;
     padding: 12px 16px;
     border-right: 0;
-    border-bottom: 1px solid var(--itkaarhus-gray-200);
+    border-bottom: 1px solid var(--itkaarhus-border);
     overflow-x: auto;
   }
   .ds-brand { margin-bottom: 0; }
@@ -174,6 +235,16 @@ body {
   }
   .ds-nav__label { display: none; }
   .ds-nav__group ul { flex-direction: row; gap: 4px; }
+  .ds-theme { margin: 0; padding: 0; }
+  /* Keep the legend for assistive tech; the icons + labels carry it visually. */
+  .ds-theme__legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .ds-main { margin-left: 0; }
   .ds-main--bleed { height: auto; min-height: 70vh; }
 }

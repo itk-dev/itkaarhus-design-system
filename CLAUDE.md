@@ -30,14 +30,15 @@ When asked to "use this design system", "apply the styling", or similar:
 
 | Don't | Do |
 | --- | --- |
-| `color: #007BA6;` | `color: var(--itkaarhus-blue-500);` or `var(--itkaarhus-primary);` |
+| `color: #007BA6;` | `color: var(--itkaarhus-primary);` (theme-aware) — a raw `var(--itkaarhus-blue-500)` only where the colour must stay fixed in both themes |
 | `color: #FF5F31;` | `color: var(--itkaarhus-secondary);` or `var(--itkaarhus-coral-500);` |
 | `padding: 16px;` | `padding: var(--itkaarhus-space-4);` |
 | `border-radius: 6px;` | `border-radius: var(--itkaarhus-radius-2);` |
 | `font-family: "Newsreader", serif;` | `font-family: var(--itkaarhus-font-serif);` |
 | `box-shadow: 0 4px 10px ...;` | `box-shadow: var(--itkaarhus-shadow-2);` |
+| `background: #fff; color: #111318;` | `background: var(--itkaarhus-bg-raised); color: var(--itkaarhus-text);` |
 
-If a missing token is genuinely needed, add it to `assets/tokens.css` rather than inlining the value.
+If a missing token is genuinely needed, add it to `assets/tokens.css` rather than inlining the value. Any colour that depends on the theme (surfaces, text, borders, accents, soft fills) must come from a **semantic token** — see "Light & dark themes".
 
 ## Color roles
 
@@ -49,7 +50,19 @@ Two brand colours, four state colours, one guidance colour, one neutral scale. E
 - **`--itkaarhus-purple-*` (guidance)** — help and instructions offered next to the content (a page's "how do I" text, onboarding hints). Not a state and not decoration; keep it out of charts and status. Role alias `--itkaarhus-guidance` (+ `-soft`).
 - **`--itkaarhus-gray-*`** (`50`→`900`, numbered only) — body copy, surfaces, borders, muted text. `--itkaarhus-white` is true white for page backgrounds.
 
-There are no decorative/supporting hues — the palette is deliberately just these. Role aliases: `--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`, `--itkaarhus-{info,success,warning,danger}`, each state with a `*-soft` surface tint for badges/alerts, and `--itkaarhus-guidance` (+ `-soft`).
+There are no decorative/supporting hues — the palette is deliberately just these. Role aliases: `--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary` (+ `-hover`), `--itkaarhus-{info,success,warning,danger}` (+ `--itkaarhus-danger-hover`), `--itkaarhus-guidance`; each role has a `*-soft` surface with a `*-soft-text` partner for badges/tags, and the states have `*-text` for coloured text on page surfaces.
+
+## Light & dark themes
+
+Dark is **opt-in**: no `data-theme` on `<html>` (or `data-theme="light"`) is light and unchanged; `data-theme="dark"` is dark; `data-theme="auto"` follows `prefers-color-scheme`. A stored choice lives in `localStorage` under `itkaarhus-theme` and is applied by a tiny inline `<head>` script before first paint (snippet in the README). The light and dark values sit in two blocks at the end of `assets/tokens.css`; the dark block is duplicated for `auto` under the media query, and `npm run check:tokens` (part of `build`) fails if the copies differ — edit both.
+
+- **Semantic tokens** (use these for anything theme-dependent): surfaces `--itkaarhus-bg`, `-bg-muted`, `-bg-raised`, `-bg-inverse`; text `--itkaarhus-text`, `-text-muted`, `-text-subtle`, `-text-label`, `-text-disabled`, `-text-on-accent`, `-text-on-inverse`; borders `--itkaarhus-border-subtle`, `-border`, `-border-strong`; the role aliases above with their `-soft` / `-soft-text` / `-text` partners (plus `--itkaarhus-neutral-soft` / `-soft-text`, `--itkaarhus-primary-soft` / `-soft-text`, `--itkaarhus-secondary-soft` / `-soft-text`); `--itkaarhus-heatmap-{0..5}` (+ `-text`); `--itkaarhus-shadow-{1,2,3}`; `--itkaarhus-focus`. The Colors page (`/colors#themes`) shows every token in both themes, generated from `tokens.css`.
+- **Raw scale steps** stay for colours that must not change with the theme: swatches that depict a palette colour, flat brand media placeholders, boxes that show a logo on a specific ground.
+- **Accent fills carry `--itkaarhus-text-on-accent`**, never a hardcoded white — in dark the accents are light (300/400 steps) and take dark text.
+- **`--itkaarhus-bg-inverse` stays dark** in both themes (footer, CTA band), so white logos and white text on it never swap.
+- **Logos swap, never recolour**: on a surface that turns dark, render the dark and white file with `.itkaarhus-light-only` / `.itkaarhus-dark-only` (in `components.css`).
+- **Charts**: resolve colours with `color()` from `src/scripts/chart-theme.ts` and rebuild on `onThemeChange()`.
+- Every new reference page or example must work in both themes; check with the sidebar theme switch.
 
 ## Typography
 
@@ -81,8 +94,8 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 ## Graphs & diagrams
 
 - **Charts use Chart.js** (the team's established tool — see the legacy `itk-workspace`). Bar, line/area, donut, sparkline.
-- **Theme from tokens, never hardcode chart colours.** Use `src/scripts/chart-theme.ts` (`applyChartTheme`, `chartPalette`, `token`) — it reads `--itkaarhus-*` off `:root` at runtime. The categorical series order is blue → coral → info → success → warning → gray; semantic charts use the state colours.
-- **No gradients in charts** — flat fills only (the system-wide no-gradient rule applies here too). For intensity (heatmaps), use steps of the blue scale (`blue-100` → `blue-500`).
+- **Theme from tokens, never hardcode chart colours.** Use `src/scripts/chart-theme.ts` (`applyChartTheme`, `chartPalette`, `stateColors`, `color`, `token`, `onThemeChange`) — `color()` resolves any token, semantic ones included, to the current theme's value; rebuild charts in `onThemeChange()`. The categorical series order is blue → coral → info → success → warning → gray; semantic charts use the state colours.
+- **No gradients in charts** — flat fills only (the system-wide no-gradient rule applies here too). For intensity (heatmaps), use the `--itkaarhus-heatmap-{0..5}` ramp (blue scale; reversed in dark).
 - **Heatmaps and meters are hand-rolled CSS**, not Chart.js. **Every `<canvas>` needs an `aria-label`** summarising the data (canvas is opaque to assistive tech).
 - Astro pages: `import 'chart.js/auto'` (bundled). Standalone `public/examples/` pages load `examples/vendor/chart.umd.min.js` (copied from the dep by `npm run sync:vendor`; never edit or commit it — it's git-ignored).
 
@@ -96,7 +109,8 @@ A small uppercase label above a heading. There are two treatments, and the diffe
 ## Logo
 
 - **Brand mark — Aarhus Kommune.** `public/assets/logos/AAK_02_venstrejusteret_sh.svg` (dark) on light; `AAK_02_venstrejusteret_hvid.svg` (white) on dark; `AAK_02_hoejrejusteret_dark.svg` (right-aligned alt). Use small, as a footer endorsement. Maintain clear space; do not recolour or recreate the mark — always use the supplied SVGs.
-- **Header emblem.** `assets/logos/aak-emblem.svg` (dark) / `aak-emblem-hvid.svg` (white) — the crest only, derived from the supplied lockups, intrinsic 32px tall — paired with the product name. The favicon (`public/assets/logos/aak-favicon.ico`) stays the `.ico`.
+- **Header emblem.** `assets/logos/aak-emblem.svg` (dark) / `aak-emblem-hvid.svg` (white) — the crest only, derived from the supplied lockups, intrinsic 32px tall — paired with the product name. The favicon (`public/assets/logos/aak-favicon.ico`) stays the `.ico`; where it is shown as an image it is a dark crest, so pair it with `aak-emblem-hvid.svg` via `.itkaarhus-dark-only` for dark surfaces.
+- **Dark theme.** Dark surfaces get the `-hvid` files (`aak-emblem-hvid.svg`, `AAK_02_venstrejusteret_hvid.svg`); `AAK_02_hoejrejusteret_dark.svg` has no white variant — light surfaces only. See the Logo page's "Logos in the dark theme" section.
 - The old ITK marks have been **removed** from the design system entirely — don't reintroduce them.
 - See the Logo page (`src/pages/logo.astro`, route `/logo`).
 

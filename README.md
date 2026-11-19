@@ -31,7 +31,7 @@ Add it as a VCS repository and require it:
 
 The payload installs to `vendor/itk-dev/itkaarhus-design-system/assets/`:
 
-- `tokens.css` — every `--itkaarhus-*` custom property (colors, type, spacing, radii, shadows, focus). Load first.
+- `tokens.css` — every `--itkaarhus-*` custom property (colors, type, spacing, radii, shadows, focus), plus the semantic light/dark theme tokens. Load first.
 - `components.css` — the namespaced `.itkaarhus-*` component classes (buttons, links, tags, inputs, cards, callouts, stats, KPI cards, tables, timeline, breadcrumb, heatmap, meters). Requires `tokens.css`.
 - `lucide-sprite.svg` — the Lucide icon sprite.
 - `logos/aak-emblem.svg` / `logos/aak-emblem-hvid.svg` — the Aarhus Kommune emblem (crest only, no wordmark; intrinsic 32px tall) in dark and white, for the product header / sidebar mark.
@@ -43,12 +43,13 @@ also published on GitHub Pages at
 
 ## Files
 
-- `assets/tokens.css` — the single source of truth for tokens: CSS custom properties (colors, type scale, spacing, radii, shadows, focus).
-- `assets/components.css` — all shared `.itkaarhus-*` component rules, extracted from the reference pages.
+- `assets/tokens.css` — the single source of truth for tokens: CSS custom properties (colors, type scale, spacing, radii, shadows, focus) and the light/dark semantic blocks.
+- `assets/components.css` — all shared `.itkaarhus-*` component rules, extracted from the reference pages, plus the `.itkaarhus-light-only` / `.itkaarhus-dark-only` visibility utilities.
 - `assets/lucide-sprite.svg` — the Lucide icon set used by the system.
 - `assets/logos/` — the emblem-only Aarhus Kommune marks (`aak-emblem.svg` dark, `aak-emblem-hvid.svg` white), derived from the supplied `AAK_02_*` lockups.
 - `npm run sync:assets` copies the payload files above into `public/` (run automatically on `dev`/`build`) so the site serves them at stable URLs; the copies are git-ignored — edit only `assets/`.
-- `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** and the `<head>` (fonts, favicon); imports `assets/tokens.css`.
+- `scripts/check-tokens.mjs` — `npm run check:tokens` (run on `build`) fails if the two copies of the dark token block in `tokens.css` drift apart.
+- `src/layouts/Layout.astro` — shared page shell: the persistent left **sidebar** (with the Light / Dark / System theme switch) and the `<head>` (fonts, favicon, the no-flash theme script); imports `assets/tokens.css` and `assets/components.css`.
 - `src/styles/sidebar.css` — sidebar styling (replaces the old top-bar `ds-nav.css`).
 - `src/pages/index.astro` — overview page with previews of every section.
 - `src/pages/colors.astro` — palette, color scales, and usage rules.
@@ -56,7 +57,7 @@ also published on GitHub Pages at
 - `src/pages/spacing.astro` — 4px-base spacing, radii, elevation.
 - `src/pages/logo.astro` — Aarhus Kommune endorsement mark, product header lockup, clear space, misuse.
 - `src/pages/components.astro` — buttons, tags & status, inputs, cards, callouts, stats, editorial type, KPI cards, graphs & diagrams, expandable table, timeline, nav, breadcrumb; the component rules themselves live in `assets/components.css`.
-- `src/scripts/chart-theme.ts` — shared Chart.js theme: reads the `--itkaarhus-*` tokens at runtime and exposes the categorical palette + defaults (flat fills, no gradients).
+- `src/scripts/chart-theme.ts` — shared Chart.js theme: resolves the `--itkaarhus-*` tokens for the current theme at runtime, exposes the categorical palette + defaults (flat fills, no gradients) and `onThemeChange()` to rebuild charts when the theme flips.
 - `src/pages/examples/*.astro` — thin wrappers that iframe each applied example, keeping the sidebar in place.
 - `public/examples/` — the standalone example documents (a fictional "Mit Aarhus" municipal product): `website-landing.html`, `website-content.html`, `website-about.html`, `app-dashboard.html`, `app-data-tables.html`, `app-statistics.html`, plus shared `site.css` (public site chrome) and `app.css` (logged-in app shell).
 - `public/assets/logos/` — the Aarhus Kommune marks (`AAK_02_*.svg`) + favicon (`aak-favicon.ico`).
@@ -78,10 +79,91 @@ scale. Every colour ships a **50→900 scale** (`-50` lightest → `-900` darkes
 | `--itkaarhus-purple-*` | `#7356B8` | **Guidance** — help and instructions next to the content; not a state and not decoration |
 | `--itkaarhus-gray-*` | — | Neutral — text, surfaces, borders (`50`→`900`; numbered only) |
 
-`--itkaarhus-white` is true white for page backgrounds. Role aliases:
-`--itkaarhus-primary` (+ `-hover`), `--itkaarhus-secondary`,
-`--itkaarhus-{info,success,warning,danger}` — each state with a `*-soft` surface
-tint for badges/alerts — and `--itkaarhus-guidance` (+ `-soft`).
+`--itkaarhus-white` is true white for page backgrounds. The raw scales are the
+same in both themes; everything theme-dependent goes through the semantic tokens
+below.
+
+## Light & dark themes
+
+Dark is **opt-in**. A product that does nothing keeps today's light look.
+
+| `<html>` attribute | Result |
+|---|---|
+| none | light (default, unchanged) |
+| `data-theme="light"` | light, explicitly |
+| `data-theme="dark"` | dark |
+| `data-theme="auto"` | follows the OS `prefers-color-scheme` |
+
+To offer a choice, put `data-theme="auto"` on `<html>` and apply a stored
+preference before first paint with this inline script, first thing in `<head>`
+(no flash of the wrong theme; without JavaScript the page still follows the OS):
+
+```html
+<html lang="da" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('itkaarhus-theme');
+        if (t === 'light' || t === 'dark' || t === 'auto') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+```
+
+A theme switch then sets `document.documentElement.dataset.theme` and stores the
+same value under `itkaarhus-theme`. The `sun`, `moon` and `monitor` icons in
+`lucide-sprite.svg` are there for that switch. `data-theme` also works on any
+element, to scope a light or dark island (e.g. a side-by-side preview); such an
+element must set its own `background` / `color` from the tokens.
+
+### Semantic tokens
+
+Use these for anything that changes between themes — never a raw scale step or
+a hardcoded hex. Light values are today's colours. The
+[Colors page](https://itk-dev.github.io/itkaarhus-design-system/colors#themes)
+shows both themes side by side, generated from `tokens.css`.
+
+| Group | Tokens | Light → dark |
+|---|---|---|
+| Surfaces | `--itkaarhus-bg` · `-bg-muted` · `-bg-raised` · `-bg-inverse` | white · gray-50 · white · gray-900 → gray-900 · `#171a20` · `#1c2028` · `#08090c` |
+| Text | `--itkaarhus-text` · `-text-muted` · `-text-subtle` · `-text-label` · `-text-disabled` | gray-900 · 700 · 500 · 800 · 400 → gray-100 · 300 · 400 · 200 · 600 |
+| Text on fills | `--itkaarhus-text-on-accent` · `-text-on-inverse` | white · white → gray-900 · gray-100 |
+| Borders | `--itkaarhus-border-subtle` · `-border` · `-border-strong` | gray-100 · 200 · 300 → `#22262e` · gray-800 · gray-700 |
+| Roles | `--itkaarhus-primary` (+ `-hover`) · `-secondary` (+ `-hover`) · `-info` · `-success` · `-warning` · `-danger` (+ `-hover`) · `-guidance` | the `500` steps (hovers 600/700) → `300`/`400` steps (hovers 200/300) |
+| State text | `--itkaarhus-{info,success,warning,danger}-text` | info-800 · success-700 · warning-900 · danger-700 → the dark role steps |
+| Soft fills | `--itkaarhus-{primary,secondary,neutral,info,success,warning,danger,guidance}-soft` + `-soft-text` | `100` (primary `50`) with `700`–`900` text → `900` with `200` text (neutral gray-800 / gray-200) |
+| Heatmap | `--itkaarhus-heatmap-{0..5}` + `-text` | blue-100 → 500 ramp → blue-900 → 300 ramp |
+| Elevation, focus | `--itkaarhus-shadow-{1,2,3}` · `--itkaarhus-focus` | stronger black shadows and a blue-300 ring in dark |
+
+### Dark rules
+
+- **Accents move lighter.** In dark the role tokens point at steps that keep
+  ≥ 4.5:1 on every dark surface, so accent fills (primary/danger buttons, checked
+  toggles, callout icons) carry **dark** text: always pair them with
+  `--itkaarhus-text-on-accent`, never a hardcoded white.
+- **Surfaces rise in lightness:** page `bg` → `bg-muted` → `bg-raised`. The four
+  hex values above are dark-only surface steps between gray-800 and gray-900.
+- **The inverse band stays dark** in both themes (footer, CTA), so it keeps the
+  white logos and white text.
+- **Logos are swapped, not recoloured.** On a surface that turns dark, show the
+  white file in dark with the visibility utilities:
+  ```html
+  <img class="itkaarhus-light-only" src="…/logos/aak-emblem.svg" alt="Aarhus Kommune">
+  <img class="itkaarhus-dark-only" src="…/logos/aak-emblem-hvid.svg" alt="Aarhus Kommune">
+  ```
+  The white emblem-only mark `aak-emblem-hvid.svg` already ships in
+  `assets/logos/`; the white footer endorsement is
+  `AAK_02_venstrejusteret_hvid.svg` (site-only, under `public/assets/logos/`).
+  `aak-favicon.ico` is a dark crest; `AAK_02_hoejrejusteret_dark.svg` has no
+  white variant — keep it to light surfaces.
+- **Flat fills only**, no gradients or glows, in dark too.
+- The theme tokens are plain custom-property overrides (no `light-dark()`), so
+  browsers that predate the newer colour functions still render the light theme
+  exactly as before.
+- The applied examples in `public/examples/` support both themes and follow the
+  reference site's theme switch.
 
 ## Type
 
@@ -109,10 +191,13 @@ tint for badges/alerts — and `--itkaarhus-guidance` (+ `-soft`).
 
 - **Charts use [Chart.js](https://www.chartjs.org/)** (bar, line/area, donut,
   sparkline), themed from the tokens at runtime via `src/scripts/chart-theme.ts`
-  (it reads `--itkaarhus-*` off `:root`). **Flat fills only — no gradients** —
-  drawn from the categorical palette: blue, coral, info, success, warning, gray.
+  (it resolves the `--itkaarhus-*` tokens for the current theme, and
+  `onThemeChange()` lets a page rebuild its charts when the theme flips).
+  **Flat fills only — no gradients** — drawn from the categorical palette:
+  blue, coral, info, success, warning, gray (role tokens, so dark gets the
+  lighter steps).
 - **Heatmaps and progress/meter bars are hand-rolled CSS** (no library) —
-  intensity uses the blue scale (`blue-100` → `blue-500`).
+  intensity uses the `--itkaarhus-heatmap-{0..5}` ramp from the blue scale.
 - Astro pages bundle Chart.js via `import 'chart.js/auto'`. The standalone
   `public/examples/` pages load a vendored copy at `examples/vendor/chart.umd.min.js`,
   copied from the npm dependency by `npm run sync:vendor` (run automatically on
