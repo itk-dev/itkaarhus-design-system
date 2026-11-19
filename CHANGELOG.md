@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-19
+
 ### Added
 
 - Opt-in dark theme: `data-theme="dark"` (or `"auto"` to follow the system setting) on `<html>` switches every token-based surface, text, border and accent; without the attribute products look exactly as before.
