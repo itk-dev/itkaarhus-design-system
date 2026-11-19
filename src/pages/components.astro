@@ -47,7 +47,7 @@ const base = import.meta.env.BASE_URL;
     </div>
 
     <h2 class="sh" id="tags">Tags &amp; status</h2>
-    <p class="sub">One badge component for both category tags and status. Each role is a soft <code>-100</code> surface with <code>-700</code> text — an AA-contrast pairing (≥ 4.5:1) on white. The leading dot is optional via <code>--dot</code>; drop it for neutral metadata.</p>
+    <p class="sub">One badge component for both category tags and status. Each role is a soft surface with its <code>-soft-text</code> partner (<code>-100</code>/<code>-700</code> in light, <code>-900</code>/<code>-200</code> in dark) — an AA-contrast pairing (≥ 4.5:1) in both themes. The leading dot is optional via <code>--dot</code>; drop it for neutral metadata.</p>
     <div class="demo stack" style="gap:24px">
       <div>
         <div class="demo-label">Semantic roles</div>
@@ -181,7 +181,8 @@ const base = import.meta.env.BASE_URL;
     <h2 class="sh" id="navigation">Navigation &amp; breadcrumb</h2>
     <div class="nav-demo">
       <a class="brand" href="#">
-        <img src={`${base}assets/logos/aak-favicon.ico`} alt="" width="24" height="24" />
+        <img class="itkaarhus-light-only" src={`${base}assets/logos/aak-favicon.ico`} alt="" width="24" height="24" />
+        <img class="itkaarhus-dark-only" src={`${base}assets/logos/aak-emblem-hvid.svg`} alt="" width="24" height="24" />
         <span class="product">[Product name]</span>
       </a>
       <ul>
@@ -191,7 +192,7 @@ const base = import.meta.env.BASE_URL;
         <li><a href="#">Kontakt</a></li>
       </ul>
       <div class="spacer"></div>
-      <a href="#" style="font-size:13px; color:var(--itkaarhus-gray-500); text-decoration:none">English ↗</a>
+      <a href="#" style="font-size:13px; color:var(--itkaarhus-text-subtle); text-decoration:none">English ↗</a>
     </div>
     <div class="itkaarhus-breadcrumb" style="margin-top:16px">
       <a href="#">Forside</a><span class="sep">/</span>
@@ -247,8 +248,8 @@ const base = import.meta.env.BASE_URL;
 
     <div class="demo" style="margin-top:20px">
       <div class="demo-label">Heatmap — temaer × afdelinger</div>
-      <p class="sub" style="margin:-4px 0 16px">CSS-grid, no library. Cell intensity uses the blue scale (<code>blue-100</code> → <code>blue-700</code>); empty is a neutral tint.</p>
-      <div class="itkaarhus-heatmap" role="img" aria-label="Varmekort over aktivitet pr. tema og afdeling; mørkere blå betyder flere sager.">
+      <p class="sub" style="margin:-4px 0 16px">CSS-grid, no library. Cell intensity uses the <code>--itkaarhus-heatmap-*</code> ramp from the blue scale (lighter → darker in light, darker → lighter in dark); empty is a neutral tint.</p>
+      <div class="itkaarhus-heatmap" role="img" aria-label="Varmekort over aktivitet pr. tema og afdeling; kraftigere blå betyder flere sager.">
         <span class="itkaarhus-heatmap__corner"></span>
         <span class="itkaarhus-heatmap__col">Byg</span>
         <span class="itkaarhus-heatmap__col">Miljø</span>
@@ -324,117 +325,131 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   import Chart from 'chart.js/auto';
-  import { applyChartTheme, chartPalette, stateColors, token } from '../scripts/chart-theme';
+  import { applyChartTheme, chartPalette, color, onThemeChange, stateColors } from '../scripts/chart-theme';
 
-  applyChartTheme(Chart);
-  const palette = chartPalette();
-  const state = stateColors();
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun'];
 
-  const bar = document.getElementById('cBar') as HTMLCanvasElement | null;
-  if (bar) {
-    new Chart(bar, {
-      type: 'bar',
-      data: {
-        labels: months,
-        datasets: [{ label: 'Nye sager', data: [42, 38, 51, 47, 61, 55], backgroundColor: palette[0], borderRadius: 4, borderSkipped: false }],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: token('gray-100') } } },
-      },
-    });
+  /** Build every chart on the page with the current theme's colours. */
+  function draw(): Chart[] {
+    applyChartTheme(Chart);
+    const palette = chartPalette();
+    const state = stateColors();
+    const charts: Chart[] = [];
+
+    const bar = document.getElementById('cBar') as HTMLCanvasElement | null;
+    if (bar) {
+      charts.push(new Chart(bar, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [{ label: 'Nye sager', data: [42, 38, 51, 47, 61, 55], backgroundColor: palette[0], borderRadius: 4, borderSkipped: false }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: color('border-subtle') } } },
+        },
+      }));
+    }
+
+    const line = document.getElementById('cLine') as HTMLCanvasElement | null;
+    if (line) {
+      charts.push(new Chart(line, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Svartid (dage)', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8],
+            borderColor: palette[0], backgroundColor: color('primary-soft'),
+            fill: true, tension: 0.3, pointBackgroundColor: palette[0], pointRadius: 3, borderWidth: 2,
+          }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: color('border-subtle') } } },
+        },
+      }));
+    }
+
+    const donut = document.getElementById('cDonut') as HTMLCanvasElement | null;
+    if (donut) {
+      charts.push(new Chart(donut, {
+        type: 'doughnut',
+        data: {
+          labels: ['Godkendt', 'I behandling', 'Afventer', 'Afvist'],
+          datasets: [{
+            data: [128, 42, 18, 9],
+            backgroundColor: [state.success, state.info, state.warning, state.danger],
+            // Segment gaps take the surface colour the chart sits on.
+            borderColor: color('bg-raised'), borderWidth: 3, hoverOffset: 8,
+          }],
+        },
+        options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
+      }));
+    }
+
+    const spark = document.getElementById('cSpark') as HTMLCanvasElement | null;
+    if (spark) {
+      charts.push(new Chart(spark, {
+        type: 'line',
+        data: {
+          labels: Array.from({ length: 30 }, (_, i) => i + 1),
+          datasets: [{
+            data: [32, 35, 31, 38, 40, 37, 42, 39, 45, 44, 41, 48, 46, 50, 47, 52, 49, 55, 53, 58, 54, 60, 57, 62, 59, 64, 61, 66, 63, 68],
+            borderColor: palette[0], borderWidth: 2, pointRadius: 0, fill: false, tension: 0.4,
+          }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: { x: { display: false }, y: { display: false } },
+          elements: { line: { borderCapStyle: 'round' } },
+        },
+      }));
+    }
+
+    return charts;
   }
 
-  const line = document.getElementById('cLine') as HTMLCanvasElement | null;
-  if (line) {
-    new Chart(line, {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [{
-          label: 'Svartid (dage)', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8],
-          borderColor: palette[0], backgroundColor: token('blue-50'),
-          fill: true, tension: 0.3, pointBackgroundColor: palette[0], pointRadius: 3, borderWidth: 2,
-        }],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: token('gray-100') } } },
-      },
-    });
-  }
-
-  const donut = document.getElementById('cDonut') as HTMLCanvasElement | null;
-  if (donut) {
-    new Chart(donut, {
-      type: 'doughnut',
-      data: {
-        labels: ['Godkendt', 'I behandling', 'Afventer', 'Afvist'],
-        datasets: [{
-          data: [128, 42, 18, 9],
-          backgroundColor: [state.success, state.info, state.warning, state.danger],
-          borderColor: '#fff', borderWidth: 3, hoverOffset: 8,
-        }],
-      },
-      options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
-    });
-  }
-
-  const spark = document.getElementById('cSpark') as HTMLCanvasElement | null;
-  if (spark) {
-    new Chart(spark, {
-      type: 'line',
-      data: {
-        labels: Array.from({ length: 30 }, (_, i) => i + 1),
-        datasets: [{
-          data: [32, 35, 31, 38, 40, 37, 42, 39, 45, 44, 41, 48, 46, 50, 47, 52, 49, 55, 53, 58, 54, 60, 57, 62, 59, 64, 61, 66, 63, 68],
-          borderColor: token('blue-500'), borderWidth: 2, pointRadius: 0, fill: false, tension: 0.4,
-        }],
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: { x: { display: false }, y: { display: false } },
-        elements: { line: { borderCapStyle: 'round' } },
-      },
-    });
-  }
+  let charts = draw();
+  onThemeChange(() => {
+    charts.forEach((chart) => chart.destroy());
+    charts = draw();
+  });
 </script>
 
 <style>
   body { padding: 48px; font-family: var(--itkaarhus-font-sans); }
   .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-text-subtle); font-weight: 600; }
   h1.title { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 640px; margin: 0 0 40px; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-text-muted); max-width: 640px; margin: 0 0 40px; }
   h2.sh { font-size: 22px; margin: 48px 0 16px; font-weight: 600; letter-spacing: -0.01em; scroll-margin-top: 24px; }
-  .sub { font-size: 13px; color: var(--itkaarhus-gray-500); margin: -8px 0 20px; max-width: 640px; }
+  .sub { font-size: 13px; color: var(--itkaarhus-text-subtle); margin: -8px 0 20px; max-width: 640px; }
 
-  .demo { border: 1px solid var(--itkaarhus-gray-200); border-radius: 12px; padding: 32px; background: #fff; }
+  .demo { border: 1px solid var(--itkaarhus-border); border-radius: 12px; padding: 32px; background: var(--itkaarhus-bg-raised); }
   .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
   .stack { display: flex; flex-direction: column; gap: 12px; }
-  .demo-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--itkaarhus-gray-500); margin-bottom: 12px; }
+  .demo-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--itkaarhus-text-subtle); margin-bottom: 12px; }
   .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
   /* -- Nav (demo) --------------------------------------------- */
-  .nav-demo { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 16px 24px; display: flex; align-items: center; gap: 32px; }
-  .nav-demo .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--itkaarhus-gray-900); }
+  .nav-demo { background: var(--itkaarhus-bg-raised); border: 1px solid var(--itkaarhus-border); border-radius: 10px; padding: 16px 24px; display: flex; align-items: center; gap: 32px; }
+  .nav-demo .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--itkaarhus-text); }
   .nav-demo .brand img { width: 24px; height: 24px; border-radius: var(--itkaarhus-radius-1); object-fit: contain; }
   .nav-demo .brand .product { font-family: var(--itkaarhus-font-display); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .nav-demo ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; }
-  .nav-demo a { color: var(--itkaarhus-gray-900); text-decoration: none; font-weight: 500; font-size: 15px; }
-  .nav-demo a.active { color: var(--itkaarhus-blue-500); border-bottom: 2px solid var(--itkaarhus-blue-500); padding-bottom: 2px; }
+  .nav-demo a { color: var(--itkaarhus-text); text-decoration: none; font-weight: 500; font-size: 15px; }
+  .nav-demo a.active { color: var(--itkaarhus-primary); border-bottom: 2px solid var(--itkaarhus-primary); padding-bottom: 2px; }
   .nav-demo .spacer { flex: 1; }
 
   /* -- Editorial type (voice demo, see /typography) ------------ */
-  .ed-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color: var(--itkaarhus-blue-500); }
+  .ed-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color: var(--itkaarhus-primary); }
   .ed-eyebrow::before { content:""; width:24px; height:1px; background: currentColor; }
-  .ed-title { font-family: var(--itkaarhus-font-serif); font-weight:400; font-size:40px; line-height:1.05; letter-spacing:-0.02em; color: var(--itkaarhus-gray-900); margin:12px 0; max-width: 18ch; }
-  .ed-title em { font-style:italic; color: var(--itkaarhus-coral-500); }
-  .ed-lede { font-family: var(--itkaarhus-font-sans); font-size:18px; line-height:1.6; color: var(--itkaarhus-gray-700); max-width: 52ch; margin:0; }
+  .ed-title { font-family: var(--itkaarhus-font-serif); font-weight:400; font-size:40px; line-height:1.05; letter-spacing:-0.02em; color: var(--itkaarhus-text); margin:12px 0; max-width: 18ch; }
+  .ed-title em { font-style:italic; color: var(--itkaarhus-secondary); }
+  .ed-lede { font-family: var(--itkaarhus-font-sans); font-size:18px; line-height:1.6; color: var(--itkaarhus-text-muted); max-width: 52ch; margin:0; }
 
   /* -- Graph demo layout --------------------------------------- */
   .graph-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; }
@@ -447,8 +462,8 @@ const base = import.meta.env.BASE_URL;
   /* Sparkline — compact inline trend */
   .spark-row { display:flex; align-items:center; gap:20px; height:240px; }
   .spark-stat { display:flex; flex-direction:column; gap:4px; flex:none; }
-  .spark-stat__l { font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color: var(--itkaarhus-gray-500); }
-  .spark-stat__v { font-size:36px; font-weight:700; letter-spacing:-0.02em; line-height:1; font-variant-numeric: tabular-nums; color: var(--itkaarhus-gray-900); }
+  .spark-stat__l { font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color: var(--itkaarhus-text-subtle); }
+  .spark-stat__v { font-size:36px; font-weight:700; letter-spacing:-0.02em; line-height:1; font-variant-numeric: tabular-nums; color: var(--itkaarhus-text); }
   /* The sparkline needs a positioned, shrinkable box of its own for Chart.js to fill. */
   .spark-wrap { position:relative; flex:1; min-width:0; height:64px; }
   .spark-wrap canvas { position:absolute; inset:0; width:100% !important; height:100% !important; }

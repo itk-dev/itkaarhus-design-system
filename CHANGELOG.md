@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Opt-in dark theme: `data-theme="dark"` (or `"auto"` to follow the system setting) on `<html>` switches every token-based surface, text, border and accent; without the attribute products look exactly as before.
+- Semantic theme tokens (`--itkaarhus-bg-raised`, `--itkaarhus-text-*`, `--itkaarhus-border-*`, `--itkaarhus-*-soft-text`, state `*-text`, `--itkaarhus-heatmap-*` and more) that components and products use for anything that changes between themes.
+- `.itkaarhus-light-only` / `.itkaarhus-dark-only` utilities for swapping logos between themes, and the `sun`, `moon` and `monitor` icons for a theme switch.
+- A Light / Dark / System switch on the reference site.
+
+### Changed
+
+- `components.css` now reads every theme-dependent colour from the semantic tokens.
+
 ## [0.6.0] - 2026-11-06
 
 ### Added

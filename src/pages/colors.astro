@@ -1,6 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import tokensCss from '../../assets/tokens.css?raw';
 const base = import.meta.env.BASE_URL;
+
+// Read the light and dark semantic blocks straight from tokens.css, so the
+// table below can never drift from the shipped values.
+function declarations(block: string): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const m of block.matchAll(/--itkaarhus-([a-z0-9-]+):\s*([^;]+);/g)) {
+    map.set(m[1], m[2].trim().replace(/^var\(--itkaarhus-(.+)\)$/, '$1'));
+  }
+  return map;
+}
+const lightStart = tokensCss.indexOf('{', tokensCss.indexOf('/* ---- Light (default)'));
+const light = declarations(tokensCss.slice(lightStart, tokensCss.indexOf('\n}', lightStart)));
+const dark = declarations(
+  tokensCss.slice(tokensCss.indexOf('@dark-tokens:start'), tokensCss.indexOf('@dark-tokens:end')),
+);
+
+type Kind = 'fill' | 'text' | 'border' | 'soft' | 'heat';
+interface Row { token: string; use: string; on?: string }
+const groups: { title: string; kind: Kind; rows: Row[] }[] = [
+  { title: 'Surfaces', kind: 'fill', rows: [
+    { token: 'bg', use: 'Page background' },
+    { token: 'bg-muted', use: 'Recessed panels, table heads, the app canvas' },
+    { token: 'bg-raised', use: 'Cards, inputs, menus, tooltips' },
+    { token: 'bg-inverse', use: 'Contrasting band — footer, CTA. Stays dark in both themes' },
+  ] },
+  { title: 'Text', kind: 'text', rows: [
+    { token: 'text', use: 'Primary ink — headings, body' },
+    { token: 'text-muted', use: 'Secondary copy, ledes, excerpts' },
+    { token: 'text-subtle', use: 'Labels, help text, metadata' },
+    { token: 'text-label', use: 'Form labels' },
+    { token: 'text-disabled', use: 'Disabled labels (exempt from AA)' },
+    { token: 'text-on-accent', use: 'Text and icons on primary and state fills', on: 'primary' },
+    { token: 'text-on-inverse', use: 'Text on the inverse band', on: 'bg-inverse' },
+  ] },
+  { title: 'Borders', kind: 'border', rows: [
+    { token: 'border-subtle', use: 'Row dividers' },
+    { token: 'border', use: 'Cards, panels, sections' },
+    { token: 'border-strong', use: 'Inputs, outline buttons, off toggles' },
+  ] },
+  { title: 'Roles', kind: 'fill', rows: [
+    { token: 'primary', use: 'Primary actions, links, focus, active state' },
+    { token: 'primary-hover', use: 'Hover / pressed primary' },
+    { token: 'secondary', use: 'Secondary emphasis, editorial accent' },
+    { token: 'secondary-hover', use: 'Hover on secondary' },
+    { token: 'info', use: 'Informational status' },
+    { token: 'success', use: 'Success / active status' },
+    { token: 'warning', use: 'Warnings, caution' },
+    { token: 'danger', use: 'Errors, destructive actions' },
+    { token: 'danger-hover', use: 'Hover on destructive actions' },
+    { token: 'guidance', use: 'Accent for help and instructions' },
+  ] },
+  { title: 'State text', kind: 'text', rows: [
+    { token: 'info-text', use: 'Info as text on page and card surfaces' },
+    { token: 'success-text', use: 'Success as text — positive deltas, OK values' },
+    { token: 'warning-text', use: 'Warning as text' },
+    { token: 'danger-text', use: 'Danger as text — negative deltas, errors' },
+  ] },
+  { title: 'Soft fills', kind: 'soft', rows: [
+    { token: 'primary', use: 'Brand tags, selected items, highlights' },
+    { token: 'secondary', use: 'Highlighted / featured tags' },
+    { token: 'neutral', use: 'Metadata tags, tracks, empty states' },
+    { token: 'info', use: 'Info badges' },
+    { token: 'success', use: 'Success badges' },
+    { token: 'warning', use: 'Warning badges' },
+    { token: 'danger', use: 'Danger badges' },
+    { token: 'guidance', use: 'Help and instruction surfaces' },
+  ] },
+  { title: 'Heatmap', kind: 'heat', rows: [0, 1, 2, 3, 4, 5].map((n) => ({
+    token: `heatmap-${n}`, use: n === 0 ? 'Empty cell' : `Intensity ${n} of 5`,
+  })) },
+];
+
+// The value column: the scale step (or dark-only hex) a token maps to.
+const mapsTo = (values: Map<string, string>, kind: Kind, token: string) =>
+  kind === 'soft'
+    ? `${values.get(`${token}-soft`)} / ${values.get(`${token}-soft-text`)}`
+    : kind === 'heat'
+      ? `${values.get(token)} / ${values.get(`${token}-text`)}`
+      : values.get(token);
+const themes = [
+  { id: 'light', values: light },
+  { id: 'dark', values: dark },
+];
 ---
 
 <Layout title="Colors">
@@ -154,8 +238,8 @@ const base = import.meta.env.BASE_URL;
         <li><b>Use coral sparingly.</b> A single editorial highlight or a secondary CTA per view — not a second primary.</li>
         <li><b>Reserve state colors for meaning.</b> Green = success, amber = warning, red = danger, cyan = info. Nothing decorative.</li>
         <li><b>Use purple only for guidance.</b> Help and instructions next to the content — not status, not actions.</li>
-        <li><b>Build surfaces from gray.</b> <code>white</code> page, <code>gray-50</code> muted panels, <code>gray-200</code> borders, <code>gray-500</code>+ for text.</li>
-        <li><b>Pair tints with shades.</b> A <code>-50</code> background wants <code>-700</code>+ text for legible contrast.</li>
+        <li><b>Build surfaces from the semantic tokens.</b> <code>bg</code> page, <code>bg-muted</code> panels, <code>border</code> dividers, <code>text-subtle</code>+ for text — they carry the light and dark values for you.</li>
+        <li><b>Pair tints with shades.</b> A soft fill wants its <code>-soft-text</code> partner — <code>-100</code>/<code>-700</code> in light, <code>-900</code>/<code>-200</code> in dark.</li>
       </ul>
     </div>
     <div class="ucard dont">
@@ -170,77 +254,127 @@ const base = import.meta.env.BASE_URL;
     </div>
   </div>
 
-  <h2>Role tokens</h2>
-  <p class="sub">Semantic aliases point at scale steps, so intent stays readable in code. Prefer the role token where one exists.</p>
-  <table class="recipe">
-    <thead><tr><th></th><th>Token</th><th>Maps to</th><th>Use for</th></tr></thead>
-    <tbody>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-primary)"></span></td><td class="tk">--itkaarhus-primary</td><td>blue-500</td><td>Primary actions, links, active state</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-primary-hover)"></span></td><td class="tk">--itkaarhus-primary-hover</td><td>blue-600</td><td>Hover / pressed primary</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-secondary)"></span></td><td class="tk">--itkaarhus-secondary</td><td>coral-500</td><td>Secondary emphasis, editorial accent</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-info)"></span></td><td class="tk">--itkaarhus-info</td><td>info-500</td><td>Informational status</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-success)"></span></td><td class="tk">--itkaarhus-success</td><td>success-500</td><td>Success / active status</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-warning)"></span></td><td class="tk">--itkaarhus-warning</td><td>warning-500</td><td>Warnings, caution</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-danger)"></span></td><td class="tk">--itkaarhus-danger</td><td>danger-500</td><td>Errors, destructive actions</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-info-soft)"></span></td><td class="tk">--itkaarhus-{'{state}'}-soft</td><td>{'{state}'}-100</td><td>Soft surface tint for badges / alerts</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-guidance)"></span></td><td class="tk">--itkaarhus-guidance</td><td>purple-500</td><td>Accent for help and instructions</td></tr>
-      <tr><td class="sw"><span style="background:var(--itkaarhus-guidance-soft)"></span></td><td class="tk">--itkaarhus-guidance-soft</td><td>purple-100</td><td>Soft surface tint for help and instructions</td></tr>
-    </tbody>
+  <h2 id="themes">Light &amp; dark</h2>
+  <p class="sub">Dark is opt-in per product: <code>data-theme="dark"</code> on <code>&lt;html&gt;</code> forces it, <code>data-theme="auto"</code> follows the visitor's system setting, and no attribute keeps today's light look. Everything that changes between the themes is a semantic token — use these, not the raw scale steps, for any surface, text, border or accent. The raw scales above are the same in both themes. Use the theme switch in the sidebar to preview every page.</p>
+
+  <table class="themes">
+    <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Use for</th></tr></thead>
+    {
+      groups.map((group) => (
+        <tbody>
+          <tr class="grp"><th colspan="4" scope="colgroup">{group.title}</th></tr>
+          {group.rows.map((row) => (
+            <tr>
+              <td class="tk">
+                {group.kind === 'soft' ? (
+                  <Fragment>--itkaarhus-{row.token}-soft<br />--itkaarhus-{row.token}-soft-text</Fragment>
+                ) : group.kind === 'heat' ? (
+                  <Fragment>--itkaarhus-{row.token}<br />--itkaarhus-{row.token}-text</Fragment>
+                ) : (
+                  `--itkaarhus-${row.token}`
+                )}
+              </td>
+              {themes.map((theme) => (
+                <td>
+                  <div class="tw" data-theme={theme.id}>
+                    {group.kind === 'fill' && <span class="sw" style={`background: var(--itkaarhus-${row.token})`} />}
+                    {group.kind === 'border' && <span class="sw sw--border" style={`border-color: var(--itkaarhus-${row.token})`} />}
+                    {group.kind === 'text' && (
+                      <span class="aa" style={`color: var(--itkaarhus-${row.token}); background: var(--itkaarhus-${row.on ?? 'bg'})`}>Aa</span>
+                    )}
+                    {group.kind === 'soft' && (
+                      <span class="pill" style={`background: var(--itkaarhus-${row.token}-soft); color: var(--itkaarhus-${row.token}-soft-text)`}>Aa</span>
+                    )}
+                    {group.kind === 'heat' && (
+                      <span class="cell" style={`background: var(--itkaarhus-${row.token}); color: var(--itkaarhus-${row.token}-text)`}>{row.token.slice(-1)}</span>
+                    )}
+                    <code class="map">{mapsTo(theme.values, group.kind, row.token)}</code>
+                  </div>
+                </td>
+              ))}
+              <td class="use">{row.use}</td>
+            </tr>
+          ))}
+        </tbody>
+      ))
+    }
   </table>
+
+  <h3 class="h3">Dark rules</h3>
+  <ul class="rules">
+    <li><b>Surfaces rise in lightness.</b> Page <code>bg</code> is the darkest; <code>bg-muted</code> and <code>bg-raised</code> step up so cards separate without heavy shadows. Four dark-only neutrals sit between <code>gray-800</code> and <code>gray-900</code>.</li>
+    <li><b>Accents move lighter.</b> In dark, the role tokens point at <code>300</code>/<code>400</code> steps that keep ≥ 4.5:1 on every dark surface — so accent fills carry dark text: always pair a primary or state fill with <code>--itkaarhus-text-on-accent</code>, never a hardcoded white.</li>
+    <li><b>Soft fills invert.</b> Tags sit on the <code>900</code> step with <code>200</code> text instead of <code>100</code> with <code>700</code>.</li>
+    <li><b>The inverse band stays dark.</b> Footers and CTA bands on <code>bg-inverse</code> keep the white (<code>-hvid</code>) logos and white text in both themes.</li>
+    <li><b>Swap logos, don't recolour them.</b> Where a dark mark sits on a surface that turns dark, ship both files and toggle them with <code>.itkaarhus-light-only</code> / <code>.itkaarhus-dark-only</code> — see <a href={`${base}logo#dark`}>Logo</a>.</li>
+    <li><b>Flat fills only.</b> No gradients or glows in dark either.</li>
+  </ul>
 </div>
 </Layout>
 
 <style>
-  body { padding: 48px; background: var(--itkaarhus-white); }
+  body { padding: 48px; background: var(--itkaarhus-bg); }
   .page { max-width: 1040px; margin: 0 auto; }
-  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--itkaarhus-text-subtle); font-weight: 600; }
   h1 { font-size: 44px; line-height: 1.05; margin: 8px 0 16px; letter-spacing: -0.02em; font-weight: 700; }
-  p.lede { font-size: 18px; color: var(--itkaarhus-gray-700); max-width: 660px; margin: 0 0 8px; line-height: 1.55; }
-  h2 { font-size: 22px; margin: 56px 0 6px; font-weight: 600; letter-spacing: -0.01em; }
-  h2 + .sub { font-size: 14px; color: var(--itkaarhus-gray-500); margin: 0 0 20px; max-width: 660px; line-height: 1.55; }
-  code { font-family: var(--itkaarhus-font-mono); font-size: 0.9em; background: var(--itkaarhus-gray-100); padding: 1px 5px; border-radius: 4px; }
+  p.lede { font-size: 18px; color: var(--itkaarhus-text-muted); max-width: 660px; margin: 0 0 8px; line-height: 1.55; }
+  h2 { font-size: 22px; margin: 56px 0 6px; font-weight: 600; letter-spacing: -0.01em; scroll-margin-top: 24px; }
+  h2 + .sub { font-size: 14px; color: var(--itkaarhus-text-subtle); margin: 0 0 20px; max-width: 660px; line-height: 1.55; }
+  code { font-family: var(--itkaarhus-font-mono); font-size: 0.9em; background: var(--itkaarhus-neutral-soft); padding: 1px 5px; border-radius: 4px; }
 
-  /* Primary brand pair — two large cards */
+  /* Primary brand pair — two large cards. The chips depict fixed palette colours. */
   .brand-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .brand-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
+  .brand-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--itkaarhus-border); }
   .brand-card .chip { background: var(--c); height: 140px; display: flex; align-items: flex-end; padding: 18px; }
-  .brand-card .chip .role { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: #fff; opacity: 0.9; }
+  .brand-card .chip .role { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--itkaarhus-white); opacity: 0.9; }
   .brand-card .meta { padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
   .brand-card .nm { font-size: 18px; font-weight: 600; }
-  .brand-card .codes { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); text-align: right; }
+  .brand-card .codes { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-text-subtle); text-align: right; }
 
-  /* Scale row: 10 steps */
-  .scale { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid var(--itkaarhus-gray-200); }
-  .scale .step { aspect-ratio: 1/1.5; background: var(--c); display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding: 8px 6px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: #fff; }
+  /* Scale row: 10 steps. Labels sit on fixed palette colours, so they stay raw. */
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: 8px; overflow: hidden; border: 1px solid var(--itkaarhus-border); }
+  .scale .step { aspect-ratio: 1/1.5; background: var(--c); display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding: 8px 6px; font-family: var(--itkaarhus-font-mono); font-size: 10px; color: var(--itkaarhus-white); }
   .scale .step.dk { color: var(--itkaarhus-gray-900); }
   .scale .step .s { font-weight: 500; opacity: 0.95; }
   .scale .step .h { opacity: 0.7; font-size: 9px; }
   .scale-label { display: flex; align-items: baseline; gap: 10px; margin: 20px 0 6px; }
-  .scale-label .t { font-size: 14px; font-weight: 600; color: var(--itkaarhus-gray-900); }
-  .scale-label .tok { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-500); }
+  .scale-label .t { font-size: 14px; font-weight: 600; color: var(--itkaarhus-text); }
+  .scale-label .tok { font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-text-subtle); }
 
   /* Usage */
   .usage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
-  .ucard { border: 1px solid var(--itkaarhus-gray-200); border-radius: 10px; padding: 22px; }
-  .ucard.do { border-left: 3px solid var(--itkaarhus-success-500); }
-  .ucard.dont { border-left: 3px solid var(--itkaarhus-danger-500); }
+  .ucard { border: 1px solid var(--itkaarhus-border); border-radius: 10px; padding: 22px; }
+  .ucard.do { border-left: 3px solid var(--itkaarhus-success); }
+  .ucard.dont { border-left: 3px solid var(--itkaarhus-danger); }
   .ucard .hd { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
-  .ucard.do .hd { color: var(--itkaarhus-success-700); }
-  .ucard.dont .hd { color: var(--itkaarhus-danger-700); }
+  .ucard.do .hd { color: var(--itkaarhus-success-text); }
+  .ucard.dont .hd { color: var(--itkaarhus-danger-text); }
   .ucard ul { margin: 0; padding: 0; list-style: none; }
-  .ucard li { padding: 10px 0; border-top: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); line-height: 1.5; }
+  .ucard li { padding: 10px 0; border-top: 1px solid var(--itkaarhus-border-subtle); font-size: 14px; color: var(--itkaarhus-text-muted); line-height: 1.5; }
   .ucard li:first-child { border-top: 0; padding-top: 0; }
-  .ucard li b { color: var(--itkaarhus-gray-900); font-weight: 600; }
+  .ucard li b { color: var(--itkaarhus-text); font-weight: 600; }
 
-  /* Recipe table — token → role */
-  .recipe { width: 100%; border-collapse: collapse; margin-top: 8px; }
-  .recipe th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--itkaarhus-gray-500); font-weight: 600; padding: 0 0 10px; border-bottom: 1px solid var(--itkaarhus-gray-200); }
-  .recipe td { padding: 12px 0; border-bottom: 1px solid var(--itkaarhus-gray-100); font-size: 14px; color: var(--itkaarhus-gray-700); vertical-align: top; }
-  .recipe td.sw { width: 32px; }
-  .recipe td.sw span { display: inline-block; width: 20px; height: 20px; border-radius: 5px; border: 1px solid rgba(17,19,24,0.08); vertical-align: middle; }
-  .recipe td.tk { width: 230px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-gray-900); }
+  /* Semantic tokens — each swatch cell is a light or dark island (data-theme),
+     so both values show side by side whatever the page theme is. */
+  .themes { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .themes thead th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--itkaarhus-text-subtle); font-weight: 600; padding: 0 12px 10px 0; border-bottom: 1px solid var(--itkaarhus-border); }
+  .themes .grp th { text-align: left; padding: 28px 0 8px; font-size: 14px; font-weight: 600; color: var(--itkaarhus-text); border-bottom: 1px solid var(--itkaarhus-border); }
+  .themes td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--itkaarhus-border-subtle); font-size: 14px; color: var(--itkaarhus-text-muted); vertical-align: middle; }
+  .themes td.tk { width: 240px; font-family: var(--itkaarhus-font-mono); font-size: 12px; color: var(--itkaarhus-text); line-height: 1.6; }
+  .themes td.use { font-size: 13px; }
+  .tw { display: flex; align-items: center; gap: 10px; min-width: 190px; padding: 8px 10px; border-radius: var(--itkaarhus-radius-2); border: 1px solid var(--itkaarhus-border); background: var(--itkaarhus-bg); color: var(--itkaarhus-text); }
+  .tw .map { background: none; padding: 0; font-size: 11px; color: var(--itkaarhus-text-subtle); white-space: nowrap; }
+  .tw .sw { flex: none; width: 28px; height: 28px; border-radius: var(--itkaarhus-radius-1); box-shadow: inset 0 0 0 1px var(--itkaarhus-border); }
+  .tw .sw--border { box-shadow: none; border: 2px solid; background: var(--itkaarhus-bg); }
+  .tw .aa { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: var(--itkaarhus-radius-1); font-size: 14px; font-weight: 600; box-shadow: inset 0 0 0 1px var(--itkaarhus-border); }
+  .tw .pill { flex: none; padding: 4px 10px; border-radius: var(--itkaarhus-radius-pill); font-size: 12px; font-weight: 600; }
+  .tw .cell { flex: none; display: grid; place-items: center; width: 36px; height: 28px; border-radius: 6px; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
 
-  /* State demo alerts */
+  .h3 { font-size: 16px; font-weight: 600; margin: 40px 0 12px; }
+  .rules { margin: 0; padding: 0 0 0 18px; max-width: 720px; display: grid; gap: 10px; font-size: 14px; line-height: 1.55; color: var(--itkaarhus-text-muted); }
+  .rules b { color: var(--itkaarhus-text); font-weight: 600; }
+
+  /* State demo alerts — depict the raw scale steps named in the copy (light usage). */
   .states { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
   .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 14px; line-height: 1.5; border: 1px solid transparent; }
   .alert .ic { flex: none; width: 18px; height: 18px; }
@@ -250,4 +384,9 @@ const base = import.meta.env.BASE_URL;
   .alert.danger  { background: var(--itkaarhus-danger-50);  border-color: var(--itkaarhus-danger-200);  color: var(--itkaarhus-danger-900); }
   .alert svg { stroke-width: 2; fill: none; stroke: currentColor; }
   .alert b { display: block; }
+
+  @media (max-width: 860px) {
+    body { padding: 24px 16px; }
+    .themes td.tk { width: auto; }
+  }
 </style>

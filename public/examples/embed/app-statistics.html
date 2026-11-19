@@ -1,12 +1,22 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" data-theme="auto">
 <head>
 <meta charset="utf-8">
+<script>
+  (function () {
+    var root = document.documentElement;
+    function apply(t) { if (t === 'light' || t === 'dark' || t === 'auto') root.dataset.theme = t; }
+    try { apply(localStorage.getItem('itkaarhus-theme')); } catch (e) {}
+    // Follow the reference site's theme switch live (the examples run in its iframes).
+    window.addEventListener('storage', function (e) { if (e.key === 'itkaarhus-theme') apply(e.newValue || 'auto'); });
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Statistik — Mit Aarhus</title>
 <link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/components.css">
 <link rel="stylesheet" href="/itkaarhus-design-system/examples/embed/app.css">
 <style>
   /* Statistics-pane layout + viz that app.css doesn't already cover. Tokens only. */
@@ -20,25 +30,25 @@
 
   /* Heatmap — CSS grid, blue-scale intensity (no library) */
   .heatmap { display: grid; grid-template-columns: 84px repeat(5, 1fr); gap: 6px; }
-  .heatmap__col { font-size: 12px; font-weight: 600; color: var(--itkaarhus-gray-500); text-align: center; align-self: end; padding-bottom: 4px; }
-  .heatmap__row { font-size: 13px; font-weight: 500; color: var(--itkaarhus-gray-700); display: flex; align-items: center; }
+  .heatmap__col { font-size: 12px; font-weight: 600; color: var(--itkaarhus-text-subtle); text-align: center; align-self: end; padding-bottom: 4px; }
+  .heatmap__row { font-size: 13px; font-weight: 500; color: var(--itkaarhus-text-muted); display: flex; align-items: center; }
   .heatmap__cell { height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .heatmap__cell[data-v="0"] { background: var(--itkaarhus-gray-100); color: var(--itkaarhus-gray-400); }
-  .heatmap__cell[data-v="1"] { background: var(--itkaarhus-blue-100); color: var(--itkaarhus-blue-700); }
-  .heatmap__cell[data-v="2"] { background: var(--itkaarhus-blue-200); color: var(--itkaarhus-blue-800); }
-  .heatmap__cell[data-v="3"] { background: var(--itkaarhus-blue-300); color: var(--itkaarhus-blue-900); }
-  .heatmap__cell[data-v="4"] { background: var(--itkaarhus-blue-400); color: #fff; }
-  .heatmap__cell[data-v="5"] { background: var(--itkaarhus-blue-500); color: #fff; }
+  .heatmap__cell[data-v="0"] { background: var(--itkaarhus-heatmap-0); color: var(--itkaarhus-heatmap-0-text); }
+  .heatmap__cell[data-v="1"] { background: var(--itkaarhus-heatmap-1); color: var(--itkaarhus-heatmap-1-text); }
+  .heatmap__cell[data-v="2"] { background: var(--itkaarhus-heatmap-2); color: var(--itkaarhus-heatmap-2-text); }
+  .heatmap__cell[data-v="3"] { background: var(--itkaarhus-heatmap-3); color: var(--itkaarhus-heatmap-3-text); }
+  .heatmap__cell[data-v="4"] { background: var(--itkaarhus-heatmap-4); color: var(--itkaarhus-heatmap-4-text); }
+  .heatmap__cell[data-v="5"] { background: var(--itkaarhus-heatmap-5); color: var(--itkaarhus-heatmap-5-text); }
 
   /* Meters */
   .meters { display: grid; gap: 16px; }
   .meter { display: grid; grid-template-columns: 1fr 48px; align-items: center; gap: 8px 14px; }
-  .meter__label { font-size: 14px; color: var(--itkaarhus-gray-700); }
-  .meter__track { grid-column: 1 / -1; order: 3; height: 8px; border-radius: 999px; background: var(--itkaarhus-gray-100); overflow: hidden; }
-  .meter__track i { display: block; height: 100%; border-radius: 999px; background: var(--itkaarhus-blue-500); }
-  .meter__track i.is-success { background: var(--itkaarhus-success-500); }
-  .meter__track i.is-warning { background: var(--itkaarhus-warning-500); }
-  .meter__val { font-size: 13px; font-weight: 600; color: var(--itkaarhus-gray-700); text-align: right; font-variant-numeric: tabular-nums; }
+  .meter__label { font-size: 14px; color: var(--itkaarhus-text-muted); }
+  .meter__track { grid-column: 1 / -1; order: 3; height: 8px; border-radius: 999px; background: var(--itkaarhus-neutral-soft); overflow: hidden; }
+  .meter__track i { display: block; height: 100%; border-radius: 999px; background: var(--itkaarhus-primary); }
+  .meter__track i.is-success { background: var(--itkaarhus-success); }
+  .meter__track i.is-warning { background: var(--itkaarhus-warning); }
+  .meter__val { font-size: 13px; font-weight: 600; color: var(--itkaarhus-text-muted); text-align: right; font-variant-numeric: tabular-nums; }
 
   @media (max-width: 980px) { .stat-grid, .stat-grid--even { grid-template-columns: 1fr; } }
 </style>
@@ -49,7 +59,7 @@
 
 <div class="app">
   <aside class="app-rail" aria-label="Navigation">
-    <a class="brand" href="app-dashboard.html"><img src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><b>Mit Aarhus</b></a>
+    <a class="brand" href="app-dashboard.html"><img class="itkaarhus-light-only" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt=""><img class="itkaarhus-dark-only" src="/itkaarhus-design-system/assets/logos/aak-emblem-hvid.svg" alt=""><b>Mit Aarhus</b></a>
     <nav>
       <span class="nav-label">Arbejde</span>
       <a class="item" href="app-dashboard.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overblik</a>
@@ -114,7 +124,7 @@
         <section class="panel">
           <div class="panel__head"><h2>Aktivitet — tema × afdeling</h2></div>
           <div class="panel__body">
-            <div class="heatmap" role="img" aria-label="Varmekort over sager pr. tema og afdeling; mørkere blå betyder flere sager.">
+            <div class="heatmap" role="img" aria-label="Varmekort over sager pr. tema og afdeling; kraftigere blå betyder flere sager.">
               <span></span>
               <span class="heatmap__col">Byg</span><span class="heatmap__col">Miljø</span><span class="heatmap__col">Social</span><span class="heatmap__col">Kultur</span><span class="heatmap__col">IT</span>
               <span class="heatmap__row">Teknik</span>
@@ -144,47 +154,62 @@
 <script src="vendor/chart.umd.min.js"></script>
 <script>
   (function () {
-    var css = getComputedStyle(document.documentElement);
-    var t = function (n) { return css.getPropertyValue('--itkaarhus-' + n).trim(); };
+    var root = document.documentElement;
+    var t = function (n) { return getComputedStyle(root).getPropertyValue('--itkaarhus-' + n).trim(); };
 
-    // System Chart.js defaults — Inter font, neutral grid, white tooltips. No gradients.
-    Chart.defaults.font.family = t('font-sans') || 'Inter, sans-serif';
-    Chart.defaults.color = t('gray-500');
-    Chart.defaults.borderColor = t('gray-200');
-    Chart.defaults.plugins.legend.labels.usePointStyle = true;
-    Chart.defaults.plugins.legend.labels.boxWidth = 8;
-    Chart.defaults.plugins.legend.labels.padding = 14;
-    Chart.defaults.plugins.tooltip.backgroundColor = '#fff';
-    Chart.defaults.plugins.tooltip.titleColor = t('gray-900');
-    Chart.defaults.plugins.tooltip.bodyColor = t('gray-700');
-    Chart.defaults.plugins.tooltip.borderColor = t('gray-200');
-    Chart.defaults.plugins.tooltip.borderWidth = 1;
+    // Semantic tokens are var() chains; resolve them to concrete colours through a hidden probe.
+    var probe = document.createElement('span');
+    probe.hidden = true;
+    document.body.appendChild(probe);
+    var c = function (n) { probe.style.color = 'var(--itkaarhus-' + n + ')'; return getComputedStyle(probe).color; };
 
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
+    var charts = [];
 
-    new Chart(document.getElementById('cBar'), {
-      type: 'bar',
-      data: { labels: months, datasets: [{ label: 'Nye sager', data: [186, 174, 203, 198, 221, 246, 168, 172, 214, 231, 209, 195], backgroundColor: t('blue-500'), borderRadius: 4, borderSkipped: false }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: t('gray-100') } } } },
-    });
+    function render() {
+      charts.forEach(function (chart) { chart.destroy(); });
 
-    new Chart(document.getElementById('cDonut'), {
-      type: 'doughnut',
-      data: { labels: ['Afsluttet', 'I behandling', 'Afventer', 'Afvist'], datasets: [{ data: [1061, 142, 56, 25], backgroundColor: [t('success-500'), t('info-500'), t('warning-500'), t('danger-500')], borderColor: '#fff', borderWidth: 3, hoverOffset: 8 }] },
-      options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
-    });
+      // System Chart.js defaults — Inter font, neutral grid, raised-surface tooltips. No gradients.
+      Chart.defaults.font.family = t('font-sans') || 'Inter, sans-serif';
+      Chart.defaults.color = c('text-subtle');
+      Chart.defaults.borderColor = c('border');
+      Chart.defaults.plugins.legend.labels.usePointStyle = true;
+      Chart.defaults.plugins.legend.labels.boxWidth = 8;
+      Chart.defaults.plugins.legend.labels.padding = 14;
+      Chart.defaults.plugins.tooltip.backgroundColor = c('bg-raised');
+      Chart.defaults.plugins.tooltip.titleColor = c('text');
+      Chart.defaults.plugins.tooltip.bodyColor = c('text-muted');
+      Chart.defaults.plugins.tooltip.borderColor = c('border');
+      Chart.defaults.plugins.tooltip.borderWidth = 1;
 
-    new Chart(document.getElementById('cLine'), {
-      type: 'line',
-      data: { labels: months.slice(0, 6), datasets: [{ label: 'Svartid', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8], borderColor: t('blue-500'), backgroundColor: t('blue-50'), fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: t('blue-500') }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: t('gray-100') } } } },
-    });
+      charts = [
+        new Chart(document.getElementById('cBar'), {
+          type: 'bar',
+          data: { labels: months, datasets: [{ label: 'Nye sager', data: [186, 174, 203, 198, 221, 246, 168, 172, 214, 231, 209, 195], backgroundColor: c('primary'), borderRadius: 4, borderSkipped: false }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: c('border-subtle') } } } },
+        }),
+        new Chart(document.getElementById('cDonut'), {
+          type: 'doughnut',
+          data: { labels: ['Afsluttet', 'I behandling', 'Afventer', 'Afvist'], datasets: [{ data: [1061, 142, 56, 25], backgroundColor: [c('success'), c('info'), c('warning'), c('danger')], borderColor: c('bg-raised'), borderWidth: 3, hoverOffset: 8 }] },
+          options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right' } } },
+        }),
+        new Chart(document.getElementById('cLine'), {
+          type: 'line',
+          data: { labels: months.slice(0, 6), datasets: [{ label: 'Svartid', data: [5.1, 4.8, 4.6, 4.2, 4.0, 3.8], borderColor: c('primary'), backgroundColor: c('primary-soft'), fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: c('primary') }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: c('border-subtle') } } } },
+        }),
+        new Chart(document.getElementById('cHBar'), {
+          type: 'bar',
+          data: { labels: ['Teknik', 'Borger', 'Kultur', 'Social', 'IT'], datasets: [{ label: 'Sager', data: [312, 274, 198, 156, 89], backgroundColor: c('primary'), borderRadius: 4, borderSkipped: false }] },
+          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: c('border-subtle') } }, y: { grid: { display: false } } } },
+        }),
+      ];
+    }
 
-    new Chart(document.getElementById('cHBar'), {
-      type: 'bar',
-      data: { labels: ['Teknik', 'Borger', 'Kultur', 'Social', 'IT'], datasets: [{ label: 'Sager', data: [312, 274, 198, 156, 89], backgroundColor: t('blue-500'), borderRadius: 4, borderSkipped: false }] },
-      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, grid: { color: t('gray-100') } }, y: { grid: { display: false } } } },
-    });
+    render();
+    // Re-theme when the page's theme or the OS colour scheme changes.
+    new MutationObserver(render).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
   })();
 </script>
 

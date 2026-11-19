@@ -1,38 +1,48 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" data-theme="auto">
 <head>
 <meta charset="utf-8">
+<script>
+  (function () {
+    var root = document.documentElement;
+    function apply(t) { if (t === 'light' || t === 'dark' || t === 'auto') root.dataset.theme = t; }
+    try { apply(localStorage.getItem('itkaarhus-theme')); } catch (e) {}
+    // Follow the reference site's theme switch live (the examples run in its iframes).
+    window.addEventListener('storage', function (e) { if (e.key === 'itkaarhus-theme') apply(e.newValue || 'auto'); });
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Om Mit Aarhus</title>
 <link rel="icon" href="/itkaarhus-design-system/assets/logos/aak-favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/itkaarhus-design-system/tokens.css">
+<link rel="stylesheet" href="/itkaarhus-design-system/components.css">
 <link rel="stylesheet" href="/itkaarhus-design-system/examples/embed/site.css">
 <style>
-  /* Page-specific helpers for the About page — tokens only, no hardcoded values except #fff. */
-  .about-hero { background: var(--itkaarhus-white); border-bottom: 1px solid var(--itkaarhus-gray-200); }
+  /* Page-specific helpers for the About page — tokens only. */
+  .about-hero { background: var(--itkaarhus-bg); border-bottom: 1px solid var(--itkaarhus-border); }
   .about-hero__inner { padding: 48px 40px 40px; }
   .about-hero h1 { font-family: var(--itkaarhus-font-serif); font-weight: 500; font-size: 44px; line-height: 1.06; letter-spacing: -0.02em; margin: 8px 0 18px; max-width: 18ch; }
-  .about-hero__lede { font-size: 19px; line-height: 1.55; color: var(--itkaarhus-gray-700); margin: 0; max-width: 46ch; }
+  .about-hero__lede { font-size: 19px; line-height: 1.55; color: var(--itkaarhus-text-muted); margin: 0; max-width: 46ch; }
 
   /* Prose block */
   .prose { max-width: 38rem; }
   .prose h2 { font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 16px; }
-  .prose p { font-size: 17px; line-height: 1.65; color: var(--itkaarhus-gray-700); margin: 0 0 16px; }
+  .prose p { font-size: 17px; line-height: 1.65; color: var(--itkaarhus-text-muted); margin: 0 0 16px; }
   .prose p:last-child { margin-bottom: 0; }
 
   /* Stats strip */
-  .stats { border-top: 1px solid var(--itkaarhus-gray-200); border-bottom: 1px solid var(--itkaarhus-gray-200); }
-  .stat { background: #fff; border: 1px solid var(--itkaarhus-gray-200); border-radius: 14px; padding: 28px; }
-  .stat__num { font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: var(--itkaarhus-blue-500); font-variant-numeric: tabular-nums; }
-  .stat__label { font-size: 14px; color: var(--itkaarhus-gray-700); margin: 10px 0 0; }
+  .stats { border-top: 1px solid var(--itkaarhus-border); border-bottom: 1px solid var(--itkaarhus-border); }
+  .stat { background: var(--itkaarhus-bg-raised); border: 1px solid var(--itkaarhus-border); border-radius: 14px; padding: 28px; }
+  .stat__num { font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: var(--itkaarhus-primary); font-variant-numeric: tabular-nums; }
+  .stat__label { font-size: 14px; color: var(--itkaarhus-text-muted); margin: 10px 0 0; }
 
   /* Accessibility & security callout */
-  .callout { display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start; background: var(--itkaarhus-blue-50); border: 1px solid var(--itkaarhus-blue-200); border-radius: 14px; padding: 28px; }
-  .callout__icon { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: #fff; color: var(--itkaarhus-blue-500); }
+  .callout { display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start; background: var(--itkaarhus-primary-soft); border: 1px solid var(--itkaarhus-blue-200); border-radius: 14px; padding: 28px; }
+  .callout__icon { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--itkaarhus-bg-raised); color: var(--itkaarhus-primary); }
   .callout__icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .callout h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 2px 0 8px; }
-  .callout p { font-size: 15px; line-height: 1.6; color: var(--itkaarhus-gray-700); margin: 0; }
+  .callout p { font-size: 15px; line-height: 1.6; color: var(--itkaarhus-text-muted); margin: 0; }
 
   @media (max-width: 880px) {
     .about-hero__inner { padding: 36px 20px 32px; }
@@ -49,7 +59,8 @@
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href="website-landing.html">
-      <img class="brand__emblem" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt="" width="28" height="28">
+      <img class="brand__emblem itkaarhus-light-only" src="/itkaarhus-design-system/assets/logos/aak-favicon.ico" alt="" width="28" height="28">
+      <img class="brand__emblem itkaarhus-dark-only" src="/itkaarhus-design-system/assets/logos/aak-emblem-hvid.svg" alt="" width="28" height="28">
       <span class="brand__name">Mit Aarhus</span>
     </a>
     <nav class="site-nav" aria-label="Primær">

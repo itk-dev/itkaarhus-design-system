@@ -1,5 +1,6 @@
 ---
 import '../../assets/tokens.css';
+import '../../assets/components.css';
 import '../styles/sidebar.css';
 
 interface Props {
@@ -70,12 +71,35 @@ const groups = [
 const withBase = (href: string) => (href ? `${base}${href}` : base);
 // Compare with trailing slashes stripped so the active state matches either form.
 const isCurrent = (href: string) => withBase(href).replace(/\/$/, '') === current;
+
+// Theme switch options; values match the data-theme attribute in tokens.css.
+const themes = [
+  { value: 'light', label: 'Light', icon: 'sun' },
+  { value: 'dark', label: 'Dark', icon: 'moon' },
+  { value: 'auto', label: 'System', icon: 'monitor' },
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="auto">
   <head>
     <meta charset="utf-8" />
+    <!-- Apply the stored theme before first paint, so there is no flash of the wrong theme.
+         Without a stored choice the page stays on data-theme="auto" (follows the OS). -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        function apply(t) { if (t === 'light' || t === 'dark' || t === 'auto') root.dataset.theme = t; }
+        try { apply(localStorage.getItem('itkaarhus-theme')); } catch (e) {}
+        // Keep other open tabs and the example iframes in step with the switch.
+        window.addEventListener('storage', function (e) {
+          if (e.key !== 'itkaarhus-theme') return;
+          apply(e.newValue || 'auto');
+          var input = document.querySelector('.ds-theme input[value="' + root.dataset.theme + '"]');
+          if (input) input.checked = true;
+        });
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — Design System</title>
     <link rel="icon" href={`${base}assets/logos/aak-favicon.ico`} sizes="any" />
@@ -122,6 +146,36 @@ const isCurrent = (href: string) => withBase(href).replace(/\/$/, '') === curren
           ))
         }
       </nav>
+
+      <fieldset class="ds-theme">
+        <legend class="ds-theme__legend">Theme</legend>
+        <div class="ds-theme__options">
+          {
+            themes.map((t) => (
+              <label class="ds-theme__option">
+                <input type="radio" name="ds-theme" value={t.value} />
+                <svg class="ds-theme__icon" width="14" height="14" aria-hidden="true">
+                  <use href={`${base}assets/lucide-sprite.svg#lucide-${t.icon}`} />
+                </svg>
+                <span>{t.label}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      <script is:inline>
+        (function () {
+          var root = document.documentElement;
+          var inputs = document.querySelectorAll('.ds-theme input');
+          inputs.forEach(function (input) {
+            input.checked = input.value === root.dataset.theme;
+            input.addEventListener('change', function () {
+              root.dataset.theme = input.value;
+              try { localStorage.setItem('itkaarhus-theme', input.value); } catch (e) {}
+            });
+          });
+        })();
+      </script>
     </aside>
 
     <main id="main" class={bleed ? 'ds-main ds-main--bleed' : 'ds-main'}>

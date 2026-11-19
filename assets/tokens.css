@@ -115,28 +115,6 @@
   --itkaarhus-gray-800: #2a2f38;
   --itkaarhus-gray-900: #111318;   /* body copy, darkest ink */
 
-  /* ---- Roles ------------------------------------------------ */
-  --itkaarhus-primary:          var(--itkaarhus-blue-500);
-  --itkaarhus-primary-hover:    var(--itkaarhus-blue-600);
-  --itkaarhus-secondary:        var(--itkaarhus-coral-500);
-  --itkaarhus-secondary-hover:  var(--itkaarhus-coral-700);
-
-  --itkaarhus-info:        var(--itkaarhus-info-500);
-  --itkaarhus-info-soft:   var(--itkaarhus-info-100);
-  --itkaarhus-success:     var(--itkaarhus-success-500);
-  --itkaarhus-success-soft:var(--itkaarhus-success-100);
-  --itkaarhus-warning:     var(--itkaarhus-warning-500);
-  --itkaarhus-warning-soft:var(--itkaarhus-warning-100);
-  --itkaarhus-danger:      var(--itkaarhus-danger-500);
-  --itkaarhus-danger-soft: var(--itkaarhus-danger-100);
-  --itkaarhus-guidance:      var(--itkaarhus-purple-500);
-  --itkaarhus-guidance-soft: var(--itkaarhus-purple-100);
-
-  /* ---- Surfaces & text -------------------------------------- */
-  --itkaarhus-bg:          var(--itkaarhus-white);
-  --itkaarhus-bg-muted:    var(--itkaarhus-gray-50);
-  --itkaarhus-bg-inverse:  var(--itkaarhus-gray-900);
-
   /* ---- Type stack ------------------------------------------- */
   --itkaarhus-font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --itkaarhus-font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -176,14 +154,6 @@
   --itkaarhus-radius-4: 16px;
   --itkaarhus-radius-pill: 999px;
 
-  /* ---- Elevation -------------------------------------------- */
-  --itkaarhus-shadow-1: 0 1px 2px rgba(17,19,24,0.06);
-  --itkaarhus-shadow-2: 0 4px 10px -2px rgba(17,19,24,0.08), 0 2px 4px -1px rgba(17,19,24,0.04);
-  --itkaarhus-shadow-3: 0 16px 32px -12px rgba(17,19,24,0.18), 0 4px 8px -2px rgba(17,19,24,0.06);
-
-  /* ---- Focus ring ------------------------------------------- */
-  --itkaarhus-focus: 0 0 0 3px rgba(0,123,166,0.35);
-
   /* ---- Layout ----------------------------------------------- */
   --itkaarhus-container: 1200px;
   --itkaarhus-gutter: 24px;
@@ -196,12 +166,258 @@
   --itkaarhus-bp-lg: 64rem; /* 1024px — collapse + share become icon-only */
 }
 
+/* =============================================================
+   THEMES — semantic tokens
+   Everything that changes between light and dark lives here, as
+   aliases onto the raw scales above. Components use these, never
+   the raw steps, for any colour that depends on the theme.
+
+   Opt-in on <html>:
+     (no attribute)      light — the default, unchanged
+     data-theme="light"  light, explicitly
+     data-theme="dark"   dark
+     data-theme="auto"   follows prefers-color-scheme
+   The attribute also works on any element, to scope a light or dark
+   island (e.g. a side-by-side preview); such an element must set its
+   own `background` and `color` from the tokens.
+   ============================================================= */
+
+/* ---- Light (default) ------------------------------------------ */
+:root,
+[data-theme="light"],
+[data-theme="auto"] {
+  /* Surfaces */
+  --itkaarhus-bg:          var(--itkaarhus-white);    /* page */
+  --itkaarhus-bg-muted:    var(--itkaarhus-gray-50);  /* recessed panels, table heads, app canvas */
+  --itkaarhus-bg-raised:   var(--itkaarhus-white);    /* cards, inputs, menus, tooltips */
+  --itkaarhus-bg-inverse:  var(--itkaarhus-gray-900); /* contrasting band: footer, CTA */
+
+  /* Text */
+  --itkaarhus-text:            var(--itkaarhus-gray-900); /* primary ink */
+  --itkaarhus-text-muted:      var(--itkaarhus-gray-700); /* secondary copy, ledes, excerpts */
+  --itkaarhus-text-subtle:     var(--itkaarhus-gray-500); /* labels, help, metadata */
+  --itkaarhus-text-label:      var(--itkaarhus-gray-800); /* form labels */
+  --itkaarhus-text-disabled:   var(--itkaarhus-gray-400); /* disabled labels — exempt from AA */
+  --itkaarhus-text-on-accent:  var(--itkaarhus-white);    /* on primary / danger / success fills */
+  --itkaarhus-text-on-inverse: var(--itkaarhus-white);    /* on --itkaarhus-bg-inverse */
+
+  /* Borders */
+  --itkaarhus-border-subtle: var(--itkaarhus-gray-100); /* row dividers */
+  --itkaarhus-border:        var(--itkaarhus-gray-200); /* cards, panels, sections */
+  --itkaarhus-border-strong: var(--itkaarhus-gray-300); /* inputs, outline buttons, off toggles */
+
+  /* Roles — fills, links, icons, accents */
+  --itkaarhus-primary:          var(--itkaarhus-blue-500);
+  --itkaarhus-primary-hover:    var(--itkaarhus-blue-600);
+  --itkaarhus-secondary:        var(--itkaarhus-coral-500);
+  --itkaarhus-secondary-hover:  var(--itkaarhus-coral-700);
+  --itkaarhus-info:             var(--itkaarhus-info-500);
+  --itkaarhus-success:          var(--itkaarhus-success-500);
+  --itkaarhus-warning:          var(--itkaarhus-warning-500);
+  --itkaarhus-danger:           var(--itkaarhus-danger-500);
+  --itkaarhus-danger-hover:     var(--itkaarhus-danger-700);
+  --itkaarhus-guidance:         var(--itkaarhus-purple-500);
+
+  /* State text — a state colour as text on page / muted / raised surfaces (AA) */
+  --itkaarhus-info-text:     var(--itkaarhus-info-800);
+  --itkaarhus-success-text:  var(--itkaarhus-success-700);
+  --itkaarhus-warning-text:  var(--itkaarhus-warning-900);
+  --itkaarhus-danger-text:   var(--itkaarhus-danger-700);
+
+  /* Soft fills + the text that reads on them (tags, badges, highlights) */
+  --itkaarhus-primary-soft:        var(--itkaarhus-blue-50);
+  --itkaarhus-primary-soft-text:   var(--itkaarhus-blue-700);
+  --itkaarhus-secondary-soft:      var(--itkaarhus-coral-100);
+  --itkaarhus-secondary-soft-text: var(--itkaarhus-coral-800);
+  --itkaarhus-neutral-soft:        var(--itkaarhus-gray-100);
+  --itkaarhus-neutral-soft-text:   var(--itkaarhus-gray-700);
+  --itkaarhus-info-soft:           var(--itkaarhus-info-100);
+  --itkaarhus-info-soft-text:      var(--itkaarhus-info-800);
+  --itkaarhus-success-soft:        var(--itkaarhus-success-100);
+  --itkaarhus-success-soft-text:   var(--itkaarhus-success-700);
+  --itkaarhus-warning-soft:        var(--itkaarhus-warning-100);
+  --itkaarhus-warning-soft-text:   var(--itkaarhus-warning-900);
+  --itkaarhus-danger-soft:         var(--itkaarhus-danger-100);
+  --itkaarhus-danger-soft-text:    var(--itkaarhus-danger-700);
+  --itkaarhus-guidance-soft:       var(--itkaarhus-purple-100);
+  --itkaarhus-guidance-soft-text:  var(--itkaarhus-purple-700);
+
+  /* Heatmap intensity — 0 is empty, 5 is the strongest */
+  --itkaarhus-heatmap-0: var(--itkaarhus-gray-100); --itkaarhus-heatmap-0-text: var(--itkaarhus-gray-400);
+  --itkaarhus-heatmap-1: var(--itkaarhus-blue-100); --itkaarhus-heatmap-1-text: var(--itkaarhus-blue-700);
+  --itkaarhus-heatmap-2: var(--itkaarhus-blue-200); --itkaarhus-heatmap-2-text: var(--itkaarhus-blue-800);
+  --itkaarhus-heatmap-3: var(--itkaarhus-blue-300); --itkaarhus-heatmap-3-text: var(--itkaarhus-blue-900);
+  --itkaarhus-heatmap-4: var(--itkaarhus-blue-400); --itkaarhus-heatmap-4-text: var(--itkaarhus-white);
+  --itkaarhus-heatmap-5: var(--itkaarhus-blue-500); --itkaarhus-heatmap-5-text: var(--itkaarhus-white);
+
+  /* Elevation */
+  --itkaarhus-shadow-1: 0 1px 2px rgba(17,19,24,0.06);
+  --itkaarhus-shadow-2: 0 4px 10px -2px rgba(17,19,24,0.08), 0 2px 4px -1px rgba(17,19,24,0.04);
+  --itkaarhus-shadow-3: 0 16px 32px -12px rgba(17,19,24,0.18), 0 4px 8px -2px rgba(17,19,24,0.06);
+
+  /* Focus ring */
+  --itkaarhus-focus: 0 0 0 3px rgba(0,123,166,0.35);
+}
+
+[data-theme="light"] { color-scheme: light; }
+
+/* ---- Dark -------------------------------------------------------
+   Surfaces step up in lightness as they rise (page → muted → raised).
+   The four neutrals between gray-800 and gray-900 below are dark-only
+   surface steps; everything else maps onto the raw scales. Accents
+   move to lighter steps that keep ≥ 4.5:1 on every dark surface, so
+   accent fills carry dark text (--itkaarhus-text-on-accent).
+
+   The declarations are repeated verbatim for data-theme="auto" under
+   prefers-color-scheme: dark. `npm run check:tokens` (part of the
+   build) fails if the two blocks drift apart.
+   ---------------------------------------------------------------- */
+[data-theme="dark"] {
+  /* @dark-tokens:start */
+  color-scheme: dark;
+
+  --itkaarhus-bg:          var(--itkaarhus-gray-900);
+  --itkaarhus-bg-muted:    #171a20;
+  --itkaarhus-bg-raised:   #1c2028;
+  --itkaarhus-bg-inverse:  #08090c;
+
+  --itkaarhus-text:            var(--itkaarhus-gray-100);
+  --itkaarhus-text-muted:      var(--itkaarhus-gray-300);
+  --itkaarhus-text-subtle:     var(--itkaarhus-gray-400);
+  --itkaarhus-text-label:      var(--itkaarhus-gray-200);
+  --itkaarhus-text-disabled:   var(--itkaarhus-gray-600);
+  --itkaarhus-text-on-accent:  var(--itkaarhus-gray-900);
+  --itkaarhus-text-on-inverse: var(--itkaarhus-gray-100);
+
+  --itkaarhus-border-subtle: #22262e;
+  --itkaarhus-border:        var(--itkaarhus-gray-800);
+  --itkaarhus-border-strong: var(--itkaarhus-gray-700);
+
+  --itkaarhus-primary:          var(--itkaarhus-blue-300);
+  --itkaarhus-primary-hover:    var(--itkaarhus-blue-200);
+  --itkaarhus-secondary:        var(--itkaarhus-coral-400);
+  --itkaarhus-secondary-hover:  var(--itkaarhus-coral-300);
+  --itkaarhus-info:             var(--itkaarhus-info-300);
+  --itkaarhus-success:          var(--itkaarhus-success-300);
+  --itkaarhus-warning:          var(--itkaarhus-warning-400);
+  --itkaarhus-danger:           var(--itkaarhus-danger-300);
+  --itkaarhus-danger-hover:     var(--itkaarhus-danger-200);
+  --itkaarhus-guidance:         var(--itkaarhus-purple-300);
+
+  --itkaarhus-info-text:     var(--itkaarhus-info-300);
+  --itkaarhus-success-text:  var(--itkaarhus-success-300);
+  --itkaarhus-warning-text:  var(--itkaarhus-warning-400);
+  --itkaarhus-danger-text:   var(--itkaarhus-danger-300);
+
+  --itkaarhus-primary-soft:        var(--itkaarhus-blue-900);
+  --itkaarhus-primary-soft-text:   var(--itkaarhus-blue-200);
+  --itkaarhus-secondary-soft:      var(--itkaarhus-coral-900);
+  --itkaarhus-secondary-soft-text: var(--itkaarhus-coral-200);
+  --itkaarhus-neutral-soft:        var(--itkaarhus-gray-800);
+  --itkaarhus-neutral-soft-text:   var(--itkaarhus-gray-200);
+  --itkaarhus-info-soft:           var(--itkaarhus-info-900);
+  --itkaarhus-info-soft-text:      var(--itkaarhus-info-200);
+  --itkaarhus-success-soft:        var(--itkaarhus-success-900);
+  --itkaarhus-success-soft-text:   var(--itkaarhus-success-200);
+  --itkaarhus-warning-soft:        var(--itkaarhus-warning-900);
+  --itkaarhus-warning-soft-text:   var(--itkaarhus-warning-200);
+  --itkaarhus-danger-soft:         var(--itkaarhus-danger-900);
+  --itkaarhus-danger-soft-text:    var(--itkaarhus-danger-200);
+  --itkaarhus-guidance-soft:       var(--itkaarhus-purple-900);
+  --itkaarhus-guidance-soft-text:  var(--itkaarhus-purple-200);
+
+  --itkaarhus-heatmap-0: var(--itkaarhus-gray-800); --itkaarhus-heatmap-0-text: var(--itkaarhus-gray-500);
+  --itkaarhus-heatmap-1: var(--itkaarhus-blue-900); --itkaarhus-heatmap-1-text: var(--itkaarhus-blue-200);
+  --itkaarhus-heatmap-2: var(--itkaarhus-blue-800); --itkaarhus-heatmap-2-text: var(--itkaarhus-blue-100);
+  --itkaarhus-heatmap-3: var(--itkaarhus-blue-600); --itkaarhus-heatmap-3-text: var(--itkaarhus-blue-50);
+  --itkaarhus-heatmap-4: var(--itkaarhus-blue-500); --itkaarhus-heatmap-4-text: var(--itkaarhus-white);
+  --itkaarhus-heatmap-5: var(--itkaarhus-blue-300); --itkaarhus-heatmap-5-text: var(--itkaarhus-gray-900);
+
+  --itkaarhus-shadow-1: 0 1px 2px rgba(0,0,0,0.4);
+  --itkaarhus-shadow-2: 0 4px 10px -2px rgba(0,0,0,0.5), 0 2px 4px -1px rgba(0,0,0,0.3);
+  --itkaarhus-shadow-3: 0 16px 32px -12px rgba(0,0,0,0.6), 0 4px 8px -2px rgba(0,0,0,0.4);
+
+  --itkaarhus-focus: 0 0 0 3px rgba(102,174,201,0.6);
+  /* @dark-tokens:end */
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    /* @dark-tokens:start */
+    color-scheme: dark;
+
+    --itkaarhus-bg:          var(--itkaarhus-gray-900);
+    --itkaarhus-bg-muted:    #171a20;
+    --itkaarhus-bg-raised:   #1c2028;
+    --itkaarhus-bg-inverse:  #08090c;
+
+    --itkaarhus-text:            var(--itkaarhus-gray-100);
+    --itkaarhus-text-muted:      var(--itkaarhus-gray-300);
+    --itkaarhus-text-subtle:     var(--itkaarhus-gray-400);
+    --itkaarhus-text-label:      var(--itkaarhus-gray-200);
+    --itkaarhus-text-disabled:   var(--itkaarhus-gray-600);
+    --itkaarhus-text-on-accent:  var(--itkaarhus-gray-900);
+    --itkaarhus-text-on-inverse: var(--itkaarhus-gray-100);
+
+    --itkaarhus-border-subtle: #22262e;
+    --itkaarhus-border:        var(--itkaarhus-gray-800);
+    --itkaarhus-border-strong: var(--itkaarhus-gray-700);
+
+    --itkaarhus-primary:          var(--itkaarhus-blue-300);
+    --itkaarhus-primary-hover:    var(--itkaarhus-blue-200);
+    --itkaarhus-secondary:        var(--itkaarhus-coral-400);
+    --itkaarhus-secondary-hover:  var(--itkaarhus-coral-300);
+    --itkaarhus-info:             var(--itkaarhus-info-300);
+    --itkaarhus-success:          var(--itkaarhus-success-300);
+    --itkaarhus-warning:          var(--itkaarhus-warning-400);
+    --itkaarhus-danger:           var(--itkaarhus-danger-300);
+    --itkaarhus-danger-hover:     var(--itkaarhus-danger-200);
+    --itkaarhus-guidance:         var(--itkaarhus-purple-300);
+
+    --itkaarhus-info-text:     var(--itkaarhus-info-300);
+    --itkaarhus-success-text:  var(--itkaarhus-success-300);
+    --itkaarhus-warning-text:  var(--itkaarhus-warning-400);
+    --itkaarhus-danger-text:   var(--itkaarhus-danger-300);
+
+    --itkaarhus-primary-soft:        var(--itkaarhus-blue-900);
+    --itkaarhus-primary-soft-text:   var(--itkaarhus-blue-200);
+    --itkaarhus-secondary-soft:      var(--itkaarhus-coral-900);
+    --itkaarhus-secondary-soft-text: var(--itkaarhus-coral-200);
+    --itkaarhus-neutral-soft:        var(--itkaarhus-gray-800);
+    --itkaarhus-neutral-soft-text:   var(--itkaarhus-gray-200);
+    --itkaarhus-info-soft:           var(--itkaarhus-info-900);
+    --itkaarhus-info-soft-text:      var(--itkaarhus-info-200);
+    --itkaarhus-success-soft:        var(--itkaarhus-success-900);
+    --itkaarhus-success-soft-text:   var(--itkaarhus-success-200);
+    --itkaarhus-warning-soft:        var(--itkaarhus-warning-900);
+    --itkaarhus-warning-soft-text:   var(--itkaarhus-warning-200);
+    --itkaarhus-danger-soft:         var(--itkaarhus-danger-900);
+    --itkaarhus-danger-soft-text:    var(--itkaarhus-danger-200);
+    --itkaarhus-guidance-soft:       var(--itkaarhus-purple-900);
+    --itkaarhus-guidance-soft-text:  var(--itkaarhus-purple-200);
+
+    --itkaarhus-heatmap-0: var(--itkaarhus-gray-800); --itkaarhus-heatmap-0-text: var(--itkaarhus-gray-500);
+    --itkaarhus-heatmap-1: var(--itkaarhus-blue-900); --itkaarhus-heatmap-1-text: var(--itkaarhus-blue-200);
+    --itkaarhus-heatmap-2: var(--itkaarhus-blue-800); --itkaarhus-heatmap-2-text: var(--itkaarhus-blue-100);
+    --itkaarhus-heatmap-3: var(--itkaarhus-blue-600); --itkaarhus-heatmap-3-text: var(--itkaarhus-blue-50);
+    --itkaarhus-heatmap-4: var(--itkaarhus-blue-500); --itkaarhus-heatmap-4-text: var(--itkaarhus-white);
+    --itkaarhus-heatmap-5: var(--itkaarhus-blue-300); --itkaarhus-heatmap-5-text: var(--itkaarhus-gray-900);
+
+    --itkaarhus-shadow-1: 0 1px 2px rgba(0,0,0,0.4);
+    --itkaarhus-shadow-2: 0 4px 10px -2px rgba(0,0,0,0.5), 0 2px 4px -1px rgba(0,0,0,0.3);
+    --itkaarhus-shadow-3: 0 16px 32px -12px rgba(0,0,0,0.6), 0 4px 8px -2px rgba(0,0,0,0.4);
+
+    --itkaarhus-focus: 0 0 0 3px rgba(102,174,201,0.6);
+    /* @dark-tokens:end */
+  }
+}
+
 /* Base reset-ish */
 *,*::before,*::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
   font-family: var(--itkaarhus-font-sans);
-  color: var(--itkaarhus-gray-900);
+  color: var(--itkaarhus-text);
   background: var(--itkaarhus-bg);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "cv11","ss01";
